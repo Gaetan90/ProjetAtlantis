@@ -26,8 +26,14 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFWebService", "WCFWebServ
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationEngine", "CalculationEngine\CalculationEngine.csproj", "{0FB601B8-F60F-4597-B028-D153FE991E9A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{51DAA8F6-9A4E-4C52-B471-FFEC2262303E} = {51DAA8F6-9A4E-4C52-B471-FFEC2262303E}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimlationDevices", "SimlationDevices\SimlationDevices.csproj", "{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationDevices", "SimlationDevices\SimulationDevices.csproj", "{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{51DAA8F6-9A4E-4C52-B471-FFEC2262303E} = {51DAA8F6-9A4E-4C52-B471-FFEC2262303E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
