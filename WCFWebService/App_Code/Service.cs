@@ -3,8 +3,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Web.Script.Serialization;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
@@ -62,4 +65,31 @@ public class Service : IServiceDevice, IServiceCalcul
 		}
 		return composite;
 	}
+
+    public void ReceptMetric(MetricView metric)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void saveMetrics(string idDevice, string value)
+    {
+        var json = new JavaScriptSerializer().Deserialize<MetricsJson>(value);
+        Metrics metrics = new Metrics();
+        metrics.idDevice = Int32.Parse(idDevice);
+        metrics.date = json.metricDate;
+        int nbrValue = 0;
+        ICollection<DataMetrics> dataMetrics = new Collection<DataMetrics>();
+        foreach (Object o in json.metricValue){
+            DataMetrics data = new DataMetrics();
+            data.value = o.ToString();
+            dataMetrics.Add(data);
+            nbrValue++;
+        }
+        metrics.nbrValues = nbrValue;
+        metrics.DataMetrics = dataMetrics;
+
+        AtlantisWindowsEntities _dbo = new AtlantisWindowsEntities();
+        _dbo.Metrics.Add(metrics);
+        _dbo.SaveChanges();
+    }
 }

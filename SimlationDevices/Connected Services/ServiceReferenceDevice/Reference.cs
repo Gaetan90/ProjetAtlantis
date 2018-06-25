@@ -103,9 +103,6 @@ namespace SimlationDevices.ServiceReferenceDevice {
         private int nbrValuesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SimlationDevices.ServiceReferenceDevice.TypeDeviceView typeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private object[] valuesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -171,19 +168,6 @@ namespace SimlationDevices.ServiceReferenceDevice {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SimlationDevices.ServiceReferenceDevice.TypeDeviceView type {
-            get {
-                return this.typeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.typeField, value) != true)) {
-                    this.typeField = value;
-                    this.RaisePropertyChanged("type");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public object[] values {
             get {
                 return this.valuesField;
@@ -226,6 +210,9 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nomField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SimlationDevices.ServiceReferenceDevice.TypeDeviceView typeDevicesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -289,63 +276,15 @@ namespace SimlationDevices.ServiceReferenceDevice {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TypeDeviceView", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class TypeDeviceView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string nameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
+        public SimlationDevices.ServiceReferenceDevice.TypeDeviceView typeDevices {
             get {
-                return this.idField;
+                return this.typeDevicesField;
             }
             set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameField, value) != true)) {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("name");
+                if ((object.ReferenceEquals(this.typeDevicesField, value) != true)) {
+                    this.typeDevicesField = value;
+                    this.RaisePropertyChanged("typeDevices");
                 }
             }
         }
@@ -437,6 +376,67 @@ namespace SimlationDevices.ServiceReferenceDevice {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TypeDeviceView", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class TypeDeviceView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceDevice.IServiceDevice")]
     public interface IServiceDevice {
@@ -452,6 +452,24 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/ReceptMetric", ReplyAction="http://tempuri.org/IServiceDevice/ReceptMetricResponse")]
+        void ReceptMetric(SimlationDevices.ServiceReferenceDevice.MetricView metric);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/ReceptMetric", ReplyAction="http://tempuri.org/IServiceDevice/ReceptMetricResponse")]
+        System.Threading.Tasks.Task ReceptMetricAsync(SimlationDevices.ServiceReferenceDevice.MetricView metric);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetAllDevice", ReplyAction="http://tempuri.org/IServiceDevice/GetAllDeviceResponse")]
+        SimlationDevices.ServiceReferenceDevice.DeviceView[] GetAllDevice();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetAllDevice", ReplyAction="http://tempuri.org/IServiceDevice/GetAllDeviceResponse")]
+        System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.DeviceView[]> GetAllDeviceAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/saveMetrics", ReplyAction="http://tempuri.org/IServiceDevice/saveMetricsResponse")]
+        void saveMetrics(string idDevice, string value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/saveMetrics", ReplyAction="http://tempuri.org/IServiceDevice/saveMetricsResponse")]
+        System.Threading.Tasks.Task saveMetricsAsync(string idDevice, string value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -495,6 +513,30 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+        
+        public void ReceptMetric(SimlationDevices.ServiceReferenceDevice.MetricView metric) {
+            base.Channel.ReceptMetric(metric);
+        }
+        
+        public System.Threading.Tasks.Task ReceptMetricAsync(SimlationDevices.ServiceReferenceDevice.MetricView metric) {
+            return base.Channel.ReceptMetricAsync(metric);
+        }
+        
+        public SimlationDevices.ServiceReferenceDevice.DeviceView[] GetAllDevice() {
+            return base.Channel.GetAllDevice();
+        }
+        
+        public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.DeviceView[]> GetAllDeviceAsync() {
+            return base.Channel.GetAllDeviceAsync();
+        }
+        
+        public void saveMetrics(string idDevice, string value) {
+            base.Channel.saveMetrics(idDevice, value);
+        }
+        
+        public System.Threading.Tasks.Task saveMetricsAsync(string idDevice, string value) {
+            return base.Channel.saveMetricsAsync(idDevice, value);
         }
     }
     

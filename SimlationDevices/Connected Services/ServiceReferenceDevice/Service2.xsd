@@ -53,6 +53,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="saveMetrics">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idDevice" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="saveMetricsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCalcul">
     <xs:complexType>
       <xs:sequence>
