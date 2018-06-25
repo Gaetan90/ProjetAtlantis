@@ -18,7 +18,7 @@ namespace SimlationDevices
 
             
             Console.WriteLine("Begin process");
-            /*for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 bool presenceSensor = new Random().Next(100) % 2 == 0;
                 Console.WriteLine("Presence Sensor : " + presenceSensor);
@@ -53,72 +53,10 @@ namespace SimlationDevices
                 Console.WriteLine(" ");
 
                 System.Threading.Thread.Sleep(1000);
-            }*/
-            // Setup the input
-            var input = new StringReader(Document);
-            var text = new StreamReader(@"D:\swaggeratlantis.yaml");
-            Console.WriteLine("Contents of WriteText.txt = {0}", text);
-
-            // Load the stream
-            var yaml = new YamlStream();
-            yaml.Load(text);
-
-            // Examine the stream
-            var mapping =
-                (YamlMappingNode)yaml.Documents[0].RootNode;
-
-            foreach (var entry in mapping.Children)
-            {
-                Console.WriteLine("Mapping " +((YamlScalarNode)entry.Key).Value);
             }
-
-            // List all the items
-            var items = (YamlSequenceNode)mapping.Children[new YamlScalarNode("info")];
-            foreach (YamlMappingNode item in items)
-            {
-                Console.WriteLine(
-                    "{0}\t{1}",
-                    item.Children[new YamlScalarNode("name")],
-                    item.Children[new YamlScalarNode("description")]
-                );
-            }
-
-
+            
             Console.WriteLine("End process");
             Console.Read();
         }
-        private const string Document = @"---
-            receipt:    Oz-Ware Purchase Invoice
-            date:        2007-08-06
-            customer:
-                given:   Dorothy
-                family:  Gale
-
-            items:
-                - part_no:   A4786
-                  descrip:   Water Bucket (Filled)
-                  price:     1.47
-                  quantity:  4
-
-                - part_no:   E1628
-                  descrip:   High Heeled ""Ruby"" Slippers
-                  price:     100.27
-                  quantity:  1
-
-            bill-to:  &id001
-                street: |
-                        123 Tornado Alley
-                        Suite 16
-                city:   East Westville
-                state:  KS
-
-            ship-to:  *id001
-
-            specialDelivery:  >
-                Follow the Yellow Brick
-                Road to the Emerald City.
-                Pay no attention to the
-                man behind the curtain.
-...";
     }
 }
