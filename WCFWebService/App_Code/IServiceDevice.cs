@@ -8,7 +8,7 @@ using System.Text;
 
 // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom d'interface "IService" à la fois dans le code et le fichier de configuration.
 [ServiceContract]
-public interface IService
+public interface IServiceDevice
 {
 
 	[OperationContract]
