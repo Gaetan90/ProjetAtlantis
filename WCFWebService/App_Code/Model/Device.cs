@@ -11,8 +11,12 @@ using System.Web;
 [DataContract]
 public class Device
 {
+    [DataMember]
     public int id { get; set; }
+    [DataMember]
     public string nom { get; set; }
+    [DataMember]
     public string adressMac { get; set; }
-    public int MyProperty { get; set; }
+    [DataMember]
+    public ICollection<Employee> employees { get; set; }
 }
