@@ -7,9 +7,14 @@ using System.ServiceModel.Web;
 using System.Text;
 
 // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service" dans le code, le fichier svc et le fichier de configuration.
-public class ServiceDevice : IServiceDevice
+public class Service : IServiceDevice, IServiceCalcul
 {
-	public string GetData(int value)
+    public string GetCalcul(int value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string GetData(int value)
 	{
 		return string.Format("You entered: {0}", value);
 	}
