@@ -25,13 +25,28 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFWebService", "WCFWebServ
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationEngine", "CalculationEngine\CalculationEngine.csproj", "{0FB601B8-F60F-4597-B028-D153FE991E9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimlationDevices", "SimlationDevices\SimlationDevices.csproj", "{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{51DAA8F6-9A4E-4C52-B471-FFEC2262303E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51DAA8F6-9A4E-4C52-B471-FFEC2262303E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DAA8F6-9A4E-4C52-B471-FFEC2262303E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DAA8F6-9A4E-4C52-B471-FFEC2262303E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{0FB601B8-F60F-4597-B028-D153FE991E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB601B8-F60F-4597-B028-D153FE991E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB601B8-F60F-4597-B028-D153FE991E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB601B8-F60F-4597-B028-D153FE991E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6FF8EDA-4E5D-4627-AB4C-F43B7FBC24D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
