@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -18,7 +19,10 @@ public interface IServiceDevice
 	CompositeType GetDataUsingDataContract(CompositeType composite);
 
     [OperationContract]
-    Metric GetMetric();
+    void ReceptMetric(MetricView metric);
+
+    [OperationContract(Name="Devices")]
+    ICollection<DeviceView> GetAllDevice();
 
     // TODO: ajoutez vos opérations de service ici
 }

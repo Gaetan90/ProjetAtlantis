@@ -8,45 +8,51 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
-  <xs:complexType name="Metric">
+  <xs:complexType name="MetricView">
     <xs:sequence>
       <xs:element minOccurs="0" name="date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="device" nillable="true" type="tns:Device" />
+      <xs:element minOccurs="0" name="device" nillable="true" type="tns:DeviceView" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="nbrValues" type="xs:int" />
-      <xs:element minOccurs="0" name="type" nillable="true" type="tns:TypeDevice" />
+      <xs:element minOccurs="0" name="type" nillable="true" type="tns:TypeDeviceView" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q1:ArrayOfanyType" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Metric" nillable="true" type="tns:Metric" />
-  <xs:complexType name="Device">
+  <xs:element name="MetricView" nillable="true" type="tns:MetricView" />
+  <xs:complexType name="DeviceView">
     <xs:sequence>
       <xs:element minOccurs="0" name="adressMac" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="employees" nillable="true" type="tns:ArrayOfEmployee" />
+      <xs:element minOccurs="0" name="employees" nillable="true" type="tns:ArrayOfEmployeeView" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="nom" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Device" nillable="true" type="tns:Device" />
-  <xs:complexType name="ArrayOfEmployee">
+  <xs:element name="DeviceView" nillable="true" type="tns:DeviceView" />
+  <xs:complexType name="ArrayOfEmployeeView">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Employee" nillable="true" type="tns:Employee" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeView" nillable="true" type="tns:EmployeeView" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfEmployee" nillable="true" type="tns:ArrayOfEmployee" />
-  <xs:complexType name="Employee">
+  <xs:element name="ArrayOfEmployeeView" nillable="true" type="tns:ArrayOfEmployeeView" />
+  <xs:complexType name="EmployeeView">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="nom" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="prenom" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Employee" nillable="true" type="tns:Employee" />
-  <xs:complexType name="TypeDevice">
+  <xs:element name="EmployeeView" nillable="true" type="tns:EmployeeView" />
+  <xs:complexType name="TypeDeviceView">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="TypeDevice" nillable="true" type="tns:TypeDevice" />
+  <xs:element name="TypeDeviceView" nillable="true" type="tns:TypeDeviceView" />
+  <xs:complexType name="ArrayOfDeviceView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceView" nillable="true" type="tns:DeviceView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceView" nillable="true" type="tns:ArrayOfDeviceView" />
 </xs:schema>

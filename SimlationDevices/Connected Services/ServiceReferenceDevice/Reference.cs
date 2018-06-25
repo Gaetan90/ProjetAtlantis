@@ -76,15 +76,16 @@ namespace SimlationDevices.ServiceReferenceDevice {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Metric", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MetricView", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.CompositeType))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.Device))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.Employee[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.Employee))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.TypeDevice))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.DeviceView))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.EmployeeView[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.EmployeeView))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.TypeDeviceView))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.DeviceView[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
-    public partial class Metric : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class MetricView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -93,7 +94,7 @@ namespace SimlationDevices.ServiceReferenceDevice {
         private System.DateTime dateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SimlationDevices.ServiceReferenceDevice.Device deviceField;
+        private SimlationDevices.ServiceReferenceDevice.DeviceView deviceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
@@ -102,7 +103,7 @@ namespace SimlationDevices.ServiceReferenceDevice {
         private int nbrValuesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SimlationDevices.ServiceReferenceDevice.TypeDevice typeField;
+        private SimlationDevices.ServiceReferenceDevice.TypeDeviceView typeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private object[] valuesField;
@@ -131,7 +132,7 @@ namespace SimlationDevices.ServiceReferenceDevice {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SimlationDevices.ServiceReferenceDevice.Device device {
+        public SimlationDevices.ServiceReferenceDevice.DeviceView device {
             get {
                 return this.deviceField;
             }
@@ -170,7 +171,7 @@ namespace SimlationDevices.ServiceReferenceDevice {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SimlationDevices.ServiceReferenceDevice.TypeDevice type {
+        public SimlationDevices.ServiceReferenceDevice.TypeDeviceView type {
             get {
                 return this.typeField;
             }
@@ -207,9 +208,9 @@ namespace SimlationDevices.ServiceReferenceDevice {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Device", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeviceView", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
-    public partial class Device : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DeviceView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -218,7 +219,7 @@ namespace SimlationDevices.ServiceReferenceDevice {
         private string adressMacField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SimlationDevices.ServiceReferenceDevice.Employee[] employeesField;
+        private SimlationDevices.ServiceReferenceDevice.EmployeeView[] employeesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
@@ -250,7 +251,7 @@ namespace SimlationDevices.ServiceReferenceDevice {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SimlationDevices.ServiceReferenceDevice.Employee[] employees {
+        public SimlationDevices.ServiceReferenceDevice.EmployeeView[] employees {
             get {
                 return this.employeesField;
             }
@@ -300,9 +301,9 @@ namespace SimlationDevices.ServiceReferenceDevice {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TypeDevice", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TypeDeviceView", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
-    public partial class TypeDevice : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TypeDeviceView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -361,9 +362,9 @@ namespace SimlationDevices.ServiceReferenceDevice {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Employee", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EmployeeView", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
-    public partial class Employee : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class EmployeeView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -451,12 +452,6 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetMetric", ReplyAction="http://tempuri.org/IServiceDevice/GetMetricResponse")]
-        SimlationDevices.ServiceReferenceDevice.Metric GetMetric();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetMetric", ReplyAction="http://tempuri.org/IServiceDevice/GetMetricResponse")]
-        System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.Metric> GetMetricAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -500,14 +495,6 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
-        }
-        
-        public SimlationDevices.ServiceReferenceDevice.Metric GetMetric() {
-            return base.Channel.GetMetric();
-        }
-        
-        public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.Metric> GetMetricAsync() {
-            return base.Channel.GetMetricAsync();
         }
     }
     

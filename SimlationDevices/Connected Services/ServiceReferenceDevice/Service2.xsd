@@ -29,15 +29,27 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetMetric">
+  <xs:element name="ReceptMetric">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="metric" nillable="true" type="q3:MetricView" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReceptMetricResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetMetricResponse">
+  <xs:element name="GetAllDevice">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDeviceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetMetricResult" nillable="true" type="q3:Metric" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetAllDeviceResult" nillable="true" type="q4:ArrayOfDeviceView" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

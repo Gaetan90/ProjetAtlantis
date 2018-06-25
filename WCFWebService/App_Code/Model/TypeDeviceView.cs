@@ -4,11 +4,10 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Description résumée de Employee
+/// Description résumée de TypeDevice
 /// </summary>
-public class Employee
+public class TypeDeviceView
 {
     public int id { get; set; }
-    public string nom { get; set; }
-    public string prenom { get; set; }
+    public string name { get; set; }
 }

@@ -9,7 +9,7 @@ using System.Web;
 /// </summary>
 /// 
 [DataContract]
-public class Metric
+public class MetricView
 {
     [DataMember]
     public int id { get; set; }
@@ -19,8 +19,7 @@ public class Metric
     public DateTime date { get; set; }
     [DataMember]
     public int nbrValues { get; set; }
+    
     [DataMember]
-    public TypeDevice type { get; set; }
-    [DataMember]
-    public Device device { get; set; }
+    public DeviceView device { get; set; }
 }
