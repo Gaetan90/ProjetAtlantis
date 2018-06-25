@@ -29,17 +29,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetCalucl">
+  <xs:element name="GetMetric">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMetricResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetMetricResult" nillable="true" type="q3:Metric" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCalcul">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="value" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetCaluclResponse">
+  <xs:element name="GetCalculResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetCaluclResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="GetCalculResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

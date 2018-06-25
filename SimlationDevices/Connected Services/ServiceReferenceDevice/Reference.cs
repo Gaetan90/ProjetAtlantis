@@ -74,6 +74,368 @@ namespace SimlationDevices.ServiceReferenceDevice {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Metric", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.CompositeType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.Device))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.Employee[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.Employee))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SimlationDevices.ServiceReferenceDevice.TypeDevice))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
+    public partial class Metric : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SimlationDevices.ServiceReferenceDevice.Device deviceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int nbrValuesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SimlationDevices.ServiceReferenceDevice.TypeDevice typeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object[] valuesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime date {
+            get {
+                return this.dateField;
+            }
+            set {
+                if ((this.dateField.Equals(value) != true)) {
+                    this.dateField = value;
+                    this.RaisePropertyChanged("date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SimlationDevices.ServiceReferenceDevice.Device device {
+            get {
+                return this.deviceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.deviceField, value) != true)) {
+                    this.deviceField = value;
+                    this.RaisePropertyChanged("device");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int nbrValues {
+            get {
+                return this.nbrValuesField;
+            }
+            set {
+                if ((this.nbrValuesField.Equals(value) != true)) {
+                    this.nbrValuesField = value;
+                    this.RaisePropertyChanged("nbrValues");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SimlationDevices.ServiceReferenceDevice.TypeDevice type {
+            get {
+                return this.typeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.typeField, value) != true)) {
+                    this.typeField = value;
+                    this.RaisePropertyChanged("type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object[] values {
+            get {
+                return this.valuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.valuesField, value) != true)) {
+                    this.valuesField = value;
+                    this.RaisePropertyChanged("values");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Device", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class Device : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string adressMacField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SimlationDevices.ServiceReferenceDevice.Employee[] employeesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nomField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string adressMac {
+            get {
+                return this.adressMacField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.adressMacField, value) != true)) {
+                    this.adressMacField = value;
+                    this.RaisePropertyChanged("adressMac");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SimlationDevices.ServiceReferenceDevice.Employee[] employees {
+            get {
+                return this.employeesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.employeesField, value) != true)) {
+                    this.employeesField = value;
+                    this.RaisePropertyChanged("employees");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nom {
+            get {
+                return this.nomField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nomField, value) != true)) {
+                    this.nomField = value;
+                    this.RaisePropertyChanged("nom");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TypeDevice", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class TypeDevice : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Employee", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class Employee : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nomField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string prenomField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nom {
+            get {
+                return this.nomField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nomField, value) != true)) {
+                    this.nomField = value;
+                    this.RaisePropertyChanged("nom");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string prenom {
+            get {
+                return this.prenomField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.prenomField, value) != true)) {
+                    this.prenomField = value;
+                    this.RaisePropertyChanged("prenom");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceDevice.IServiceDevice")]
     public interface IServiceDevice {
@@ -89,6 +451,12 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetMetric", ReplyAction="http://tempuri.org/IServiceDevice/GetMetricResponse")]
+        SimlationDevices.ServiceReferenceDevice.Metric GetMetric();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetMetric", ReplyAction="http://tempuri.org/IServiceDevice/GetMetricResponse")]
+        System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.Metric> GetMetricAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -133,17 +501,25 @@ namespace SimlationDevices.ServiceReferenceDevice {
         public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
+        
+        public SimlationDevices.ServiceReferenceDevice.Metric GetMetric() {
+            return base.Channel.GetMetric();
+        }
+        
+        public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.Metric> GetMetricAsync() {
+            return base.Channel.GetMetricAsync();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceDevice.IServiceCalcul")]
     public interface IServiceCalcul {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetCalucl", ReplyAction="http://tempuri.org/IServiceCalcul/GetCaluclResponse")]
-        string GetCalucl(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetCalcul", ReplyAction="http://tempuri.org/IServiceCalcul/GetCalculResponse")]
+        string GetCalcul(int value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetCalucl", ReplyAction="http://tempuri.org/IServiceCalcul/GetCaluclResponse")]
-        System.Threading.Tasks.Task<string> GetCaluclAsync(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetCalcul", ReplyAction="http://tempuri.org/IServiceCalcul/GetCalculResponse")]
+        System.Threading.Tasks.Task<string> GetCalculAsync(int value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -173,12 +549,12 @@ namespace SimlationDevices.ServiceReferenceDevice {
                 base(binding, remoteAddress) {
         }
         
-        public string GetCalucl(int value) {
-            return base.Channel.GetCalucl(value);
+        public string GetCalcul(int value) {
+            return base.Channel.GetCalcul(value);
         }
         
-        public System.Threading.Tasks.Task<string> GetCaluclAsync(int value) {
-            return base.Channel.GetCaluclAsync(value);
+        public System.Threading.Tasks.Task<string> GetCalculAsync(int value) {
+            return base.Channel.GetCalculAsync(value);
         }
     }
 }

@@ -18,5 +18,7 @@ public class Device
     [DataMember]
     public string adressMac { get; set; }
     [DataMember]
+    public string typeDevice { get; set; }
+    [DataMember]
     public ICollection<Employee> employees { get; set; }
 }

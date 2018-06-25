@@ -1,0 +1,112 @@
+swagger: "2.0"
+info:
+  description: "This definition contains all endpoints used by our device emulator to register and send telemetries in an IoT platform."
+  version: "1.0.0"
+  title: "Swagger Atlantis"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/v1"
+tags:
+- name: "device"
+  description: "Everything used by devices"
+schemes:
+- "http"
+paths:
+  /device:
+    post: 
+      tags:
+      - "device"
+      summary: "Create a new device"
+      description: "This method creates a new device with a specific type and return its identifier. The identifier will be sens by the device for each other operation."
+      operationId: "createDevice"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "device"
+        description: "Device objects the needs to be added to the IoT platform"
+        required: true
+        schema:
+          $ref: "#/definitions/Device"
+      responses:
+        200:
+          description: "successful operation. The device object is return with its Identifier and its default name."
+          schema:
+            $ref: "#/definitions/Device"
+        405:
+          description: "Invalid input"
+  /device/{deviceId}/telemetry:
+    post:
+      tags:
+      - "device"
+      summary: "Send a new telemetry"
+      description: ""
+      operationId: "sendTelemetry"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Send a new telemetry from specified device"
+        required: true
+        schema:
+          $ref: "#/definitions/Telemetry"
+      - name: "deviceId"
+        in: "path"
+        description: "Device Identifier returned by the API on creation of the device"
+        required: true
+        type: "string"
+        format: "guid"
+      responses:
+        200:
+          description: "successful operation"
+        405:
+          description: "Invalid input"
+definitions:
+  Device:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "guid"
+        description: "Identifier of the device. Should not be filled on creation."
+      name:
+        type: "string"
+        description: "Name of the device. This property is nullable and set by User once he attach this device to its account. OPTIONAL: A default name should be return by the API after the creation."
+      deviceType:
+        $ref: "#/definitions/DeviceType"
+  Telemetry:
+    type: "object"
+    properties:
+      metricDate:
+        type: "string"
+        format: "date-time"
+      deviceType:
+        $ref: "#/definitions/DeviceType"
+      metricValue:
+        type: "string"
+  DeviceType:
+    type: "string"
+    description: "Device type. It defines what metrics the device can send"
+    enum:
+      - "presenceSensor"
+      - "temperatureSensor"
+      - "brightnessSensor"
+      - "atmosphericPressureSensor"
+      - "humiditySensor"
+      - "soundLevelSensor"
+      - "gpsSensor"
+      - "co2Sensor"
+      - "ledDevice"
+      - "beeperDevice"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

@@ -31,4 +31,9 @@ public class Service : IServiceDevice, IServiceCalcul
 		}
 		return composite;
 	}
+
+    public Metric GetMetric()
+    {
+        throw new NotImplementedException();
+    }
 }
