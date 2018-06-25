@@ -5,18 +5,21 @@ using System.Runtime.Serialization;
 using System.Web;
 
 /// <summary>
-/// Description résumée de Device
+/// Description résumée de Metric
 /// </summary>
 /// 
 [DataContract]
-public class Device
+public class MetricView
 {
     [DataMember]
     public int id { get; set; }
     [DataMember]
-    public string nom { get; set; }
+    public ICollection<Object> values { get; set; }
     [DataMember]
-    public string adressMac { get; set; }
+    public DateTime date { get; set; }
     [DataMember]
-    public ICollection<Employee> employees { get; set; }
+    public int nbrValues { get; set; }
+    
+    [DataMember]
+    public DeviceView device { get; set; }
 }

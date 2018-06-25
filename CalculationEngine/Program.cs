@@ -10,7 +10,7 @@ namespace CalculationEngine
     {
         static void Main(string[] args)
         {
-
+            ServiceReferenceCalcul.ServiceDeviceClient service = new ServiceReferenceCalcul.ServiceDeviceClient();
         }
     }
 }
