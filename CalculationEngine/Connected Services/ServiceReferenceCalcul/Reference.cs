@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CalculationEngine.ServiceReference1 {
+namespace CalculationEngine.ServiceReferenceCalcul {
     using System.Runtime.Serialization;
     using System;
     
@@ -75,7 +75,7 @@ namespace CalculationEngine.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceDevice")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceCalcul.IServiceDevice")]
     public interface IServiceDevice {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetData", ReplyAction="http://tempuri.org/IServiceDevice/GetDataResponse")]
@@ -85,19 +85,19 @@ namespace CalculationEngine.ServiceReference1 {
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse")]
-        CalculationEngine.ServiceReference1.CompositeType GetDataUsingDataContract(CalculationEngine.ServiceReference1.CompositeType composite);
+        CalculationEngine.ServiceReferenceCalcul.CompositeType GetDataUsingDataContract(CalculationEngine.ServiceReferenceCalcul.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<CalculationEngine.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(CalculationEngine.ServiceReference1.CompositeType composite);
+        System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.CompositeType> GetDataUsingDataContractAsync(CalculationEngine.ServiceReferenceCalcul.CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceDeviceChannel : CalculationEngine.ServiceReference1.IServiceDevice, System.ServiceModel.IClientChannel {
+    public interface IServiceDeviceChannel : CalculationEngine.ServiceReferenceCalcul.IServiceDevice, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceDeviceClient : System.ServiceModel.ClientBase<CalculationEngine.ServiceReference1.IServiceDevice>, CalculationEngine.ServiceReference1.IServiceDevice {
+    public partial class ServiceDeviceClient : System.ServiceModel.ClientBase<CalculationEngine.ServiceReferenceCalcul.IServiceDevice>, CalculationEngine.ServiceReferenceCalcul.IServiceDevice {
         
         public ServiceDeviceClient() {
         }
@@ -126,17 +126,17 @@ namespace CalculationEngine.ServiceReference1 {
             return base.Channel.GetDataAsync(value);
         }
         
-        public CalculationEngine.ServiceReference1.CompositeType GetDataUsingDataContract(CalculationEngine.ServiceReference1.CompositeType composite) {
+        public CalculationEngine.ServiceReferenceCalcul.CompositeType GetDataUsingDataContract(CalculationEngine.ServiceReferenceCalcul.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<CalculationEngine.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(CalculationEngine.ServiceReference1.CompositeType composite) {
+        public System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.CompositeType> GetDataUsingDataContractAsync(CalculationEngine.ServiceReferenceCalcul.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceCalcul")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceCalcul.IServiceCalcul")]
     public interface IServiceCalcul {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetCalucl", ReplyAction="http://tempuri.org/IServiceCalcul/GetCaluclResponse")]
@@ -147,12 +147,12 @@ namespace CalculationEngine.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceCalculChannel : CalculationEngine.ServiceReference1.IServiceCalcul, System.ServiceModel.IClientChannel {
+    public interface IServiceCalculChannel : CalculationEngine.ServiceReferenceCalcul.IServiceCalcul, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceCalculClient : System.ServiceModel.ClientBase<CalculationEngine.ServiceReference1.IServiceCalcul>, CalculationEngine.ServiceReference1.IServiceCalcul {
+    public partial class ServiceCalculClient : System.ServiceModel.ClientBase<CalculationEngine.ServiceReferenceCalcul.IServiceCalcul>, CalculationEngine.ServiceReferenceCalcul.IServiceCalcul {
         
         public ServiceCalculClient() {
         }

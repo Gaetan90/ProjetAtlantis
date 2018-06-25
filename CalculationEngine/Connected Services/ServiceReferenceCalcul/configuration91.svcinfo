@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="c1fesYiEaRmStN7aKYvpZs2P3e0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="B5cLZXAYWMIPHa6WL73/Ek0b9gI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IServiceDevice">
       <properties>
@@ -221,7 +221,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IServiceDevice" contract="ServiceReference1.IServiceDevice" bindingType="basicHttpBinding" address="http://localhost:54435/Service.svc" bindingConfiguration="BasicHttpBinding_IServiceDevice">
+    <endpoint name="BasicHttpBinding_IServiceDevice" contract="ServiceReferenceCalcul.IServiceDevice" bindingType="basicHttpBinding" address="http://localhost:54435/Service.svc" bindingConfiguration="BasicHttpBinding_IServiceDevice">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:54435/Service.svc</serializedValue>
@@ -236,7 +236,7 @@
           <serializedValue>BasicHttpBinding_IServiceDevice</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReference1.IServiceDevice</serializedValue>
+          <serializedValue>ServiceReferenceCalcul.IServiceDevice</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -306,7 +306,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_IServiceCalcul" contract="ServiceReference1.IServiceCalcul" bindingType="basicHttpBinding" address="http://localhost:54435/Service.svc" bindingConfiguration="BasicHttpBinding_IServiceCalcul">
+    <endpoint name="BasicHttpBinding_IServiceCalcul" contract="ServiceReferenceCalcul.IServiceCalcul" bindingType="basicHttpBinding" address="http://localhost:54435/Service.svc" bindingConfiguration="BasicHttpBinding_IServiceCalcul">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:54435/Service.svc</serializedValue>
@@ -321,7 +321,7 @@
           <serializedValue>BasicHttpBinding_IServiceCalcul</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReference1.IServiceCalcul</serializedValue>
+          <serializedValue>ServiceReferenceCalcul.IServiceCalcul</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
