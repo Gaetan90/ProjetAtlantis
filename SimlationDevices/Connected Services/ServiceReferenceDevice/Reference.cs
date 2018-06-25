@@ -452,18 +452,6 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/ReceptMetric", ReplyAction="http://tempuri.org/IServiceDevice/ReceptMetricResponse")]
-        void ReceptMetric(SimlationDevices.ServiceReferenceDevice.MetricView metric);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/ReceptMetric", ReplyAction="http://tempuri.org/IServiceDevice/ReceptMetricResponse")]
-        System.Threading.Tasks.Task ReceptMetricAsync(SimlationDevices.ServiceReferenceDevice.MetricView metric);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetAllDevice", ReplyAction="http://tempuri.org/IServiceDevice/GetAllDeviceResponse")]
-        SimlationDevices.ServiceReferenceDevice.DeviceView[] GetAllDevice();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetAllDevice", ReplyAction="http://tempuri.org/IServiceDevice/GetAllDeviceResponse")]
-        System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.DeviceView[]> GetAllDeviceAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -507,22 +495,6 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
-        }
-        
-        public void ReceptMetric(SimlationDevices.ServiceReferenceDevice.MetricView metric) {
-            base.Channel.ReceptMetric(metric);
-        }
-        
-        public System.Threading.Tasks.Task ReceptMetricAsync(SimlationDevices.ServiceReferenceDevice.MetricView metric) {
-            return base.Channel.ReceptMetricAsync(metric);
-        }
-        
-        public SimlationDevices.ServiceReferenceDevice.DeviceView[] GetAllDevice() {
-            return base.Channel.GetAllDevice();
-        }
-        
-        public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.DeviceView[]> GetAllDeviceAsync() {
-            return base.Channel.GetAllDeviceAsync();
         }
     }
     

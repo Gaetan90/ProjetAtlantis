@@ -35,6 +35,12 @@
   <wsdl:message name="IServiceCalcul_GetCalcul_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCalcul" />
   </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetCalucl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCaluclResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetCalcul_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCalcul" />
+  </wsdl:message>
   <wsdl:message name="IServiceCalcul_GetCalcul_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCalculResponse" />
   </wsdl:message>
@@ -46,14 +52,6 @@
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract" message="tns:IServiceDevice_GetDataUsingDataContract_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse" message="tns:IServiceDevice_GetDataUsingDataContract_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ReceptMetric">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/ReceptMetric" message="tns:IServiceDevice_ReceptMetric_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/ReceptMetricResponse" message="tns:IServiceDevice_ReceptMetric_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllDevice">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/GetAllDevice" message="tns:IServiceDevice_GetAllDevice_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/GetAllDeviceResponse" message="tns:IServiceDevice_GetAllDevice_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IServiceCalcul">
@@ -75,24 +73,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <soap:operation soapAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContract" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ReceptMetric">
-      <soap:operation soapAction="http://tempuri.org/IServiceDevice/ReceptMetric" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllDevice">
-      <soap:operation soapAction="http://tempuri.org/IServiceDevice/GetAllDevice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
