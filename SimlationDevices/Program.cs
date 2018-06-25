@@ -6,92 +6,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
+using System.Web.Script.Serialization;
+
 
 namespace SimlationDevices
 {
+    public class Device
+    {
+        public string id;
+        public string name;
+        public string deviceType;
+    }
+    public class Metrics
+    {
+        public string metricDate;
+        public string deviceType;
+        public string metricValue;
+    }
     class Program
     {
         public static void Main(string[] args)
         {
             //ServiceReferenceDevice.ServiceDeviceClient service = new ServiceReferenceDevice.ServiceDeviceClient();
-
             //ServiceReferenceDevice.Metric metric = service.GetMetric();
+            /*Console.WriteLine("Begin device creation");
+            string idDevice;
+            string nameDevice;
+            string typeDevice;
+            string objDevice;
+            Console.WriteLine("Enter value of 'idDevice':");
+            idDevice = Console.ReadLine();
 
+            Console.WriteLine("Enter value of 'nameDevice':");
+            nameDevice = Console.ReadLine();
+
+            Console.WriteLine("Enter value of 'typeDevice':");
+            typeDevice = Console.ReadLine();
+
+            objDevice = AddDevice(idDevice, nameDevice, typeDevice);
+            Console.WriteLine(objDevice);
+            Console.WriteLine("End device creation");
+            */
             
-            Console.WriteLine("Begin process");
-            for (int i = 0; i < 10; i++)
-            {
-                bool presenceSensor = new Random().Next(100) % 2 == 0;
-                Console.WriteLine("Presence Sensor : " + presenceSensor);
 
-                var temperatureSensor = 1;
-                Console.WriteLine("Presence Sensor : " + temperatureSensor);
-
-                double lightSensor = 1;
-                Console.WriteLine("Light Sensor : " + lightSensor);
-
-                double atmosphericPressureSensor = 1;
-                Console.WriteLine("Atmospheric Pressure Sensor : " + atmosphericPressureSensor);
-
-                double humiditySensor = 1;
-                Console.WriteLine("Humidity Sensor : " + humiditySensor);
-
-                double soundLevelSensor = 1;
-                Console.WriteLine("Sound Level Sensor : " + soundLevelSensor);
-
-                double gpsSensor = 1;
-                Console.WriteLine("GPS Sensor : " + gpsSensor);
-
-                double co2LevelSensor = 1;
-                Console.WriteLine("CO2 Level Sensor : " + co2LevelSensor);
-
-                double ledCommand = 1;
-                Console.WriteLine("Led Command : " + ledCommand);
-
-                double beeperCommand = 1;
-                Console.WriteLine("Beeper Command : " + beeperCommand);
-                Console.WriteLine(" ");
-                Console.WriteLine(" ");
-
-                System.Threading.Thread.Sleep(1000);
-            }
-            
-            Console.WriteLine("End process");
             Console.Read();
         }
-        private const string Document = @"---
-            receipt:    Oz-Ware Purchase Invoice
-            date:        2007-08-06
-            customer:
-                given:   Dorothy
-                family:  Gale
+        public static string SendMetrics()
+        {
+            string metricSend;
+            metricSend = "";
 
-            items:
-                - part_no:   A4786
-                  descrip:   Water Bucket (Filled)
-                  price:     1.47
-                  quantity:  4
-
-                - part_no:   E1628
-                  descrip:   High Heeled ""Ruby"" Slippers
-                  price:     100.27
-                  quantity:  1
-
-            bill-to:  &id001
-                street: |
-                        123 Tornado Alley
-                        Suite 16
-                city:   East Westville
-                state:  KS
-
-            ship-to:  *id001
-
-            specialDelivery:  >
-                Follow the Yellow Brick
-                Road to the Emerald City.
-                Pay no attention to the
-                man behind the curtain.
-...";
+            return metricSend;
+        }
+        public static string AddDevice(string idDevice, string nameDevice, string typeDevice)
+        {
+            string newdevice;
+            var devicenew = new Device
+            {
+                id = idDevice,
+                name = nameDevice,
+                deviceType = typeDevice
+            };
+            var json = new JavaScriptSerializer().Serialize(devicenew);
+            //Console.WriteLine(json);
+            Console.WriteLine(" ");
+            System.Threading.Thread.Sleep(1000);
+            newdevice = json;
+            return newdevice;
+        }
 
         public static void test()
         {
@@ -99,5 +81,8 @@ namespace SimlationDevices
             ICollection<DeviceView> devices = service.GetAllDevice();
             Console.Read();
         }
+
     }
+
+
 }

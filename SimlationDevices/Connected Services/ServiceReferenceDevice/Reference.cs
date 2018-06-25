@@ -11,8 +11,8 @@
 namespace SimlationDevices.ServiceReferenceDevice {
     using System.Runtime.Serialization;
     using System;
-    
-    
+    using System.Collections.Generic;
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/")]
@@ -495,6 +495,11 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+
+        internal ICollection<DeviceView> GetAllDevice()
+        {
+            throw new NotImplementedException();
         }
     }
     

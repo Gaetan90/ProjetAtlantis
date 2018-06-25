@@ -62,4 +62,9 @@ public class Service : IServiceDevice, IServiceCalcul
 		}
 		return composite;
 	}
+
+    public void ReceptMetric(MetricView metric)
+    {
+        throw new NotImplementedException();
+    }
 }
