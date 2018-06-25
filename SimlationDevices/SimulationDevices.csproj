@@ -86,7 +86,13 @@
     <None Include="Connected Services\ServiceReferenceDevice\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceDevice\Service31.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReferenceDevice\SimlationDevices.ServiceReferenceDevice.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReferenceDevice\SimlationDevices.ServiceReferenceDevice.DeviceView1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

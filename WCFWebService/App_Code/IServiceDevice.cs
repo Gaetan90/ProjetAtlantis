@@ -21,8 +21,13 @@ public interface IServiceDevice
     [OperationContract]
     void ReceptMetric(MetricView metric);
 
-    [OperationContract(Name="Devices")]
+    [OperationContract]
+    [WebGet(UriTemplate = "/devices", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
     ICollection<DeviceView> GetAllDevice();
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "/devices/{idDevice}/telemetry", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    void saveMetrics(String idDevice, String value);
 
     // TODO: ajoutez vos opérations de service ici
 }
