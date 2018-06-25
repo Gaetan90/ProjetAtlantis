@@ -11,8 +11,8 @@
 namespace SimlationDevices.ServiceReferenceDevice {
     using System.Runtime.Serialization;
     using System;
-    using System.Collections.Generic;
-
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/")]
@@ -513,6 +513,30 @@ namespace SimlationDevices.ServiceReferenceDevice {
         
         public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.CompositeType> GetDataUsingDataContractAsync(SimlationDevices.ServiceReferenceDevice.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+        
+        public void ReceptMetric(SimlationDevices.ServiceReferenceDevice.MetricView metric) {
+            base.Channel.ReceptMetric(metric);
+        }
+        
+        public System.Threading.Tasks.Task ReceptMetricAsync(SimlationDevices.ServiceReferenceDevice.MetricView metric) {
+            return base.Channel.ReceptMetricAsync(metric);
+        }
+        
+        public SimlationDevices.ServiceReferenceDevice.DeviceView[] GetAllDevice() {
+            return base.Channel.GetAllDevice();
+        }
+        
+        public System.Threading.Tasks.Task<SimlationDevices.ServiceReferenceDevice.DeviceView[]> GetAllDeviceAsync() {
+            return base.Channel.GetAllDeviceAsync();
+        }
+        
+        public void saveMetrics(string idDevice, string value) {
+            base.Channel.saveMetrics(idDevice, value);
+        }
+        
+        public System.Threading.Tasks.Task saveMetricsAsync(string idDevice, string value) {
+            return base.Channel.saveMetricsAsync(idDevice, value);
         }
     }
     
