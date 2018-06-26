@@ -17,6 +17,7 @@ namespace AdoModel
         public int id { get; set; }
         public string value { get; set; }
         public int idMetric { get; set; }
+    
         public virtual Metrics Metrics { get; set; }
     }
 }

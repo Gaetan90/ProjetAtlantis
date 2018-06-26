@@ -16,8 +16,8 @@ namespace SimlationDevices
             //ServiceReferenceDevice.ServiceDeviceClient service = new ServiceReferenceDevice.ServiceDeviceClient();
 
             //ServiceReferenceDevice.Metric metric = service.GetMetric();
+            test();
 
-            
             Console.WriteLine("Begin process");
             for (int i = 0; i < 10; i++)
             {
@@ -55,48 +55,16 @@ namespace SimlationDevices
 
                 System.Threading.Thread.Sleep(1000);
             }
-            
+
             Console.WriteLine("End process");
             Console.Read();
         }
-        private const string Document = @"---
-            receipt:    Oz-Ware Purchase Invoice
-            date:        2007-08-06
-            customer:
-                given:   Dorothy
-                family:  Gale
 
-            items:
-                - part_no:   A4786
-                  descrip:   Water Bucket (Filled)
-                  price:     1.47
-                  quantity:  4
-
-                - part_no:   E1628
-                  descrip:   High Heeled ""Ruby"" Slippers
-                  price:     100.27
-                  quantity:  1
-
-            bill-to:  &id001
-                street: |
-                        123 Tornado Alley
-                        Suite 16
-                city:   East Westville
-                state:  KS
-
-            ship-to:  *id001
-
-            specialDelivery:  >
-                Follow the Yellow Brick
-                Road to the Emerald City.
-                Pay no attention to the
-                man behind the curtain.
-...";
 
         public static void test()
         {
             ServiceDeviceClient service = new ServiceDeviceClient();
-            ICollection<DeviceView> devices = service.GetAllDevice();
+            service.saveMetrics("1", "{ 'metricDate': '2018/12/01',  'deviceType': '2',  'metricValue': ['30','20','10'] }");
             Console.Read();
         }
     }

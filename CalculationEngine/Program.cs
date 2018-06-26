@@ -18,26 +18,25 @@ namespace CalculationEngine
             double result = CalculationEngine(dataMetrics);
 
             var values = new Dictionary<string, string>{
-               { "result", "["+result+"]" },
+               { "results", "["+result+"]" },
                { "name", dataMetrics.First().metric.nameTypeDivice },
                { "description", "Description à affiner" }
             };
-            sendItemAsync(values);
-            Console.Read();
+            sendItemAsync(values).Wait();
 
 
 
         }
-
 
         private static async Task sendItemAsync(Dictionary<string, string> values)
         {
             HttpClient client = new HttpClient();
             var content = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync("http://www.example.com/recepticle.aspx", content);
+            var response = await client.PostAsync("http://10.167.128.61:8282/transaction/calculation-reception", content);
 
             var responseString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseString.ToString());
             Console.Read();
         }
 

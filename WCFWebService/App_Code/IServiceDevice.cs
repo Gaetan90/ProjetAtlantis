@@ -12,12 +12,6 @@ using System.Text;
 public interface IServiceDevice
 {
 
-	[OperationContract]
-	string GetData(int value);
-
-	[OperationContract]
-	CompositeType GetDataUsingDataContract(CompositeType composite);
-
     [OperationContract]
     void ReceptMetric(MetricView metric);
 
@@ -26,30 +20,9 @@ public interface IServiceDevice
     ICollection<DeviceView> GetAllDevice();
 
     [OperationContract]
-    [WebInvoke(Method = "POST", UriTemplate = "/devices/{idDevice}/telemetry", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-    void saveMetrics(String idDevice, String value);
+    [WebInvoke(Method = "POST", UriTemplate = "/device/{idDevice}/telemetry", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    void saveMetrics(string idDevice, string value);
 
     // TODO: ajoutez vos opérations de service ici
 }
 
-// Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.
-[DataContract]
-public class CompositeType
-{
-	bool boolValue = true;
-	string stringValue = "Hello ";
-
-	[DataMember]
-	public bool BoolValue
-	{
-		get { return boolValue; }
-		set { boolValue = value; }
-	}
-
-	[DataMember]
-	public string StringValue
-	{
-		get { return stringValue; }
-		set { stringValue = value; }
-	}
-}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,7 +20,18 @@ public class MetricView
     public DateTime date { get; set; }
     [DataMember]
     public int nbrValues { get; set; }
-    
+    [DataMember]
+    public string nameTypeDivice { get; set; }
+
     [DataMember]
     public DeviceView device { get; set; }
+
+    public MetricView getMetricsToMetricsView(Metrics metric)
+    {
+        MetricView metricView = new MetricView();
+        metricView.id = metric.id;
+        metricView.nbrValues = metric.nbrValues.Value;
+        metricView.nameTypeDivice = metric.Devices.TypeDevices.name;
+        return metricView;
+    }
 }

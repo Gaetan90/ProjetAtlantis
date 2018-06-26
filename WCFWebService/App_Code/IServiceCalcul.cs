@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,7 +13,7 @@ public interface IServiceCalcul
 {
 
 	[OperationContract]
-	string GetCalcul(int value);
+    ICollection<DataMetricView> GetMetricByDeviceType(int idTypeDevice);
 
 
 }

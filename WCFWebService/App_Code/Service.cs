@@ -43,28 +43,6 @@ public class Service : IServiceDevice, IServiceCalcul
         return devices;
     }
 
-    public string GetCalcul(int value)
-    {
-        throw new NotImplementedException();
-    }
-
-    public string GetData(int value)
-	{
-		return string.Format("You entered: {0}", value);
-	}
-
-	public CompositeType GetDataUsingDataContract(CompositeType composite)
-	{
-		if (composite == null)
-		{
-			throw new ArgumentNullException("composite");
-		}
-		if (composite.BoolValue)
-		{
-			composite.StringValue += "Suffix";
-		}
-		return composite;
-	}
 
     public void ReceptMetric(MetricView metric)
     {
@@ -92,4 +70,23 @@ public class Service : IServiceDevice, IServiceCalcul
         _dbo.Metrics.Add(metrics);
         _dbo.SaveChanges();
     }
+
+    public ICollection<DataMetricView> GetMetricByDeviceType(int value)
+    {
+        AtlantisWindowsEntities _dbo = new AtlantisWindowsEntities();
+        ICollection<DataMetrics> dataMetrics = _dbo.DataMetrics.Where(o => o.Metrics.Devices.idTypeDevice == value).ToList();
+        ICollection<DataMetricView> dataMetricsView = new Collection<DataMetricView>();
+        foreach(DataMetrics dataMetric in dataMetrics)
+        {
+            DataMetricView dataMetricView = new DataMetricView();
+            dataMetricView.id = dataMetric.id;
+            dataMetricView.value = dataMetric.value;
+            dataMetricView.metric = new MetricView().getMetricsToMetricsView(dataMetric.Metrics);
+            dataMetricsView.Add(dataMetricView);
+        }
+
+        return dataMetricsView;
+
+    }
+
 }
