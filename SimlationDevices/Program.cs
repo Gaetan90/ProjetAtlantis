@@ -9,6 +9,7 @@ using YamlDotNet.RepresentationModel;
 using System.Web.Script.Serialization;
 using System.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SimlationDevices
 {
@@ -49,22 +50,60 @@ namespace SimlationDevices
     {
         public static void Main(string[] args)
         {
-            //string jsonarray = "http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices";
-            //ServiceReferenceDevice.ServiceDeviceClient service = new ServiceReferenceDevice.ServiceDeviceClient();
-            //ServiceReferenceDevice.Metric metric = service.GetMetric();
+            Console.WriteLine("\nBegin Get Devices\n");
+
             var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices");
-            var resultJsonUrl = JsonConvert.DeserializeObject<RootObjectJsonUrl>(jsonUrlDevices);
-            string adressMac = "";
-            foreach (var urlresult in resultJsonUrl.adressMac)
+            //Console.WriteLine(jsonUrlDevices);
+            var listJsonDevice = JsonConvert.DeserializeObject<List<RootObjectJsonUrl>>(jsonUrlDevices);
+            //Console.WriteLine(listJsonDevice);
+            string adressMacDevice = "";
+            string idDevice = "";
+            string nomDevice = "";
+            string typeDevicesDevice = "";
+            int i = 0;
+            foreach (var urlresult in listJsonDevice)
             {
-                adressMac = urlresult.name.fr;
+                i++;
+                adressMacDevice = urlresult.adressMac;
+                nomDevice = urlresult.nom;
+                typeDevicesDevice = urlresult.typeDevices.name;
+                Console.WriteLine($"Device {i} : ");
+                Console.WriteLine($"Adresse Mac : {adressMacDevice}");
+                Console.WriteLine($"Nom Device : {nomDevice}");
+                Console.WriteLine($"Type Device : {typeDevicesDevice}");
+                Console.WriteLine("");
+                Console.WriteLine("");
+
             }
+            Console.WriteLine("\nEnd Get Devices\n");
+
             Console.WriteLine("Begin metric sender");
-            string idDevice = "adressMac1";
-            SendMetrics(idDevice);
+            SendMetrics(adressMacDevice);
             Console.WriteLine("End metric sender");
-            
+
             Console.Read();
+
+            /*var values = new Dictionary<string, string>{
+               { "result", "["+result+"]" },
+               { "name", dataMetrics.First().metric.nameTypeDivice },
+               { "description", "Description à affiner" }
+            };
+            HttpClient client = new HttpClient();
+            var content = new FormUrlEncodedContent(values);
+ 
+            var response = await client.PostAsync("http://www.example.com/recepticle.aspx", content);
+ 
+            var responseString = await response.Content.ReadAsStringAsync();
+            Console.Read();
+             
+             */
+        }
+        public static string GetuserDevices()
+        {
+            string userdevicelist ="";
+
+
+            return userdevicelist;
         }
         public static string SendMetrics(string idDevice)
         {
@@ -80,11 +119,11 @@ namespace SimlationDevices
             };
             var json = new JavaScriptSerializer().Serialize(newMetricSend);
             //Console.WriteLine(json);
+            Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices/{idDevice}");
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices/{idDevice}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
-            Console.WriteLine(httpWebRequest.ToString());
-
+            /*
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(json);
@@ -97,7 +136,7 @@ namespace SimlationDevices
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-            }
+            }*/
             Console.WriteLine(" ");
             System.Threading.Thread.Sleep(1000);
             metricSend = json;
