@@ -55,7 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\ServiceReferenceCalcul\CalculationEngine.ServiceReferenceCalcul.CompositeType.datasource">
+    <None Include="Connected Services\ServiceReferenceCalcul\CalculationEngine.ServiceReferenceCalcul.DataMetricView.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReferenceCalcul\CalculationEngine.ServiceReferenceCalcul.DeviceView.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReferenceCalcul\Service.wsdl" />
@@ -66,6 +69,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferenceCalcul\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceCalcul\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

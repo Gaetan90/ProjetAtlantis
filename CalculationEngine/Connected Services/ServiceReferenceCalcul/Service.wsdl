@@ -5,46 +5,57 @@
       <xsd:import schemaLocation="http://localhost:54435/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:54435/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:54435/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://localhost:54435/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IServiceDevice_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
+  <wsdl:message name="IServiceDevice_ReceptMetric_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReceptMetric" />
   </wsdl:message>
-  <wsdl:message name="IServiceDevice_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  <wsdl:message name="IServiceDevice_ReceptMetric_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReceptMetricResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceDevice_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  <wsdl:message name="IServiceDevice_GetAllDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDevice" />
   </wsdl:message>
-  <wsdl:message name="IServiceDevice_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  <wsdl:message name="IServiceDevice_GetAllDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDeviceResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceCalcul_GetCalucl_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCalucl" />
+  <wsdl:message name="IServiceDevice_saveMetrics_InputMessage">
+    <wsdl:part name="parameters" element="tns:saveMetrics" />
   </wsdl:message>
-  <wsdl:message name="IServiceCalcul_GetCalucl_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCaluclResponse" />
+  <wsdl:message name="IServiceDevice_saveMetrics_OutputMessage">
+    <wsdl:part name="parameters" element="tns:saveMetricsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetMetricByDeviceType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMetricByDeviceType" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetMetricByDeviceType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMetricByDeviceTypeResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceDevice">
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/GetData" message="tns:IServiceDevice_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/GetDataResponse" message="tns:IServiceDevice_GetData_OutputMessage" />
+    <wsdl:operation name="ReceptMetric">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/ReceptMetric" message="tns:IServiceDevice_ReceptMetric_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/ReceptMetricResponse" message="tns:IServiceDevice_ReceptMetric_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContract" message="tns:IServiceDevice_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/GetDataUsingDataContractResponse" message="tns:IServiceDevice_GetDataUsingDataContract_OutputMessage" />
+    <wsdl:operation name="GetAllDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/GetAllDevice" message="tns:IServiceDevice_GetAllDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/GetAllDeviceResponse" message="tns:IServiceDevice_GetAllDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="saveMetrics">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/saveMetrics" message="tns:IServiceDevice_saveMetrics_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/saveMetricsResponse" message="tns:IServiceDevice_saveMetrics_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IServiceCalcul">
-    <wsdl:operation name="GetCalucl">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCalcul/GetCalucl" message="tns:IServiceCalcul_GetCalucl_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCalcul/GetCaluclResponse" message="tns:IServiceCalcul_GetCalucl_OutputMessage" />
+    <wsdl:operation name="GetMetricByDeviceType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCalcul/GetMetricByDeviceType" message="tns:IServiceCalcul_GetMetricByDeviceType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCalcul/GetMetricByDeviceTypeResponse" message="tns:IServiceCalcul_GetMetricByDeviceType_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceDevice" type="tns:IServiceDevice">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetData">
-      <soap:operation soapAction="http://tempuri.org/IServiceDevice/GetData" style="document" />
+    <wsdl:operation name="ReceptMetric">
+      <soap:operation soapAction="http://tempuri.org/IServiceDevice/ReceptMetric" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -52,8 +63,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap:operation soapAction="http://tempuri.org/IServiceDevice/GetDataUsingDataContract" style="document" />
+    <wsdl:operation name="GetAllDevice">
+      <soap:operation soapAction="http://tempuri.org/IServiceDevice/GetAllDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveMetrics">
+      <soap:operation soapAction="http://tempuri.org/IServiceDevice/saveMetrics" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -64,8 +84,8 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_IServiceCalcul" type="tns:IServiceCalcul">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetCalucl">
-      <soap:operation soapAction="http://tempuri.org/IServiceCalcul/GetCalucl" style="document" />
+    <wsdl:operation name="GetMetricByDeviceType">
+      <soap:operation soapAction="http://tempuri.org/IServiceCalcul/GetMetricByDeviceType" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
