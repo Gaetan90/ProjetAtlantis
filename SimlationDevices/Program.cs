@@ -19,7 +19,6 @@ namespace SimlationDevices
         public static void Main(string[] args)
         {
             Console.WriteLine("\nBegin Get Devices\n");
-
             var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices");
             //Console.WriteLine(jsonUrlDevices);
             var listJsonDevice = JsonConvert.DeserializeObject<List<RootObjectJsonUrl>>(jsonUrlDevices);
@@ -36,13 +35,13 @@ namespace SimlationDevices
             foreach (var urlresult in listJsonDevice)
             {
                 i++;
-                adressMacDevice = urlresult.adressMac;
-                nomDevice = urlresult.nom;
+                adressMacDevice = urlresult.addressMac;
+                nomDevice = urlresult.name;
                 typeDevicesDevice = urlresult.typeDevices.name;
                 listDevice.Add(new RootObjectJsonUrl
                 {
-                    adressMac = urlresult.adressMac,
-                    nom = urlresult.nom,
+                    addressMac = urlresult.addressMac,
+                    name = urlresult.name,
                     typeDevices = urlresult.typeDevices
                 });
                 Console.WriteLine($"Device {i} : ");
@@ -53,38 +52,83 @@ namespace SimlationDevices
                 Console.WriteLine("");
                 
             }
+            Console.WriteLine("\nEnd Get Devices\n");
             Console.WriteLine($"Nombre de devices : {i}");
             int j = 0;
             foreach (var deviceList in listDevice)
             {
                 Thread[] deviceThreads = new Thread[i];
-                deviceThreads[j] = new Thread(() => SendMetrics(deviceList.adressMac, deviceList.typeDevices.name));
+                deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
                 deviceThreads[j].Start();
             }
 
-            Console.WriteLine("\nEnd Get Devices\n");
             Console.WriteLine("Begin metric sender");
 
 
-            SendMetrics(adressMacDevice, typeDevicesDevice);
+            //SendMetrics(adressMacDevice, typeDevicesDevice);
+            Thread.Sleep(100);
             Console.WriteLine("End metric sender");
 
             Console.Read();
         }
-        public static string GetuserDevices()
-        {
-            string userdevicelist ="";
-            //get les devices des users via une requete a définir avec gaetan
 
-            return userdevicelist;
-        }
         public static void SendMetrics(string idDevice, string deviceType)
         {
             string metricSend;
             //string metricDateDevice = "2018-06-26T07:44:09.981Z"; 
             string metricDateDevice = DateTime.UtcNow.ToString("o"); 
-            string deviceTypeDevice = "gpsSensor"; 
-            string metricValueDevice = "N;48;51;45,81;E;2;17;15,331";
+            string deviceTypeDevice = deviceType; 
+            string metricValueDevice = "";
+
+            switch (deviceTypeDevice)
+            {
+                case ("presenceSensor"):
+                    string presenceSensorResult = "";
+                    if (GetRandomBooleanSensor() == true){presenceSensorResult = "1";}else{presenceSensorResult = "0";}
+                    metricValueDevice = presenceSensorResult;
+                    break;
+
+                case ("temperatureSensor"):
+                    metricValueDevice = GetRandomTemperature().ToString();
+                    break;
+
+                case ("brightnessSensor"):
+                    metricValueDevice = GetRandomBrightness().ToString();
+                    break;
+
+                case ("atmosphericPressureSensor"):
+                    metricValueDevice = GetRandomPressure().ToString();
+                    break;
+
+                case ("humiditySensor"):
+                    metricValueDevice = GetRandomHumidity().ToString();
+                    break;
+
+                case ("soundLevelSensor"):
+                    metricValueDevice = GetRandomSoundLevel().ToString();
+                    break;
+
+                case ("gpsSensor"):
+                    metricValueDevice = "N;48;51;45,81;E;2;17;15,331";
+                    break;
+
+                case ("co2Sensor"):
+                    metricValueDevice = GetRandomCO2Level().ToString();
+                    break;
+
+                case ("ledDevice"):
+                    metricValueDevice = "ON";
+                    break;
+
+                case ("beeperDevice"):
+                    metricValueDevice = "ON";
+                    break;
+
+                default:
+                    metricValueDevice = "ERROR";
+                    break;
+            }
+
             var newMetricSend = new Metrics
             {
                 metricDate = metricDateDevice,
@@ -92,12 +136,12 @@ namespace SimlationDevices
                 metricValue = metricValueDevice
             };
             var json = new JavaScriptSerializer().Serialize(newMetricSend);
-            Console.WriteLine(json);
+
             Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+            Console.WriteLine(json);
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
-            
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(json);
@@ -111,16 +155,71 @@ namespace SimlationDevices
                 Console.WriteLine(result);
             }
             Console.WriteLine(" ");
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
             metricSend = json;
-            //return metricSend;
         }
+        public static bool GetRandomBooleanSensor()
+        {
+            Random rnd = new Random();
+            return rnd.Next(0, 2) == 0;
+        }
+        public static double GetRandomTemperature()
+        {
+            double minimum = 19;
+            double maximum = 41;
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
+        }
+        public static int GetRandomBrightness()
+        {
+            int minimum = 0;
+            int maximum = 1001;
+            Random random = new Random();
+            return random.Next() * (maximum - minimum) + minimum;
+        }
+        public static double GetRandomPressure()
+        {
+            double minimum = 900;
+            double maximum = 1101;
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
+        }
+        public static double GetRandomHumidity()
+        {
+            double minimum = 20;
+            double maximum = 90;
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
+        }
+        public static int GetRandomSoundLevel()
+        {
+            int minimum = 60;
+            int maximum = 160;
+            Random random = new Random();
+            return random.Next() * (maximum - minimum) + minimum;
+        }
+        public static double GetRandomCO2Level()
+        {
+            double minimum = 300;
+            double maximum = 600;
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
+        }
+
 
         public static void test()
         {
             ServiceDeviceClient service = new ServiceDeviceClient();
             ICollection<DeviceView> devices = service.GetAllDevice();
+            Console.WriteLine(devices);
             Console.Read();
+        }
+        public static string GetuserDevices()
+        {
+            string userdevicelist = "";
+            //get les devices des users via une requete a définir avec gaetan
+
+            return userdevicelist;
         }
 
     }
@@ -137,10 +236,10 @@ namespace SimlationDevices
     }
     public class RootObjectJsonUrl
     {
-        public string adressMac { get; set; }
+        public string addressMac { get; set; }
         public List<Employee> employees { get; set; }
         public int id { get; set; }
-        public string nom { get; set; }
+        public string name { get; set; }
         public TypeDevices typeDevices { get; set; }
     }
     public class Device
