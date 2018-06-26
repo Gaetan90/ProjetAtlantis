@@ -24,6 +24,7 @@ namespace CalculationEngine.ServiceReferenceCalcul {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CalculationEngine.ServiceReferenceCalcul.DeviceView[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CalculationEngine.ServiceReferenceCalcul.DataMetricView[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CalculationEngine.ServiceReferenceCalcul.DataMetricView))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CalculationEngine.ServiceReferenceCalcul.MetricView[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
     public partial class MetricView : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -486,11 +487,17 @@ namespace CalculationEngine.ServiceReferenceCalcul {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/GetAllDevice", ReplyAction="http://tempuri.org/IServiceDevice/GetAllDeviceResponse")]
         System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DeviceView[]> GetAllDeviceAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/saveMetrics", ReplyAction="http://tempuri.org/IServiceDevice/saveMetricsResponse")]
-        void saveMetrics(string idDevice, string value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/SaveMetrics", ReplyAction="http://tempuri.org/IServiceDevice/SaveMetricsResponse")]
+        void SaveMetrics(string idDevice, string value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/saveMetrics", ReplyAction="http://tempuri.org/IServiceDevice/saveMetricsResponse")]
-        System.Threading.Tasks.Task saveMetricsAsync(string idDevice, string value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/SaveMetrics", ReplyAction="http://tempuri.org/IServiceDevice/SaveMetricsResponse")]
+        System.Threading.Tasks.Task SaveMetricsAsync(string idDevice, string value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/SetCommandDevice", ReplyAction="http://tempuri.org/IServiceDevice/SetCommandDeviceResponse")]
+        void SetCommandDevice(string idDevice, string value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDevice/SetCommandDevice", ReplyAction="http://tempuri.org/IServiceDevice/SetCommandDeviceResponse")]
+        System.Threading.Tasks.Task SetCommandDeviceAsync(string idDevice, string value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -536,12 +543,20 @@ namespace CalculationEngine.ServiceReferenceCalcul {
             return base.Channel.GetAllDeviceAsync();
         }
         
-        public void saveMetrics(string idDevice, string value) {
-            base.Channel.saveMetrics(idDevice, value);
+        public void SaveMetrics(string idDevice, string value) {
+            base.Channel.SaveMetrics(idDevice, value);
         }
         
-        public System.Threading.Tasks.Task saveMetricsAsync(string idDevice, string value) {
-            return base.Channel.saveMetricsAsync(idDevice, value);
+        public System.Threading.Tasks.Task SaveMetricsAsync(string idDevice, string value) {
+            return base.Channel.SaveMetricsAsync(idDevice, value);
+        }
+        
+        public void SetCommandDevice(string idDevice, string value) {
+            base.Channel.SetCommandDevice(idDevice, value);
+        }
+        
+        public System.Threading.Tasks.Task SetCommandDeviceAsync(string idDevice, string value) {
+            return base.Channel.SetCommandDeviceAsync(idDevice, value);
         }
     }
     
@@ -550,10 +565,28 @@ namespace CalculationEngine.ServiceReferenceCalcul {
     public interface IServiceCalcul {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetMetricByDeviceType", ReplyAction="http://tempuri.org/IServiceCalcul/GetMetricByDeviceTypeResponse")]
-        CalculationEngine.ServiceReferenceCalcul.DataMetricView[] GetMetricByDeviceType(int idTypeDevice);
+        CalculationEngine.ServiceReferenceCalcul.DataMetricView[] GetMetricByDeviceType(string idTypeDevice);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetMetricByDeviceType", ReplyAction="http://tempuri.org/IServiceCalcul/GetMetricByDeviceTypeResponse")]
-        System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DataMetricView[]> GetMetricByDeviceTypeAsync(int idTypeDevice);
+        System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DataMetricView[]> GetMetricByDeviceTypeAsync(string idTypeDevice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployee", ReplyAction="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployeeResponse")]
+        CalculationEngine.ServiceReferenceCalcul.DeviceView[] GetListDevicesByEmployee();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployee", ReplyAction="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployeeResponse")]
+        System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DeviceView[]> GetListDevicesByEmployeeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetListMetricSimple", ReplyAction="http://tempuri.org/IServiceCalcul/GetListMetricSimpleResponse")]
+        CalculationEngine.ServiceReferenceCalcul.MetricView[] GetListMetricSimple();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/GetListMetricSimple", ReplyAction="http://tempuri.org/IServiceCalcul/GetListMetricSimpleResponse")]
+        System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.MetricView[]> GetListMetricSimpleAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/SetDeviceEmployee", ReplyAction="http://tempuri.org/IServiceCalcul/SetDeviceEmployeeResponse")]
+        void SetDeviceEmployee(string idDevice, string value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCalcul/SetDeviceEmployee", ReplyAction="http://tempuri.org/IServiceCalcul/SetDeviceEmployeeResponse")]
+        System.Threading.Tasks.Task SetDeviceEmployeeAsync(string idDevice, string value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -583,12 +616,36 @@ namespace CalculationEngine.ServiceReferenceCalcul {
                 base(binding, remoteAddress) {
         }
         
-        public CalculationEngine.ServiceReferenceCalcul.DataMetricView[] GetMetricByDeviceType(int idTypeDevice) {
+        public CalculationEngine.ServiceReferenceCalcul.DataMetricView[] GetMetricByDeviceType(string idTypeDevice) {
             return base.Channel.GetMetricByDeviceType(idTypeDevice);
         }
         
-        public System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DataMetricView[]> GetMetricByDeviceTypeAsync(int idTypeDevice) {
+        public System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DataMetricView[]> GetMetricByDeviceTypeAsync(string idTypeDevice) {
             return base.Channel.GetMetricByDeviceTypeAsync(idTypeDevice);
+        }
+        
+        public CalculationEngine.ServiceReferenceCalcul.DeviceView[] GetListDevicesByEmployee() {
+            return base.Channel.GetListDevicesByEmployee();
+        }
+        
+        public System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.DeviceView[]> GetListDevicesByEmployeeAsync() {
+            return base.Channel.GetListDevicesByEmployeeAsync();
+        }
+        
+        public CalculationEngine.ServiceReferenceCalcul.MetricView[] GetListMetricSimple() {
+            return base.Channel.GetListMetricSimple();
+        }
+        
+        public System.Threading.Tasks.Task<CalculationEngine.ServiceReferenceCalcul.MetricView[]> GetListMetricSimpleAsync() {
+            return base.Channel.GetListMetricSimpleAsync();
+        }
+        
+        public void SetDeviceEmployee(string idDevice, string value) {
+            base.Channel.SetDeviceEmployee(idDevice, value);
+        }
+        
+        public System.Threading.Tasks.Task SetDeviceEmployeeAsync(string idDevice, string value) {
+            return base.Channel.SetDeviceEmployeeAsync(idDevice, value);
         }
     }
 }

@@ -63,4 +63,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DataMetricView" nillable="true" type="tns:DataMetricView" />
+  <xs:complexType name="ArrayOfMetricView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MetricView" nillable="true" type="tns:MetricView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMetricView" nillable="true" type="tns:ArrayOfMetricView" />
 </xs:schema>

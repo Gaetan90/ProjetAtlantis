@@ -15,13 +15,21 @@ using System.Text;
 // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service" dans le code, le fichier svc et le fichier de configuration.
 public class Service : IServiceDevice, IServiceCalcul
 {
+    IServiceDao serviceDao;
+
+    public Service()
+    {
+        this.serviceDao = new ServiceDao();
+    }
+
+    //*******************************//
+    //*********DEVICEINTERFACE********//
+    //*******************************//
     public ICollection<DeviceView> GetAllDevice()
     {
         ICollection<DeviceView> devices = new Collection<DeviceView>();
-
-        AtlantisWindowsEntities _dbo = new AtlantisWindowsEntities();
-        ICollection<Devices> listDevices = _dbo.Devices.ToList();
-        foreach(Devices device in listDevices)
+        ICollection<Devices> listDevices = serviceDao.GetAllDevicesDao();
+        foreach (Devices device in listDevices)
         {
             DeviceView deviceView = new DeviceView();
             deviceView.id = device.id;
@@ -43,38 +51,29 @@ public class Service : IServiceDevice, IServiceCalcul
         return devices;
     }
 
-
-    public void ReceptMetric(MetricView metric)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void saveMetrics(string idDevice, string value)
+    public int SaveMetrics(string adressMac, string value)
     {
         var json = new JavaScriptSerializer().Deserialize<MetricsJson>(value);
         Metrics metrics = new Metrics();
-        metrics.idDevice = Int32.Parse(idDevice);
         metrics.date = json.metricDate;
         int nbrValue = 0;
         ICollection<DataMetrics> dataMetrics = new Collection<DataMetrics>();
-        foreach (Object o in json.metricValue){
-            DataMetrics data = new DataMetrics();
-            data.value = o.ToString();
-            dataMetrics.Add(data);
-            nbrValue++;
-        }
+        //foreach (Object o in json.metricValue){
+        DataMetrics data = new DataMetrics();
+        data.value = json.metricValue;
+        dataMetrics.Add(data);
+        nbrValue++;
+        //}
+        Devices devices = serviceDao.GetDeviceByAdressMac(adressMac);
         metrics.nbrValues = nbrValue;
         metrics.DataMetrics = dataMetrics;
-
-        AtlantisWindowsEntities _dbo = new AtlantisWindowsEntities();
-        _dbo.Metrics.Add(metrics);
-        _dbo.SaveChanges();
+        metrics.Devices = devices;
+        return serviceDao.SaveMetricsDao(metrics);
     }
 
-    public ICollection<DataMetricView> GetMetricByDeviceType(int value)
+    public ICollection<DataMetricView> GetMetricByDeviceType(string value)
     {
-        AtlantisWindowsEntities _dbo = new AtlantisWindowsEntities();
-        ICollection<DataMetrics> dataMetrics = _dbo.DataMetrics.Where(o => o.Metrics.Devices.idTypeDevice == value).ToList();
+        ICollection<DataMetrics> dataMetrics = serviceDao.GetMetricByDeviceTypeDao(Int32.Parse(value));
         ICollection<DataMetricView> dataMetricsView = new Collection<DataMetricView>();
         foreach(DataMetrics dataMetric in dataMetrics)
         {
@@ -89,4 +88,54 @@ public class Service : IServiceDevice, IServiceCalcul
 
     }
 
+    public void SetCommandDevice(string idDevice, string value)
+    {
+        throw new NotImplementedException();
+    }
+
+    //*******************************//
+    //*********CALULINTERFACE********//
+    //*******************************//
+
+    public ICollection<DeviceView> GetListDevicesByEmployee()
+    {
+        ICollection<DeviceView> devices = new Collection<DeviceView>();
+        ICollection<Devices> listDevices = serviceDao.GetAllDevicesDao();
+        foreach (Devices device in listDevices)
+        {
+            DeviceView deviceView = new DeviceView();
+            deviceView.id = device.id;
+            deviceView.nom = device.name;
+            deviceView.adressMac = device.adressMac;
+            TypeDevices typeDevice = device.TypeDevices;
+            if (typeDevice != null)
+            {
+                TypeDeviceView typeDeviceView = new TypeDeviceView();
+                typeDeviceView.id = typeDevice.id;
+                typeDeviceView.name = typeDevice.name;
+                deviceView.typeDevices = typeDeviceView;
+            }
+
+            devices.Add(deviceView);
+        }
+
+        return devices;
+    }
+
+    public ICollection<MetricView> GetListMetricSimple()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetDeviceEmployee(string idDevice, string value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ReceptMetric(MetricView metric)
+    {
+        throw new NotImplementedException();
+    }
+
+  
 }

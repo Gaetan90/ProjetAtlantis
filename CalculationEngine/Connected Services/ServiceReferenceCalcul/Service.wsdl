@@ -20,17 +20,41 @@
   <wsdl:message name="IServiceDevice_GetAllDevice_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllDeviceResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceDevice_saveMetrics_InputMessage">
-    <wsdl:part name="parameters" element="tns:saveMetrics" />
+  <wsdl:message name="IServiceDevice_SaveMetrics_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMetrics" />
   </wsdl:message>
-  <wsdl:message name="IServiceDevice_saveMetrics_OutputMessage">
-    <wsdl:part name="parameters" element="tns:saveMetricsResponse" />
+  <wsdl:message name="IServiceDevice_SaveMetrics_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMetricsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDevice_SetCommandDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCommandDevice" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDevice_SetCommandDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCommandDeviceResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceCalcul_GetMetricByDeviceType_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMetricByDeviceType" />
   </wsdl:message>
   <wsdl:message name="IServiceCalcul_GetMetricByDeviceType_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMetricByDeviceTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetListDevicesByEmployee_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListDevicesByEmployee" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetListDevicesByEmployee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListDevicesByEmployeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetListMetricSimple_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListMetricSimple" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_GetListMetricSimple_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListMetricSimpleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_SetDeviceEmployee_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDeviceEmployee" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCalcul_SetDeviceEmployee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDeviceEmployeeResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceDevice">
     <wsdl:operation name="ReceptMetric">
@@ -41,15 +65,31 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/GetAllDevice" message="tns:IServiceDevice_GetAllDevice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/GetAllDeviceResponse" message="tns:IServiceDevice_GetAllDevice_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="saveMetrics">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/saveMetrics" message="tns:IServiceDevice_saveMetrics_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/saveMetricsResponse" message="tns:IServiceDevice_saveMetrics_OutputMessage" />
+    <wsdl:operation name="SaveMetrics">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/SaveMetrics" message="tns:IServiceDevice_SaveMetrics_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/SaveMetricsResponse" message="tns:IServiceDevice_SaveMetrics_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCommandDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDevice/SetCommandDevice" message="tns:IServiceDevice_SetCommandDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDevice/SetCommandDeviceResponse" message="tns:IServiceDevice_SetCommandDevice_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IServiceCalcul">
     <wsdl:operation name="GetMetricByDeviceType">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCalcul/GetMetricByDeviceType" message="tns:IServiceCalcul_GetMetricByDeviceType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceCalcul/GetMetricByDeviceTypeResponse" message="tns:IServiceCalcul_GetMetricByDeviceType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListDevicesByEmployee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployee" message="tns:IServiceCalcul_GetListDevicesByEmployee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployeeResponse" message="tns:IServiceCalcul_GetListDevicesByEmployee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListMetricSimple">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCalcul/GetListMetricSimple" message="tns:IServiceCalcul_GetListMetricSimple_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCalcul/GetListMetricSimpleResponse" message="tns:IServiceCalcul_GetListMetricSimple_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDeviceEmployee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCalcul/SetDeviceEmployee" message="tns:IServiceCalcul_SetDeviceEmployee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCalcul/SetDeviceEmployeeResponse" message="tns:IServiceCalcul_SetDeviceEmployee_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceDevice" type="tns:IServiceDevice">
@@ -72,8 +112,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="saveMetrics">
-      <soap:operation soapAction="http://tempuri.org/IServiceDevice/saveMetrics" style="document" />
+    <wsdl:operation name="SaveMetrics">
+      <soap:operation soapAction="http://tempuri.org/IServiceDevice/SaveMetrics" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCommandDevice">
+      <soap:operation soapAction="http://tempuri.org/IServiceDevice/SetCommandDevice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -86,6 +135,33 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetMetricByDeviceType">
       <soap:operation soapAction="http://tempuri.org/IServiceCalcul/GetMetricByDeviceType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListDevicesByEmployee">
+      <soap:operation soapAction="http://tempuri.org/IServiceCalcul/GetListDevicesByEmployee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListMetricSimple">
+      <soap:operation soapAction="http://tempuri.org/IServiceCalcul/GetListMetricSimple" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDeviceEmployee">
+      <soap:operation soapAction="http://tempuri.org/IServiceCalcul/SetDeviceEmployee" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

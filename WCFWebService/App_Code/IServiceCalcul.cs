@@ -13,7 +13,19 @@ public interface IServiceCalcul
 {
 
 	[OperationContract]
-    ICollection<DataMetricView> GetMetricByDeviceType(int idTypeDevice);
+    ICollection<DataMetricView> GetMetricByDeviceType(string idTypeDevice);
+
+    [OperationContract]
+    [WebGet(UriTemplate = "/devices", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    ICollection<DeviceView> GetListDevicesByEmployee();
+
+    [OperationContract]
+    [WebGet(UriTemplate = "/metrics", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    ICollection<MetricView> GetListMetricSimple();
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "/device/{idDevice}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    void SetDeviceEmployee(string idDevice, string value);
 
 
 }

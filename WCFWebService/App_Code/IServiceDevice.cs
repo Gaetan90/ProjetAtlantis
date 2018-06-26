@@ -20,9 +20,12 @@ public interface IServiceDevice
     ICollection<DeviceView> GetAllDevice();
 
     [OperationContract]
-    [WebInvoke(Method = "POST", UriTemplate = "/device/{idDevice}/telemetry", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-    void saveMetrics(string idDevice, string value);
+    [WebInvoke(Method = "PUT", UriTemplate = "/device/{idDevice}/telemetry", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    int SaveMetrics(string idDevice, string value);
 
-    // TODO: ajoutez vos opérations de service ici
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "/device/{idDevice}/command", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    void SetCommandDevice(string idDevice, string value);
+
 }
 

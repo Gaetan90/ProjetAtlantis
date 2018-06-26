@@ -25,7 +25,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="saveMetrics">
+  <xs:element name="SaveMetrics">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idDevice" nillable="true" type="xs:string" />
@@ -33,7 +33,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="saveMetricsResponse">
+  <xs:element name="SaveMetricsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCommandDevice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idDevice" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCommandDeviceResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -41,7 +54,7 @@
   <xs:element name="GetMetricByDeviceType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idTypeDevice" type="xs:int" />
+        <xs:element minOccurs="0" name="idTypeDevice" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -50,6 +63,43 @@
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetMetricByDeviceTypeResult" nillable="true" type="q3:ArrayOfDataMetricView" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListDevicesByEmployee">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListDevicesByEmployeeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetListDevicesByEmployeeResult" nillable="true" type="q4:ArrayOfDeviceView" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListMetricSimple">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListMetricSimpleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetListMetricSimpleResult" nillable="true" type="q5:ArrayOfMetricView" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDeviceEmployee">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idDevice" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDeviceEmployeeResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

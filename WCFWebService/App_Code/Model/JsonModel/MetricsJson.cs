@@ -10,5 +10,5 @@ public class MetricsJson
 {
     public DateTime metricDate { get; set; }
     public string deviceType { get; set; }
-    public ICollection<Object> metricValue { get; set; }
+    public string metricValue { get; set; }
 }
