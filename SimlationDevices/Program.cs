@@ -74,22 +74,6 @@ namespace SimlationDevices
             metricSend = json;
             return metricSend;
         }
-        public static string AddDevice(string idDevice, string nameDevice, string typeDevice)
-        {
-            string newdevice;
-            var devicenew = new Device
-            {
-                id = idDevice,
-                name = nameDevice,
-                deviceType = typeDevice
-            };
-            var json = new JavaScriptSerializer().Serialize(devicenew);
-            //Console.WriteLine(json);
-            Console.WriteLine(" ");
-            System.Threading.Thread.Sleep(1000);
-            newdevice = json;
-            return newdevice;
-        }
 
         public static void test()
         {
