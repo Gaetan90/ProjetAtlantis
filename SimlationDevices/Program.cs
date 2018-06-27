@@ -20,18 +20,12 @@ namespace SimlationDevices
         {
             Console.WriteLine("\nBegin Get Devices\n");
             var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices");
-            //Console.WriteLine(jsonUrlDevices);
             var listJsonDevice = JsonConvert.DeserializeObject<List<RootObjectJsonUrl>>(jsonUrlDevices);
-            //Console.WriteLine(listJsonDevice);
             string adressMacDevice = "";
-            //string idDevice = "";
             string nomDevice = "";
             string typeDevicesDevice = "";
-            
-
             int i = 0;
             List<RootObjectJsonUrl> listDevice = new List<RootObjectJsonUrl>();
-
             foreach (var urlresult in listJsonDevice)
             {
                 i++;
@@ -49,7 +43,6 @@ namespace SimlationDevices
                 Console.WriteLine($"Nom Device : {nomDevice}");
                 Console.WriteLine($"Type Device : {typeDevicesDevice}");
                 Console.WriteLine("");
-
             }
             Console.WriteLine("\nEnd Get Devices\n");
             Console.WriteLine($"Nombre de devices : {i}");
@@ -60,18 +53,20 @@ namespace SimlationDevices
                 deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
                 deviceThreads[j].Start();
                 j++;
-            }           
+            }
             Console.Read();
         }
 
         public static void SendMetrics(string idDevice, string deviceType)
         {
-            for (int i = 0; i < 10; i++)
+            Console.WriteLine($"BEGIN SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
+            for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine($"Begin metric sender for {idDevice}");
+                //Console.WriteLine($"Begin metric sender for {idDevice}");
                 string metricSend;
-                //string metricDateDevice = "2018-06-26T07:44:09.981Z"; 
-                string metricDateDevice = DateTime.UtcNow.ToString("o"); 
+                //string metricDateDevice = "2018-06-26T07:44:09.981Z"; // ça doit ressembler à ça
+                string metricDateDevice = DateTime.UtcNow.ToString("o");
+                //string metricDateDevice = DateTime.Now.ToString("o"); 
                 string deviceTypeDevice = deviceType; 
                 string metricValueDevice = "";
 
@@ -79,28 +74,28 @@ namespace SimlationDevices
                 {
                     case ("presenceSensor"):
                         string presenceSensorResult = "";
-                        if (GetRandomBooleanSensor() == true){presenceSensorResult = "1";}else{presenceSensorResult = "0";}
+                        if (GetRandomBoolean() == true){presenceSensorResult = "1";}else{presenceSensorResult = "0";}
                         metricValueDevice = presenceSensorResult;
                         break;
 
                     case ("temperatureSensor"):
-                        metricValueDevice = GetRandomTemperature().ToString();
+                        metricValueDevice = GetRandomDouble(19,41).ToString();
                         break;
 
                     case ("brightnessSensor"):
-                        metricValueDevice = GetRandomBrightness().ToString();
+                        metricValueDevice = GetRandomInt(0,1001).ToString();
                         break;
 
                     case ("atmosphericPressureSensor"):
-                        metricValueDevice = GetRandomPressure().ToString();
+                        metricValueDevice = GetRandomDouble(900,1101).ToString();
                         break;
 
                     case ("humiditySensor"):
-                        metricValueDevice = GetRandomHumidity().ToString();
+                        metricValueDevice = GetRandomDouble(20,90).ToString();
                         break;
 
                     case ("soundLevelSensor"):
-                        metricValueDevice = GetRandomSoundLevel().ToString();
+                        metricValueDevice = GetRandomInt(60,160).ToString();
                         break;
 
                     case ("gpsSensor"):
@@ -108,7 +103,7 @@ namespace SimlationDevices
                         break;
 
                     case ("co2Sensor"):
-                        metricValueDevice = GetRandomCO2Level().ToString();
+                        metricValueDevice = GetRandomDouble(300,600).ToString();
                         break;
 
                     case ("ledDevice"):
@@ -130,8 +125,9 @@ namespace SimlationDevices
                     deviceType = deviceTypeDevice,
                     metricValue = metricValueDevice
                 };
+                //Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
                 var json = new JavaScriptSerializer().Serialize(newMetricSend);
-                Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+                //Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
                 Console.WriteLine(json);
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
                 httpWebRequest.ContentType = "application/json";
@@ -146,63 +142,31 @@ namespace SimlationDevices
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    Console.WriteLine(result);
+                    //Console.WriteLine($"result : {result}");
                 }
                 //Console.WriteLine(" ");
                 metricSend = json;
-                Console.WriteLine($"End metric sender for {idDevice}");
-                Thread.Sleep(1000);
+                //Console.WriteLine($"End metric sender for {idDevice}");
+                //Thread.Sleep(1000);
 
             }
+            Console.WriteLine($"END SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
         }
-        public static bool GetRandomBooleanSensor()
+        public static bool GetRandomBoolean()
         {
             Random rnd = new Random();
             return rnd.Next(0, 2) == 0;
         }
-        public static double GetRandomTemperature()
+        public static double GetRandomDouble(double minimum, double maximum)
         {
-            double minimum = 19;
-            double maximum = 41;
             Random random = new Random();
             return random.NextDouble() * (maximum - minimum) + minimum;
         }
-        public static int GetRandomBrightness()
+        public static int GetRandomInt(int minimum, int maximum)
         {
-            int minimum = 0;
-            int maximum = 1001;
             Random random = new Random();
             return random.Next() * (maximum - minimum) + minimum;
         }
-        public static double GetRandomPressure()
-        {
-            double minimum = 900;
-            double maximum = 1101;
-            Random random = new Random();
-            return random.NextDouble() * (maximum - minimum) + minimum;
-        }
-        public static double GetRandomHumidity()
-        {
-            double minimum = 20;
-            double maximum = 90;
-            Random random = new Random();
-            return random.NextDouble() * (maximum - minimum) + minimum;
-        }
-        public static int GetRandomSoundLevel()
-        {
-            int minimum = 60;
-            int maximum = 160;
-            Random random = new Random();
-            return random.Next() * (maximum - minimum) + minimum;
-        }
-        public static double GetRandomCO2Level()
-        {
-            double minimum = 300;
-            double maximum = 600;
-            Random random = new Random();
-            return random.NextDouble() * (maximum - minimum) + minimum;
-        }
-
 
         public static void test()
         {
