@@ -21,6 +21,7 @@ namespace SimlationDevices
             Console.WriteLine("\nBegin Get Devices\n");
             var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices");
             var listJsonDevice = JsonConvert.DeserializeObject<List<RootObjectJsonUrl>>(jsonUrlDevices);
+            Console.WriteLine(jsonUrlDevices);
             string adressMacDevice = "";
             string nomDevice = "";
             string typeDevicesDevice = "";
@@ -38,7 +39,7 @@ namespace SimlationDevices
                     name = urlresult.name,
                     typeDevices = urlresult.typeDevices
                 });
-                Console.WriteLine($"Device {i} : ");
+                Console.WriteLine($"Device : {i} ");
                 Console.WriteLine($"Adresse Mac : {adressMacDevice}");
                 Console.WriteLine($"Nom Device : {nomDevice}");
                 Console.WriteLine($"Type Device : {typeDevicesDevice}");
@@ -129,7 +130,7 @@ namespace SimlationDevices
                 var json = new JavaScriptSerializer().Serialize(newMetricSend);
                 //Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
                 Console.WriteLine(json);
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+                /*var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -143,12 +144,11 @@ namespace SimlationDevices
                 {
                     var result = streamReader.ReadToEnd();
                     //Console.WriteLine($"result : {result}");
-                }
+                }*/
                 //Console.WriteLine(" ");
                 metricSend = json;
                 //Console.WriteLine($"End metric sender for {idDevice}");
                 //Thread.Sleep(1000);
-
             }
             Console.WriteLine($"END SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
         }
@@ -166,21 +166,6 @@ namespace SimlationDevices
         {
             Random random = new Random();
             return random.Next() * (maximum - minimum) + minimum;
-        }
-
-        public static void test()
-        {
-            ServiceDeviceClient service = new ServiceDeviceClient();
-            ICollection<DeviceView> devices = service.GetAllDevice();
-            Console.WriteLine(devices);
-            Console.Read();
-        }
-        public static string GetuserDevices()
-        {
-            string userdevicelist = "";
-            //get les devices des users via une requete a définir avec gaetan
-
-            return userdevicelist;
         }
 
     }
