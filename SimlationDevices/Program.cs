@@ -49,114 +49,111 @@ namespace SimlationDevices
                 Console.WriteLine($"Nom Device : {nomDevice}");
                 Console.WriteLine($"Type Device : {typeDevicesDevice}");
                 Console.WriteLine("");
-                Console.WriteLine("");
-                
+
             }
             Console.WriteLine("\nEnd Get Devices\n");
             Console.WriteLine($"Nombre de devices : {i}");
             int j = 0;
+            Thread[] deviceThreads = new Thread[i];
             foreach (var deviceList in listDevice)
             {
-                Thread[] deviceThreads = new Thread[i];
                 deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
                 deviceThreads[j].Start();
-            }
-
-            Console.WriteLine("Begin metric sender");
-
-
-            //SendMetrics(adressMacDevice, typeDevicesDevice);
-            Thread.Sleep(100);
-            Console.WriteLine("End metric sender");
-
+                j++;
+            }           
             Console.Read();
         }
 
         public static void SendMetrics(string idDevice, string deviceType)
         {
-            string metricSend;
-            //string metricDateDevice = "2018-06-26T07:44:09.981Z"; 
-            string metricDateDevice = DateTime.UtcNow.ToString("o"); 
-            string deviceTypeDevice = deviceType; 
-            string metricValueDevice = "";
-
-            switch (deviceTypeDevice)
+            for (int i = 0; i < 10; i++)
             {
-                case ("presenceSensor"):
-                    string presenceSensorResult = "";
-                    if (GetRandomBooleanSensor() == true){presenceSensorResult = "1";}else{presenceSensorResult = "0";}
-                    metricValueDevice = presenceSensorResult;
-                    break;
+                Console.WriteLine($"Begin metric sender for {idDevice}");
+                string metricSend;
+                //string metricDateDevice = "2018-06-26T07:44:09.981Z"; 
+                string metricDateDevice = DateTime.UtcNow.ToString("o"); 
+                string deviceTypeDevice = deviceType; 
+                string metricValueDevice = "";
 
-                case ("temperatureSensor"):
-                    metricValueDevice = GetRandomTemperature().ToString();
-                    break;
+                switch (deviceTypeDevice)
+                {
+                    case ("presenceSensor"):
+                        string presenceSensorResult = "";
+                        if (GetRandomBooleanSensor() == true){presenceSensorResult = "1";}else{presenceSensorResult = "0";}
+                        metricValueDevice = presenceSensorResult;
+                        break;
 
-                case ("brightnessSensor"):
-                    metricValueDevice = GetRandomBrightness().ToString();
-                    break;
+                    case ("temperatureSensor"):
+                        metricValueDevice = GetRandomTemperature().ToString();
+                        break;
 
-                case ("atmosphericPressureSensor"):
-                    metricValueDevice = GetRandomPressure().ToString();
-                    break;
+                    case ("brightnessSensor"):
+                        metricValueDevice = GetRandomBrightness().ToString();
+                        break;
 
-                case ("humiditySensor"):
-                    metricValueDevice = GetRandomHumidity().ToString();
-                    break;
+                    case ("atmosphericPressureSensor"):
+                        metricValueDevice = GetRandomPressure().ToString();
+                        break;
 
-                case ("soundLevelSensor"):
-                    metricValueDevice = GetRandomSoundLevel().ToString();
-                    break;
+                    case ("humiditySensor"):
+                        metricValueDevice = GetRandomHumidity().ToString();
+                        break;
 
-                case ("gpsSensor"):
-                    metricValueDevice = "N;48;51;45,81;E;2;17;15,331";
-                    break;
+                    case ("soundLevelSensor"):
+                        metricValueDevice = GetRandomSoundLevel().ToString();
+                        break;
 
-                case ("co2Sensor"):
-                    metricValueDevice = GetRandomCO2Level().ToString();
-                    break;
+                    case ("gpsSensor"):
+                        metricValueDevice = "N;48;51;45,81;E;2;17;15,331";
+                        break;
 
-                case ("ledDevice"):
-                    metricValueDevice = "ON";
-                    break;
+                    case ("co2Sensor"):
+                        metricValueDevice = GetRandomCO2Level().ToString();
+                        break;
 
-                case ("beeperDevice"):
-                    metricValueDevice = "ON";
-                    break;
+                    case ("ledDevice"):
+                        metricValueDevice = "ON";
+                        break;
 
-                default:
-                    metricValueDevice = "ERROR";
-                    break;
+                    case ("beeperDevice"):
+                        metricValueDevice = "ON";
+                        break;
+
+                    default:
+                        metricValueDevice = "ERROR";
+                        break;
+                }
+
+                var newMetricSend = new Metrics
+                {
+                    metricDate = metricDateDevice,
+                    deviceType = deviceTypeDevice,
+                    metricValue = metricValueDevice
+                };
+                var json = new JavaScriptSerializer().Serialize(newMetricSend);
+                Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+                Console.WriteLine(json);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    Console.WriteLine(result);
+                }
+                //Console.WriteLine(" ");
+                metricSend = json;
+                Console.WriteLine($"End metric sender for {idDevice}");
+                Thread.Sleep(1000);
+
             }
-
-            var newMetricSend = new Metrics
-            {
-                metricDate = metricDateDevice,
-                deviceType = deviceTypeDevice,
-                metricValue = metricValueDevice
-            };
-            var json = new JavaScriptSerializer().Serialize(newMetricSend);
-
-            Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
-            Console.WriteLine(json);
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
-            }
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-                Console.WriteLine(result);
-            }
-            Console.WriteLine(" ");
-            Thread.Sleep(1000);
-            metricSend = json;
         }
         public static bool GetRandomBooleanSensor()
         {
