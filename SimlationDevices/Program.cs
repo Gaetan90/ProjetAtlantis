@@ -11,6 +11,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
+using System.Net.Http;
 
 namespace SimlationDevices
 {
@@ -20,11 +21,11 @@ namespace SimlationDevices
         {
             Console.WriteLine("\nBegin Get Devices\n");
 
-            var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices");
+            var jsonUrlDevices = new WebClient().DownloadString("http://localhost:54435/Service.svc/devices/devices");
             //Console.WriteLine(jsonUrlDevices);
             var listJsonDevice = JsonConvert.DeserializeObject<List<RootObjectJsonUrl>>(jsonUrlDevices);
             //Console.WriteLine(listJsonDevice);
-            string adressMacDevice = "";
+            string addressMacDevice = "";
             //string idDevice = "";
             string nomDevice = "";
             string typeDevicesDevice = "";
@@ -36,17 +37,17 @@ namespace SimlationDevices
             foreach (var urlresult in listJsonDevice)
             {
                 i++;
-                adressMacDevice = urlresult.adressMac;
+                addressMacDevice = urlresult.addressMac;
                 nomDevice = urlresult.nom;
                 typeDevicesDevice = urlresult.typeDevices.name;
                 listDevice.Add(new RootObjectJsonUrl
                 {
-                    adressMac = urlresult.adressMac,
+                    addressMac = urlresult.addressMac,
                     nom = urlresult.nom,
                     typeDevices = urlresult.typeDevices
                 });
                 Console.WriteLine($"Device {i} : ");
-                Console.WriteLine($"Adresse Mac : {adressMacDevice}");
+                Console.WriteLine($"Adresse Mac : {addressMacDevice}");
                 Console.WriteLine($"Nom Device : {nomDevice}");
                 Console.WriteLine($"Type Device : {typeDevicesDevice}");
                 Console.WriteLine("");
@@ -58,7 +59,7 @@ namespace SimlationDevices
             foreach (var deviceList in listDevice)
             {
                 Thread[] deviceThreads = new Thread[i];
-                deviceThreads[j] = new Thread(() => SendMetrics(deviceList.adressMac, deviceList.typeDevices.name));
+                deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
                 deviceThreads[j].Start();
             }
 
@@ -66,7 +67,7 @@ namespace SimlationDevices
             Console.WriteLine("Begin metric sender");
 
 
-            SendMetrics(adressMacDevice, typeDevicesDevice);
+            SendMetrics(addressMacDevice, typeDevicesDevice);
             Console.WriteLine("End metric sender");
 
             Console.Read();
@@ -93,8 +94,16 @@ namespace SimlationDevices
             };
             var json = new JavaScriptSerializer().Serialize(newMetricSend);
             Console.WriteLine(json);
-            Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+            Console.WriteLine($"http://localhost:54435/Service.svc/Service.svc/devices/device/{idDevice}/telemetry");
+            //sendItemAsync(json, idDevice).Wait();
+
+
+
+
+
+
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://localhost:54435/Service.svc/devices/device/{idDevice}/telemetry");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             
@@ -105,49 +114,29 @@ namespace SimlationDevices
                 streamWriter.Close();
             }
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-                Console.WriteLine(result);
-            }
-            Console.WriteLine(" ");
+            
+
+            //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            //{
+            //    var result = streamReader.ReadToEnd();
+            //    Console.WriteLine(result);
+            //}
+           // Console.WriteLine(httpResponse);
             System.Threading.Thread.Sleep(1000);
             metricSend = json;
             //return metricSend;
         }
-        private const string Document = @"---
-            receipt:    Oz-Ware Purchase Invoice
-            date:        2007-08-06
-            customer:
-                given:   Dorothy
-                family:  Gale
+        private static async Task sendItemAsync(string values, string idDevice)
+        {
+            HttpClient client = new HttpClient();
+            var content = new StringContent(values.ToString());
 
-            items:
-                - part_no:   A4786
-                  descrip:   Water Bucket (Filled)
-                  price:     1.47
-                  quantity:  4
+            var response = await client.PostAsync($"http://localhost:54435/Service.svc/devices/device/{idDevice}/telemetry", content);
 
-                - part_no:   E1628
-                  descrip:   High Heeled ""Ruby"" Slippers
-                  price:     100.27
-                  quantity:  1
-
-            bill-to:  &id001
-                street: |
-                        123 Tornado Alley
-                        Suite 16
-                city:   East Westville
-                state:  KS
-
-            ship-to:  *id001
-
-            specialDelivery:  >
-                Follow the Yellow Brick
-                Road to the Emerald City.
-                Pay no attention to the
-                man behind the curtain.
-...";
+            var responseString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(response.ToString());
+            //Console.Read();
+        }
 
         public static void test()
         {
@@ -170,7 +159,7 @@ namespace SimlationDevices
     }
     public class RootObjectJsonUrl
     {
-        public string adressMac { get; set; }
+        public string addressMac { get; set; }
         public List<Employee> employees { get; set; }
         public int id { get; set; }
         public string nom { get; set; }

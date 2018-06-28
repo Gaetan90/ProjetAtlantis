@@ -16,6 +16,8 @@
         <AssociationConnector Association="AtlantisWindowsModel.FK_DeviceEmployees_Employees" />
         <AssociationConnector Association="AtlantisWindowsModel.FK_Devices_TypeDevices" />
         <AssociationConnector Association="AtlantisWindowsModel.FK_Metrics_Devices" />
+        <EntityTypeShape EntityType="AtlantisWindowsModel.HistoriqueCommandes" Width="1.5" PointX="8.625" PointY="3.5" />
+        <AssociationConnector Association="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

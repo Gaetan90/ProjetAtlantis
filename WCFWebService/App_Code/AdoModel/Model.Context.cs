@@ -31,5 +31,6 @@ namespace AdoModel
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Metrics> Metrics { get; set; }
         public virtual DbSet<TypeDevices> TypeDevices { get; set; }
+        public virtual DbSet<HistoriqueCommandes> HistoriqueCommandes { get; set; }
     }
 }

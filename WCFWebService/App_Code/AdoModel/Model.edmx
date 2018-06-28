@@ -29,6 +29,7 @@
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="adressMac" Type="varchar" MaxLength="50" />
           <Property Name="idTypeDevice" Type="int" />
+          <Property Name="description" Type="text" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -37,6 +38,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="lastname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HistoriqueCommandes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commandeName" Type="varchar" MaxLength="50" />
+          <Property Name="idDevice" Type="int" />
+          <Property Name="dateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Metrics">
           <Key>
@@ -102,6 +112,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HistoriqueCommandes_Devices">
+          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
+          <End Role="HistoriqueCommandes" Type="Self.HistoriqueCommandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoriqueCommandes">
+              <PropertyRef Name="idDevice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Metrics_Devices">
           <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
           <End Role="Metrics" Type="Self.Metrics" Multiplicity="*" />
@@ -119,6 +141,7 @@
           <EntitySet Name="DeviceEmployees" EntityType="Self.DeviceEmployees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoriqueCommandes" EntityType="Self.HistoriqueCommandes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Metrics" EntityType="Self.Metrics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDevices" EntityType="Self.TypeDevices" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DataMetrics_Metric" Association="Self.FK_DataMetrics_Metric">
@@ -136,6 +159,10 @@
           <AssociationSet Name="FK_Devices_TypeDevices" Association="Self.FK_Devices_TypeDevices">
             <End Role="TypeDevices" EntitySet="TypeDevices" />
             <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriqueCommandes_Devices" Association="Self.FK_HistoriqueCommandes_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="HistoriqueCommandes" EntitySet="HistoriqueCommandes" />
           </AssociationSet>
           <AssociationSet Name="FK_Metrics_Devices" Association="Self.FK_Metrics_Devices">
             <End Role="Devices" EntitySet="Devices" />
@@ -173,6 +200,11 @@
             <End Role="Devices" EntitySet="Devices" />
             <End Role="Metrics" EntitySet="Metrics" />
           </AssociationSet>
+          <EntitySet Name="HistoriqueCommandes" EntityType="AtlantisWindowsModel.HistoriqueCommandes" />
+          <AssociationSet Name="FK_HistoriqueCommandes_Devices" Association="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="HistoriqueCommandes" EntitySet="HistoriqueCommandes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DataMetrics">
           <Key>
@@ -204,6 +236,8 @@
           <NavigationProperty Name="DeviceEmployees" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Devices" FromRole="Devices" ToRole="DeviceEmployees" />
           <NavigationProperty Name="TypeDevices" Relationship="AtlantisWindowsModel.FK_Devices_TypeDevices" FromRole="Devices" ToRole="TypeDevices" />
           <NavigationProperty Name="Metrics" Relationship="AtlantisWindowsModel.FK_Metrics_Devices" FromRole="Devices" ToRole="Metrics" />
+          <NavigationProperty Name="HistoriqueCommandes" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="Devices" ToRole="HistoriqueCommandes" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -293,6 +327,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="HistoriqueCommandes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commandeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idDevice" Type="Int32" />
+          <Property Name="dateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Devices" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="HistoriqueCommandes" ToRole="Devices" />
+        </EntityType>
+        <Association Name="FK_HistoriqueCommandes_Devices">
+          <End Type="AtlantisWindowsModel.Devices" Role="Devices" Multiplicity="0..1" />
+          <End Type="AtlantisWindowsModel.HistoriqueCommandes" Role="HistoriqueCommandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoriqueCommandes">
+              <PropertyRef Name="idDevice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -320,6 +376,7 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="AtlantisWindowsModel.Devices">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="idTypeDevice" ColumnName="idTypeDevice" />
                 <ScalarProperty Name="adressMac" ColumnName="adressMac" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -350,6 +407,16 @@
             <EntityTypeMapping TypeName="AtlantisWindowsModel.TypeDevices">
               <MappingFragment StoreEntitySet="TypeDevices">
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoriqueCommandes">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.HistoriqueCommandes">
+              <MappingFragment StoreEntitySet="HistoriqueCommandes">
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
+                <ScalarProperty Name="commandeName" ColumnName="commandeName" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

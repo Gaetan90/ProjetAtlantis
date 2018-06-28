@@ -1,6 +1,7 @@
 ﻿using AdoModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -13,19 +14,21 @@ public interface IServiceDevice
 {
 
     [OperationContract]
-    void ReceptMetric(MetricView metric);
-
-    [OperationContract]
-    [WebGet(UriTemplate = "/devices", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    [WebGet(UriTemplate = "devices")]
     ICollection<DeviceView> GetAllDevice();
 
     [OperationContract]
-    [WebInvoke(Method = "PUT", UriTemplate = "/device/{idDevice}/telemetry", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-    int SaveMetrics(string idDevice, string value);
+    [WebInvoke(Method = "POST", UriTemplate = "device")]
+    void CreateNewDevice(string id, string name,string deviceType);
 
     [OperationContract]
-    [WebInvoke(Method = "POST", UriTemplate = "/device/{idDevice}/command", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-    void SetCommandDevice(string idDevice, string value);
+    [WebInvoke(Method = "POST", UriTemplate = "device/{id}/telemetry")]
+    int SaveMetrics(string id, string metricDate,string deviceType, string metricValue);
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "device/{idDevice}/command")]
+    void SetCommandDevice(string idDevice, string commande);
+
 
 }
 

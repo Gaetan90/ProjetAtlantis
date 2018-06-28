@@ -33,9 +33,9 @@ public class Service : IServiceDevice, IServiceCalcul
         {
             DeviceView deviceView = new DeviceView();
             deviceView.id = device.id;
-            deviceView.nom = device.name;
-            deviceView.adressMac = device.adressMac;
-            deviceView.EmployeeToEmployeeView(device.DeviceEmployees);
+            deviceView.name = device.name;
+            deviceView.addressMac = device.adressMac;
+            //deviceView.EmployeeToEmployeeView(device.DeviceEmployees);
             TypeDevices typeDevice = device.TypeDevices;
             if (typeDevice != null)
             {
@@ -51,23 +51,25 @@ public class Service : IServiceDevice, IServiceCalcul
         return devices;
     }
 
-    public int SaveMetrics(string adressMac, string value)
+    public int SaveMetrics(string adressMac, string metricDate, string deviceType, string metricValue)
     {
-        var json = new JavaScriptSerializer().Deserialize<MetricsJson>(value);
+        DateTime datetime = Convert.ToDateTime(metricDate);
+        int nbrValues = 0;
         Metrics metrics = new Metrics();
-        metrics.date = json.metricDate;
-        int nbrValue = 0;
+        string[] values = metricValue.Split(';');
+        metrics.date = datetime;
         ICollection<DataMetrics> dataMetrics = new Collection<DataMetrics>();
-        //foreach (Object o in json.metricValue){
-        DataMetrics data = new DataMetrics();
-        data.value = json.metricValue;
-        dataMetrics.Add(data);
-        nbrValue++;
-        //}
+        foreach (string value in values)
+        {
+            DataMetrics data = new DataMetrics();
+            data.value = value;
+            dataMetrics.Add(data);
+            nbrValues++;
+        }
         Devices devices = serviceDao.GetDeviceByAdressMac(adressMac);
-        metrics.nbrValues = nbrValue;
-        metrics.DataMetrics = dataMetrics;
+        metrics.nbrValues = nbrValues;
         metrics.Devices = devices;
+        metrics.DataMetrics = dataMetrics;
         return serviceDao.SaveMetricsDao(metrics);
     }
 
@@ -88,9 +90,24 @@ public class Service : IServiceDevice, IServiceCalcul
 
     }
 
-    public void SetCommandDevice(string idDevice, string value)
+    public void SetCommandDevice(string idDevice, string commandeName)
     {
-        throw new NotImplementedException();
+        Devices device = serviceDao.GetDeviceById(Int32.Parse(idDevice));
+        HistoriqueCommandes commandeDevice = new HistoriqueCommandes();
+        commandeDevice.Devices = device;
+        commandeDevice.commandeName = commandeName;
+        commandeDevice.dateTime = DateTime.Now;
+        serviceDao.SaveCommandeDevice(commandeDevice);
+    }
+
+    public void CreateNewDevice(string id, string name, string deviceType)
+    {
+        TypeDevices typeDevice = serviceDao.GetTypeDeviceByName(deviceType);
+        Devices device = new Devices();
+        device.adressMac = id;
+        device.name = name;
+        device.TypeDevices = typeDevice;
+        serviceDao.SaveNewDevice(device);
     }
 
     //*******************************//
@@ -105,17 +122,10 @@ public class Service : IServiceDevice, IServiceCalcul
         {
             DeviceView deviceView = new DeviceView();
             deviceView.id = device.id;
-            deviceView.nom = device.name;
-            deviceView.adressMac = device.adressMac;
-            TypeDevices typeDevice = device.TypeDevices;
-            if (typeDevice != null)
-            {
-                TypeDeviceView typeDeviceView = new TypeDeviceView();
-                typeDeviceView.id = typeDevice.id;
-                typeDeviceView.name = typeDevice.name;
-                deviceView.typeDevices = typeDeviceView;
-            }
-
+            deviceView.name = device.name;
+            deviceView.addressMac = device.adressMac;
+            deviceView.nameDeviceType = device.TypeDevices.name;
+            deviceView.EmployeeToEmployeeView(device.DeviceEmployees);
             devices.Add(deviceView);
         }
 
@@ -127,15 +137,39 @@ public class Service : IServiceDevice, IServiceCalcul
         throw new NotImplementedException();
     }
 
-    public void SetDeviceEmployee(string idDevice, string value)
+    public void SetDeviceEmployee(string idDevice, string idEmployee)
     {
         throw new NotImplementedException();
     }
 
-    public void ReceptMetric(MetricView metric)
+
+    public ICollection<EmployeeView> GetListEmployees()
     {
-        throw new NotImplementedException();
+        ICollection<Employees> employees = serviceDao.GetListEmployees();
+        ICollection<EmployeeView> listEmployeeView = new Collection<EmployeeView>();
+        foreach(Employees employee in employees)
+        {
+            EmployeeView employeeView = new EmployeeView();
+            employeeView.id = employee.id;
+            employeeView.name = employee.name;
+            employeeView.lastName = employee.lastname;
+            employeeView.DeviceToDeviceView(employee.DeviceEmployees);
+            listEmployeeView.Add(employeeView);
+        }
+        return listEmployeeView;
     }
 
-  
+    public void SetEmployee(string id,EmployeeView employee)
+    {
+        serviceDao.updateEmployee(employee);
+    }
+
+    public void SetCommandeDevice(string id_device, string action)
+    {
+        HistoriqueCommandes historiqueCommande = new HistoriqueCommandes();
+        historiqueCommande.idDevice = Int32.Parse(id_device);
+        historiqueCommande.commandeName = action;
+        historiqueCommande.dateTime = DateTime.Now;
+        serviceDao.SaveCommandeDevice(historiqueCommande);
+    }
 }

@@ -16,11 +16,13 @@ public class DeviceView
     [DataMember]
     public int id { get; set; }
     [DataMember]
-    public string nom { get; set; }
+    public string name { get; set; }
     [DataMember]
-    public string adressMac { get; set; }
+    public string addressMac { get; set; }
     [DataMember]
     public ICollection<EmployeeView> employees { get; set; }
+    [DataMember]
+    public string nameDeviceType { get; set; }
     [DataMember]
     public TypeDeviceView typeDevices { get; set; }
 
@@ -31,10 +33,12 @@ public class DeviceView
         {
             EmployeeView employeeView = new EmployeeView();
             employeeView.id = employee.Employees.id;
-            employeeView.nom = employee.Employees.name;
-            employeeView.prenom = employee.Employees.lastname;
+            employeeView.name = employee.Employees.name;
+            employeeView.lastName = employee.Employees.lastname;
             employees.Add(employeeView);
         }
         this.employees = employees;
     }
+
+   
 }

@@ -48,18 +48,22 @@ namespace AdoModel
         {
             this.DeviceEmployees = new HashSet<DeviceEmployees>();
             this.Metrics = new HashSet<Metrics>();
+            this.HistoriqueCommandes = new HashSet<HistoriqueCommandes>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
         public string adressMac { get; set; }
         public Nullable<int> idTypeDevice { get; set; }
+        public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeviceEmployees> DeviceEmployees { get; set; }
         public virtual TypeDevices TypeDevices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Metrics> Metrics { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HistoriqueCommandes> HistoriqueCommandes { get; set; }
     }
 }
 namespace AdoModel
@@ -81,6 +85,21 @@ namespace AdoModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeviceEmployees> DeviceEmployees { get; set; }
+    }
+}
+namespace AdoModel
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class HistoriqueCommandes
+    {
+        public int id { get; set; }
+        public string commandeName { get; set; }
+        public Nullable<int> idDevice { get; set; }
+        public Nullable<System.DateTime> dateTime { get; set; }
+    
+        public virtual Devices Devices { get; set; }
     }
 }
 namespace AdoModel

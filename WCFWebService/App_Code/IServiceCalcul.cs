@@ -16,16 +16,30 @@ public interface IServiceCalcul
     ICollection<DataMetricView> GetMetricByDeviceType(string idTypeDevice);
 
     [OperationContract]
-    [WebGet(UriTemplate = "/devices", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    [WebGet(UriTemplate = "devices"  )]
     ICollection<DeviceView> GetListDevicesByEmployee();
 
     [OperationContract]
-    [WebGet(UriTemplate = "/metrics", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+    [WebGet(UriTemplate = "metrics"  )]
     ICollection<MetricView> GetListMetricSimple();
 
     [OperationContract]
-    [WebInvoke(Method = "POST", UriTemplate = "/device/{idDevice}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-    void SetDeviceEmployee(string idDevice, string value);
+    [WebInvoke(Method = "POST", UriTemplate = "device/employees")]
+    void SetDeviceEmployee(string idDevice, string idEmployees);
+
+    [OperationContract]
+    [WebGet(UriTemplate = "/employees"  )]
+    ICollection<EmployeeView> GetListEmployees();
+
+    [OperationContract]
+    [WebInvoke(Method = "PUT", UriTemplate = "employees/employee/{id}")]
+    void SetEmployee(string id,EmployeeView employee);
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "device/command")]
+    void SetCommandeDevice(string id, string action);
+
+
 
 
 }
