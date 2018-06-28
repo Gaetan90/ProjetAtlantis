@@ -26,6 +26,8 @@ public class DeviceView
     [DataMember]
     public TypeDeviceView typeDevices { get; set; }
 
+    public bool disabled { get; set; }
+
     public void EmployeeToEmployeeView(ICollection<AdoModel.DeviceEmployees> deviceEmployees)
     {
         ICollection<EmployeeView> employees = new Collection<EmployeeView>();

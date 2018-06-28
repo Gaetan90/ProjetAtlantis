@@ -30,6 +30,7 @@
           <Property Name="adressMac" Type="varchar" MaxLength="50" />
           <Property Name="idTypeDevice" Type="int" />
           <Property Name="description" Type="text" />
+          <Property Name="disabled" Type="bit" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -238,6 +239,7 @@
           <NavigationProperty Name="Metrics" Relationship="AtlantisWindowsModel.FK_Metrics_Devices" FromRole="Devices" ToRole="Metrics" />
           <NavigationProperty Name="HistoriqueCommandes" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="Devices" ToRole="HistoriqueCommandes" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="disabled" Type="Boolean" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -376,6 +378,7 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="AtlantisWindowsModel.Devices">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="disabled" ColumnName="disabled" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="idTypeDevice" ColumnName="idTypeDevice" />
                 <ScalarProperty Name="adressMac" ColumnName="adressMac" />

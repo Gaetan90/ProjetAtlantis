@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AdoModel;
 
 public interface IServiceDao
@@ -14,4 +15,6 @@ public interface IServiceDao
     TypeDevices GetTypeDeviceByName(string deviceType);
     void SaveNewDevice(Devices device);
     void updateEmployee(EmployeeView employee);
+    ICollection<DataMetrics> GetDataMetricsBehindDatesByType(TypeDevices deviceType, DateTime monday, DateTime sunday);
+    ICollection<Devices> GetAllDevicesEnabled();
 }
