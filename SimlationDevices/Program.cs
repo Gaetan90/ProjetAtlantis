@@ -11,7 +11,6 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
-using System.Net.Http;
 
 namespace SimlationDevices
 {
@@ -62,42 +61,45 @@ namespace SimlationDevices
         public static void SendMetrics(string idDevice, string deviceType)
         {
             Console.WriteLine($"BEGIN SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
+            int countForSend = 0;
+            var jsonMetric = "";
             for (int i = 0; i < 100; i++)
             {
+                countForSend++;
                 //Console.WriteLine($"Begin metric sender for {idDevice}");
-                string metricSend;
                 //string metricDateDevice = "2018-06-26T07:44:09.981Z"; // ça doit ressembler à ça
                 string metricDateDevice = DateTime.UtcNow.ToString("o");
                 //string metricDateDevice = DateTime.Now.ToString("o"); 
-                string deviceTypeDevice = deviceType; 
+                string deviceTypeDevice = deviceType;
                 string metricValueDevice = "";
+
 
                 switch (deviceTypeDevice)
                 {
                     case ("presenceSensor"):
                         string presenceSensorResult = "";
-                        if (GetRandomBoolean() == true){presenceSensorResult = "1";}else{presenceSensorResult = "0";}
+                        if (GetRandomBoolean() == true) { presenceSensorResult = "1"; } else { presenceSensorResult = "0"; }
                         metricValueDevice = presenceSensorResult;
                         break;
 
                     case ("temperatureSensor"):
-                        metricValueDevice = GetRandomDouble(19,41).ToString();
+                        metricValueDevice = GetRandomDouble(19, 41).ToString();
                         break;
 
                     case ("brightnessSensor"):
-                        metricValueDevice = GetRandomInt(0,1001).ToString();
+                        metricValueDevice = GetRandomInt(0, 1001).ToString();
                         break;
 
                     case ("atmosphericPressureSensor"):
-                        metricValueDevice = GetRandomDouble(900,1101).ToString();
+                        metricValueDevice = GetRandomDouble(900, 1101).ToString();
                         break;
 
                     case ("humiditySensor"):
-                        metricValueDevice = GetRandomDouble(20,90).ToString();
+                        metricValueDevice = GetRandomDouble(20, 90).ToString();
                         break;
 
                     case ("soundLevelSensor"):
-                        metricValueDevice = GetRandomInt(60,160).ToString();
+                        metricValueDevice = GetRandomInt(60, 160).ToString();
                         break;
 
                     case ("gpsSensor"):
@@ -105,7 +107,7 @@ namespace SimlationDevices
                         break;
 
                     case ("co2Sensor"):
-                        metricValueDevice = GetRandomDouble(300,600).ToString();
+                        metricValueDevice = GetRandomDouble(300, 600).ToString();
                         break;
 
                     case ("ledDevice"):
@@ -128,9 +130,17 @@ namespace SimlationDevices
                     metricValue = metricValueDevice
                 };
                 //Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
-                var json = new JavaScriptSerializer().Serialize(newMetricSend);
+                jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
                 //Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
-                Console.WriteLine(json);
+                //Console.WriteLine(jsonMetric);
+                //Console.WriteLine(countForSend);
+                if (countForSend == 5)
+                {
+                    MetricSend(jsonMetric, idDevice);
+                    countForSend = 0;
+                    jsonMetric = "";
+                    Console.WriteLine($"SEND DATA FOR : {idDevice}");
+                }
                 /*var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
@@ -147,11 +157,28 @@ namespace SimlationDevices
                     //Console.WriteLine($"result : {result}");
                 }*/
                 //Console.WriteLine(" ");
-                metricSend = json;
                 //Console.WriteLine($"End metric sender for {idDevice}");
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
             }
             Console.WriteLine($"END SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
+        }
+        public static void MetricSend(string json, string idDevice)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                //Console.WriteLine($"result : {result}");
+            }
         }
         public static bool GetRandomBoolean()
         {
