@@ -14,7 +14,7 @@ namespace CalculationEngine
     {
         public static void Main(string[] args)
         {
-            ServiceCalculClient service = new ServiceCalculClient();
+            /*ServiceCalculClient service = new ServiceCalculClient();
             ICollection<DataMetricView> dataMetrics = service.GetMetricByDeviceType("1");
             double r = CalculationEngine(dataMetrics);
             SendJson jsonObject = new SendJson();
@@ -25,7 +25,7 @@ namespace CalculationEngine
             jsonObject.results = result;
            // String values = '{ "results": "[N, 4567579.09]" , "name": +dataMetrics.First().metric.nameTypeDivice+, "description": "Description à affiner" }'.ToString();
             string jsonSerializedObj = JsonConvert.SerializeObject(jsonObject);
-            Parallel.For(0, 100, i => sendItemAsync(jsonSerializedObj));
+            Parallel.For(0, 100, i => sendItemAsync(jsonSerializedObj));*/
             //;
 
 
