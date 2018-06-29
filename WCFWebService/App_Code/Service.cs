@@ -170,6 +170,17 @@ public class Service : IServiceDevice, IServiceCalcul
 
     public void SetCommandeDevice(string id_device, string action)
     {
+        Devices device = serviceDao.GetDeviceById(Int32.Parse(id_device));
+        switch (action)
+        {
+            case "activate":
+                device.disabled = false;
+                break;
+            case "disabled":
+                device.disabled = true;
+                break;
+        }
+        serviceDao.UpdateDevice(device);
         HistoriqueCommandes historiqueCommande = new HistoriqueCommandes();
         historiqueCommande.idDevice = Int32.Parse(id_device);
         historiqueCommande.commandeName = action;

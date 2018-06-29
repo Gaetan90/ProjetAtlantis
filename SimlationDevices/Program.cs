@@ -26,7 +26,7 @@ namespace SimlationDevices
             string typeDevicesDevice = "";
             int i = 0;
             List<RootObjectJsonUrl> listDevice = new List<RootObjectJsonUrl>();
-            foreach (var urlresult in listJsonDevice)
+            Parallel.ForEach(listJsonDevice, urlresult =>
             {
                 i++;
                 adressMacDevice = urlresult.addressMac;
@@ -43,17 +43,18 @@ namespace SimlationDevices
                 Console.WriteLine($"Nom Device : {nomDevice}");
                 Console.WriteLine($"Type Device : {typeDevicesDevice}");
                 Console.WriteLine("");
-            }
+            });
             Console.WriteLine("\nEnd Get Devices\n");
             Console.WriteLine($"Nombre de devices : {i}");
             int j = 0;
-            Thread[] deviceThreads = new Thread[i];
-            foreach (var deviceList in listDevice)
+            //Thread[] deviceThreads = new Thread[i];
+            Parallel.ForEach(listDevice, deviceList =>
             {
-                deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
+                /*deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
                 deviceThreads[j].Start();
-                j++;
-            }
+                j++;*/
+                SendMetrics(deviceList.addressMac, deviceList.typeDevices.name);
+            });
             Console.Read();
         }
 
@@ -63,7 +64,7 @@ namespace SimlationDevices
             int countForSend = 0;
             List<Metrics> listOfMetrics = new List<Metrics>();
             var jsonMetric = "";
-            for (int i = 0; i < 10000; i++)
+            Parallel.For(0, 10000, index =>
             {
                 countForSend++;
                 //string metricDateDevice = "2018-06-26T07:44:09.981Z"; // ça doit ressembler à ça
@@ -143,7 +144,7 @@ namespace SimlationDevices
                 }
                 Console.WriteLine($"End metric sender for {idDevice}");
                 Thread.Sleep(1000);
-            }
+            });
             Console.WriteLine($"END SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
         }
         public static void MetricSend(string json, string idDevice)

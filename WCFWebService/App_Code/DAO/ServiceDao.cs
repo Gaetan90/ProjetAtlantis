@@ -104,5 +104,10 @@ public class ServiceDao : IServiceDao
         return _dbo.DataMetrics.Where(o => o.Metrics.date >= date1 && o.Metrics.date < date2 && o.Metrics.Devices.idTypeDevice == deviceType.id).ToList();
     }
 
-   
+    public void UpdateDevice(Devices device)
+    {
+        Devices entity = this.GetDeviceById(device.id);
+        _dbo.Entry(entity).CurrentValues.SetValues(device);
+        _dbo.SaveChanges();
+    }
 }

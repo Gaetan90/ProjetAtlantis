@@ -17,4 +17,5 @@ public interface IServiceDao
     void updateEmployee(EmployeeView employee);
     ICollection<DataMetrics> GetDataMetricsBehindDatesByType(TypeDevices deviceType, DateTime monday, DateTime sunday);
     ICollection<Devices> GetAllDevicesEnabled();
+    void UpdateDevice(Devices device);
 }
