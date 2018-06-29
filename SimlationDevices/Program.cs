@@ -64,7 +64,8 @@ namespace SimlationDevices
             int countForSend = 0;
             List<Metrics> listOfMetrics = new List<Metrics>();
             var jsonMetric = "";
-            Parallel.For(0, 10000, index =>
+           // Parallel.For(0, 10000, index =>
+           for(int i = 0; i<10000; i++)
             {
                 countForSend++;
                 //string metricDateDevice = "2018-06-26T07:44:09.981Z"; // ça doit ressembler à ça
@@ -122,7 +123,7 @@ namespace SimlationDevices
                         break;
                 }
 
-                var newMetricSend = new Metrics
+                 var newMetricSend = new Metrics
                 {
                     metricDate = metricDateDevice,
                     deviceType = deviceTypeDevice,
@@ -144,7 +145,8 @@ namespace SimlationDevices
                 }
                 Console.WriteLine($"End metric sender for {idDevice}");
                 Thread.Sleep(1000);
-            });
+            }
+           //);
             Console.WriteLine($"END SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
         }
         public static void MetricSend(string json, string idDevice)

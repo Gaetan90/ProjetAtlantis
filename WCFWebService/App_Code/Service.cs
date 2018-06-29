@@ -13,12 +13,13 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Globalization;
 using System.Net;
+using System.Configuration;
 
 // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service" dans le code, le fichier svc et le fichier de configuration.
 public class Service : IServiceDevice, IServiceCalcul
 {
     IServiceDao serviceDao;
-
+    ConnectionStringSettingsCollection settings = ConfigurationManager.ConnectionStrings;
     public Service()
     {
         this.serviceDao = new ServiceDao();
@@ -30,6 +31,7 @@ public class Service : IServiceDevice, IServiceCalcul
     public ICollection<DeviceView> GetAllDevice()
     {
         ICollection<DeviceView> devices = new Collection<DeviceView>();
+        string test = settings["urlJee"].ConnectionString;
         ICollection<Devices> listDevices = serviceDao.GetAllDevicesEnabled();
         foreach (Devices device in listDevices)
         {
@@ -246,7 +248,8 @@ public class Service : IServiceDevice, IServiceCalcul
         dataMetricsJson.value = Double.Parse(value, CultureInfo.InvariantCulture);
         dataMetricsJson.dateType = dateType.ToUpper();
         var json = new JavaScriptSerializer().Serialize(dataMetricsJson);
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://10.167.128.145:8080/transaction/data-calculated");
+        string url = settings["urlJee"].ConnectionString + "/transaction/data-calculated";
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create(settings["urlJee"].ConnectionString+"/transaction/data-calculated");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
         using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
