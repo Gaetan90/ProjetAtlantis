@@ -51,8 +51,8 @@ namespace SimlationDevices
             Parallel.ForEach(listDevice, deviceList =>
             {
                 /*deviceThreads[j] = new Thread(() => SendMetrics(deviceList.addressMac, deviceList.typeDevices.name));
-                deviceThreads[j].Start();
-                j++;*/
+                deviceThreads[j].Start();*/
+                j++;
                 SendMetrics(deviceList.addressMac, deviceList.typeDevices.name);
             });
             Console.Read();
@@ -129,19 +129,14 @@ namespace SimlationDevices
                     metricValue = metricValueDevice
                 };
                 listOfMetrics.Add(newMetricSend);
-                /*if (deviceTypeDevice == "atmosphericPressureSensor" || deviceTypeDevice == "temperatureSensor")
-                {
-                    Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
-                }*/
+                //Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
+                //jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
                 jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
-
-                if (countForSend == 1)
-                {
-                    MetricSend(jsonMetric, idDevice);
-                    countForSend = 0;
-                    jsonMetric = "";
-                    listOfMetrics = new List<Metrics>();
-                }
+                Console.WriteLine($"json metric : {jsonMetric}");
+                MetricSend(jsonMetric, idDevice);
+                countForSend = 0;
+                jsonMetric = "";
+                listOfMetrics = new List<Metrics>();
                 Console.WriteLine($"End metric sender for {idDevice}");
                 Thread.Sleep(1000);
             });
@@ -162,7 +157,6 @@ namespace SimlationDevices
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-                //Console.WriteLine($"result : {result}");
             }
         }
         public static bool GetRandomBoolean()
