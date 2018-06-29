@@ -48,7 +48,7 @@ public interface IServiceCalcul
     ICollection<DataMetricView> GetListMetrics(string sensorType, string dateType);
 
     [OperationContract]
-    [WebInvoke(Method = "POST", UriTemplate = "calcul/{sensorType}/{dateType}")]
+    [WebInvoke(Method = "POST", UriTemplate = "{sensorType}/{dateType}")]
     void ReceptCalculatedMetrics(string sensorType, string dateType, string result);
 
 
