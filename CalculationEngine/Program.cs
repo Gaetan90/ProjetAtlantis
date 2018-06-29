@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace CalculationEngine
 {
@@ -46,14 +48,64 @@ namespace CalculationEngine
             }
             double average = listMetrics.Average();
             Console.WriteLine($"Moyenne : {average}");
+
+
+            var newMetricDouble = new ResultDouble
+            {
+                result = average
+            };
+
+            var jsonMetric = new JavaScriptSerializer().Serialize(newMetricDouble);
+            Console.WriteLine(jsonMetric);
+            //Console.WriteLine(countForSend);
+
+            CalculatedMetricSend(jsonMetric);
+            listMetrics = new List<double>();
+
+
+
+
             Console.WriteLine("End");
             Console.Read();
+        }
+        public static void CalculatedMetricSend(string json)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/temperatureSensor/week");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
         }
         public class Metrics
         {
             public string id;
             public string metric;
             public string value;
+        }
+        public class ResultInt
+        {
+            public int result;
+        }
+        public class ResultDouble
+        {
+            public double result;
+        }
+        public class ResultBoolean
+        {
+            public bool result;
+        }
+        public class ResultString
+        {
+            public string result;
         }
     }
 
