@@ -19,48 +19,54 @@ namespace CalculationEngine
         {
             Console.WriteLine("Begin");
 
-            List<string> listSensor = new List<string> { "presenceSensor", "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "gpsSensor", "co2Sensor", "ledDevice", "beeperDevice" };
+            //List<string> listSensor = new List<string> { "presenceSensor", "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "gpsSensor", "co2Sensor", "ledDevice", "beeperDevice" };
+            List<string> listSensor = new List<string> { "temperatureSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "co2Sensor"};
             List<string> listDateSend = new List<string> {"day", "week", "month"};
 
             foreach (var sensorList in listSensor)
             {
                 foreach (var dateSendList in listDateSend)
                 {
+                    Console.WriteLine($"Sensor : {sensorList}");
+                    Console.WriteLine($"date : {dateSendList}");
+                    var jsonUrlDevices = new WebClient().DownloadString($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensorList}/{dateSendList}");
+                    var listJsonDevice = JsonConvert.DeserializeObject<List<Metrics>>(jsonUrlDevices);
+                    //Console.WriteLine(jsonUrlDevices);
+                    int i = 0;
+                    List<double> listMetricsDouble = new List<double>();
+                    //List<int> listMetricsInt = new List<int>();
+                    //List<bool> listMetricsBoolean = new List<bool>();
+                    //List<string> listMetricsString = new List<string>();
+                    foreach (var urlresult in listJsonDevice)
+                    {
+                        i++;
+                        Console.WriteLine($"Device : {i} ");
+                        //Console.WriteLine($"ID : {urlresult.id}");
+                        //Console.WriteLine($"Métric : {urlresult.metric}");
+                        Console.WriteLine($"Valeur : {urlresult.value}");
+                        Console.WriteLine("");
+                        listMetricsDouble.Add(Double.Parse(urlresult.value));
 
+                    }
+                    double average = listMetricsDouble.Average();
+                    Console.WriteLine($"Moyenne : {average}");
+
+
+                    var newMetricDouble = new ResultDouble
+                    {
+                        result = average
+                    };
+
+                    var jsonMetric = new JavaScriptSerializer().Serialize(newMetricDouble);
+                    Console.WriteLine(jsonMetric);
+                    //Console.WriteLine(countForSend);
+
+                    //CalculatedMetricSend(jsonMetric);
+                    listMetricsDouble = new List<double>();
                 }
             }
 
-            var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/calculs/temperatureSensor/week");
-            var listJsonDevice = JsonConvert.DeserializeObject<List<Metrics>>(jsonUrlDevices);
-            //Console.WriteLine(jsonUrlDevices);
-            int i = 0;
-            List<double> listMetrics = new List<double>();
-            foreach (var urlresult in listJsonDevice)
-            {
-                i++;
-                Console.WriteLine($"Device : {i} ");
-                Console.WriteLine($"ID : {urlresult.id}");
-                Console.WriteLine($"Métric : {urlresult.metric}");
-                Console.WriteLine($"Valeur : {urlresult.value}");
-                Console.WriteLine("");
-                listMetrics.Add(Double.Parse(urlresult.value));
-
-            }
-            double average = listMetrics.Average();
-            Console.WriteLine($"Moyenne : {average}");
-
-
-            var newMetricDouble = new ResultDouble
-            {
-                result = average
-            };
-
-            var jsonMetric = new JavaScriptSerializer().Serialize(newMetricDouble);
-            Console.WriteLine(jsonMetric);
-            //Console.WriteLine(countForSend);
-
-            CalculatedMetricSend(jsonMetric);
-            listMetrics = new List<double>();
+            
 
 
 
