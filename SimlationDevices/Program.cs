@@ -129,22 +129,20 @@ namespace SimlationDevices
                     metricValue = metricValueDevice
                 };
                 listOfMetrics.Add(newMetricSend);
-                //Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
+                /*if (deviceTypeDevice == "atmosphericPressureSensor" || deviceTypeDevice == "temperatureSensor")
+                {
+                    Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
+                }*/
                 jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
-                //Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
-                //Console.WriteLine(jsonMetric);
-                //Console.WriteLine(countForSend);
+
                 if (countForSend == 1)
                 {
-                    //Console.WriteLine(jsonMetric);
                     MetricSend(jsonMetric, idDevice);
                     countForSend = 0;
                     jsonMetric = "";
-                    Console.WriteLine($"SEND DATA FOR : {idDevice}");
                     listOfMetrics = new List<Metrics>();
                 }
-                //Console.WriteLine(" ");
-                //Console.WriteLine($"End metric sender for {idDevice}");
+                Console.WriteLine($"End metric sender for {idDevice}");
                 Thread.Sleep(1000);
             });
             Console.WriteLine($"END SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
@@ -180,7 +178,7 @@ namespace SimlationDevices
         public static int GetRandomInt(int minimum, int maximum)
         {
             Random random = new Random();
-            return random.Next() * (maximum - minimum) + minimum;
+            return random.Next(minimum, maximum);
         }
 
     }
