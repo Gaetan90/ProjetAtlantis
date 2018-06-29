@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YamlDotNet.RepresentationModel;
 using System.Web.Script.Serialization;
 using System.Net;
 using Newtonsoft.Json;
@@ -21,7 +20,7 @@ namespace SimlationDevices
             Console.WriteLine("\nBegin Get Devices\n");
             var jsonUrlDevices = new WebClient().DownloadString("http://wcfwebservice.azurewebsites.net/Service.svc/devices/devices");
             var listJsonDevice = JsonConvert.DeserializeObject<List<RootObjectJsonUrl>>(jsonUrlDevices);
-            Console.WriteLine(jsonUrlDevices);
+            //Console.WriteLine(jsonUrlDevices);
             string adressMacDevice = "";
             string nomDevice = "";
             string typeDevicesDevice = "";
@@ -62,17 +61,16 @@ namespace SimlationDevices
         {
             Console.WriteLine($"BEGIN SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
             int countForSend = 0;
+            List<Metrics> listOfMetrics = new List<Metrics>();
             var jsonMetric = "";
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 countForSend++;
-                //Console.WriteLine($"Begin metric sender for {idDevice}");
                 //string metricDateDevice = "2018-06-26T07:44:09.981Z"; // ça doit ressembler à ça
                 string metricDateDevice = DateTime.UtcNow.ToString("o");
                 //string metricDateDevice = DateTime.Now.ToString("o"); 
                 string deviceTypeDevice = deviceType;
                 string metricValueDevice = "";
-
 
                 switch (deviceTypeDevice)
                 {
@@ -129,33 +127,21 @@ namespace SimlationDevices
                     deviceType = deviceTypeDevice,
                     metricValue = metricValueDevice
                 };
+                listOfMetrics.Add(newMetricSend);
                 //Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
                 jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
                 //Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
                 //Console.WriteLine(jsonMetric);
                 //Console.WriteLine(countForSend);
-                if (countForSend == 5)
+                if (countForSend == 1)
                 {
+                    //Console.WriteLine(jsonMetric);
                     MetricSend(jsonMetric, idDevice);
                     countForSend = 0;
                     jsonMetric = "";
                     Console.WriteLine($"SEND DATA FOR : {idDevice}");
+                    listOfMetrics = new List<Metrics>();
                 }
-                /*var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
-                httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Method = "POST";
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                }
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-                    //Console.WriteLine($"result : {result}");
-                }*/
                 //Console.WriteLine(" ");
                 //Console.WriteLine($"End metric sender for {idDevice}");
                 Thread.Sleep(1000);
