@@ -111,11 +111,15 @@ namespace SimlationDevices
                         break;
 
                     case ("ledDevice"):
-                        metricValueDevice = "ON";
+                        string ledDeviceResult = "";
+                        if (GetRandomBoolean() == true) { ledDeviceResult = "ON"; } else { ledDeviceResult = "OFF"; }
+                        metricValueDevice = ledDeviceResult;
                         break;
 
                     case ("beeperDevice"):
-                        metricValueDevice = "ON";
+                        string beeperDeviceResult = "";
+                        if (GetRandomBoolean() == true) { beeperDeviceResult = "ON"; } else { beeperDeviceResult = "OFF"; }
+                        metricValueDevice = beeperDeviceResult;
                         break;
 
                     default:
