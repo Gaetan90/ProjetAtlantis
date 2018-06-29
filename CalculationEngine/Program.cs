@@ -70,7 +70,7 @@ namespace CalculationEngine
         }
         public static void CalculatedMetricSend(string json)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/temperatureSensor/week");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://localhost:54435/Service.svc/calculs/temperatureSensor/week");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
