@@ -11,6 +11,9 @@ using System.Runtime.Serialization.Json;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Globalization;
+using System.Net;
+using Newtonsoft.Json;
 
 // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service" dans le code, le fichier svc et le fichier de configuration.
 public class Service : IServiceDevice, IServiceCalcul
@@ -28,13 +31,14 @@ public class Service : IServiceDevice, IServiceCalcul
     public ICollection<DeviceView> GetAllDevice()
     {
         ICollection<DeviceView> devices = new Collection<DeviceView>();
-        ICollection<Devices> listDevices = serviceDao.GetAllDevicesDao();
+        ICollection<Devices> listDevices = serviceDao.GetAllDevicesEnabled();
         foreach (Devices device in listDevices)
         {
             DeviceView deviceView = new DeviceView();
             deviceView.id = device.id;
             deviceView.name = device.name;
             deviceView.addressMac = device.adressMac;
+            deviceView.disabled = device.disabled.Value;
             //deviceView.EmployeeToEmployeeView(device.DeviceEmployees);
             TypeDevices typeDevice = device.TypeDevices;
             if (typeDevice != null)
@@ -124,6 +128,7 @@ public class Service : IServiceDevice, IServiceCalcul
             deviceView.id = device.id;
             deviceView.name = device.name;
             deviceView.addressMac = device.adressMac;
+            deviceView.disabled = device.disabled.Value;
             deviceView.nameDeviceType = device.TypeDevices.name;
             deviceView.EmployeeToEmployeeView(device.DeviceEmployees);
             devices.Add(deviceView);
@@ -171,5 +176,79 @@ public class Service : IServiceDevice, IServiceCalcul
         historiqueCommande.commandeName = action;
         historiqueCommande.dateTime = DateTime.Now;
         serviceDao.SaveCommandeDevice(historiqueCommande);
+    }
+
+    public ICollection<DataMetricView> GetListMetrics(string sensorType, string dateType)
+    {
+        ICollection<DataMetrics> dataMetrics = null;
+        ICollection<DataMetricView> dataMetricsViews = new Collection<DataMetricView>();
+        TypeDevices deviceType = serviceDao.GetTypeDeviceByName(sensorType);
+        DateTime now = DateTime.Now;
+        DateTime  date1 = new DateTime();
+        DateTime date2 = new DateTime();
+        switch (dateType)
+        {
+            case "day":
+                date1 = DateTime.Parse(now.ToString("d"));
+                date2 = date1.AddDays(1);
+                break;
+            case "week":
+                int delta = DayOfWeek.Monday - now.DayOfWeek;
+                date1 = DateTime.Parse(now.AddDays(delta).ToString("d"));
+                delta = now.DayOfWeek - DayOfWeek.Sunday;
+                date2 = DateTime.Parse(now.AddDays(delta).ToString("d"));
+                break;
+            case "month":
+                int month = now.Month;
+                int year = now.Year;
+                date1 = DateTime.Parse("01/" + month + "/" + year);
+                date2 = DateTime.Parse(DateTime.DaysInMonth(year,month ) +"/" + month + "/" + year);
+                break;
+        }
+        dataMetrics = serviceDao.GetDataMetricsBehindDatesByType(deviceType, date1, date2);
+        foreach(DataMetrics dataMetric in dataMetrics)
+        {
+            DataMetricView dataMetricView = new DataMetricView();
+            dataMetricView.value = dataMetric.value;
+            dataMetricsViews.Add(dataMetricView);
+        }
+        return dataMetricsViews;
+    }
+
+    public DeviceView GetDeviceById(string id)
+    {
+        DeviceView deviceView = new DeviceView();
+        Devices device = serviceDao.GetDeviceById(Int32.Parse(id));
+        deviceView.name = device.name;
+        deviceView.disabled = device.disabled.Value;
+        deviceView.nameDeviceType = device.TypeDevices.name;
+        deviceView.id = device.id;
+        deviceView.addressMac = device.adressMac;
+        deviceView.EmployeeToEmployeeView(device.DeviceEmployees);
+        return deviceView;
+    }
+
+    public void ReceptCalculatedMetrics(string sensorType, string dateType,string value)
+    {
+        DataMetricsJson dataMetricsJson = new DataMetricsJson();
+        dataMetricsJson.deviceType = sensorType;
+        dataMetricsJson.value = Double.Parse(value);
+        dataMetricsJson.dateType = dateType.ToUpper();
+        var json = new JavaScriptSerializer().Serialize(dataMetricsJson);
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://10.167.128.145:8080/transaction/data-calculated");
+        httpWebRequest.ContentType = "application/json";
+        httpWebRequest.Method = "POST";
+        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+        {
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+        }
+        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        {
+            var result = streamReader.ReadToEnd();
+        }
+        
     }
 }

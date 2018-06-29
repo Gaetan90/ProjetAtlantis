@@ -12,11 +12,11 @@ using System.Web;
 public class DataMetricsJson
 {
   [DataMember]
-    public string metricDate { get; set; }
-    [DataMember]
     public string deviceType { get; set; }
     [DataMember]
-    public string metricValue { get; set; }
+    public string dateType { get; set; }
+    [DataMember]
+    public double value { get; set; }
 
    
 }

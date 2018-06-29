@@ -27,6 +27,11 @@ public class ServiceDao : IServiceDao
         return _dbo.Devices.ToList();
     }
 
+    public ICollection<Devices> GetAllDevicesEnabled()
+    {
+        return _dbo.Devices.Where(o => o.disabled == false).ToList();
+    }
+
     public ICollection<DataMetrics> GetMetricByDeviceTypeDao(int value)
     {
         return _dbo.DataMetrics.Where(o => o.Metrics.Devices.idTypeDevice == value).ToList(); 
@@ -34,7 +39,7 @@ public class ServiceDao : IServiceDao
 
     public Devices GetDeviceByAdressMac(string adressMac)
     {
-        return _dbo.Devices.Where(o => o.adressMac == adressMac).First();
+        return _dbo.Devices.Where(o => o.adressMac == adressMac && o.disabled == false).First();
     }
 
     public HistoriqueCommandes GetCommandeByName(string commande)
@@ -93,4 +98,11 @@ public class ServiceDao : IServiceDao
         _dbo.SaveChanges();
         
     }
+
+    public ICollection<DataMetrics> GetDataMetricsBehindDatesByType(TypeDevices deviceType, DateTime date1, DateTime date2)
+    {
+        return _dbo.DataMetrics.Where(o => o.Metrics.date >= date1 && o.Metrics.date < date2 && o.Metrics.Devices.idTypeDevice == deviceType.id).ToList();
+    }
+
+   
 }

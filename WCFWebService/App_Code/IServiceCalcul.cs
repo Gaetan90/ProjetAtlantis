@@ -20,6 +20,10 @@ public interface IServiceCalcul
     ICollection<DeviceView> GetListDevicesByEmployee();
 
     [OperationContract]
+    [WebGet(UriTemplate = "devices/device/{id}")]
+    DeviceView GetDeviceById(string id);
+
+    [OperationContract]
     [WebGet(UriTemplate = "metrics"  )]
     ICollection<MetricView> GetListMetricSimple();
 
@@ -38,6 +42,14 @@ public interface IServiceCalcul
     [OperationContract]
     [WebInvoke(Method = "POST", UriTemplate = "device/command")]
     void SetCommandeDevice(string id, string action);
+
+    [OperationContract]
+    [WebGet(UriTemplate = "/{sensorType}/{dateType}")]
+    ICollection<DataMetricView> GetListMetrics(string sensorType, string dateType);
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "/{sensorType}/{dateType}")]
+    void ReceptCalculatedMetrics(string sensorType, string dateType, string result);
 
 
 

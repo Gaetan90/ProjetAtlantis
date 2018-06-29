@@ -26,6 +26,7 @@ public class EmployeeView
             deviceView.id = device.Devices.id;
             deviceView.name = device.Devices.name;
             deviceView.addressMac = device.Devices.adressMac;
+            deviceView.disabled = device.Devices.disabled.Value;
             deviceView.nameDeviceType = device.Devices.TypeDevices.name;
             listdeviceView.Add(deviceView);
         }

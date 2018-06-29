@@ -56,6 +56,7 @@ namespace AdoModel
         public string adressMac { get; set; }
         public Nullable<int> idTypeDevice { get; set; }
         public string description { get; set; }
+        public Nullable<bool> disabled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeviceEmployees> DeviceEmployees { get; set; }
