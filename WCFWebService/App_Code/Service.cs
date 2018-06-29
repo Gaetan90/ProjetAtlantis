@@ -203,17 +203,18 @@ public class Service : IServiceDevice, IServiceCalcul
                 date2 = date1.AddDays(1);
                 break;
             case "week":
+            case "month":
                 int delta = DayOfWeek.Monday - now.DayOfWeek;
                 date1 = DateTime.Parse(now.AddDays(delta).ToString("d"));
                 delta = now.DayOfWeek - DayOfWeek.Sunday;
                 date2 = DateTime.Parse(now.AddDays(delta).ToString("d"));
                 break;
-            case "month":
-                int month = now.Month;
-                int year = now.Year;
-                date1 = DateTime.Parse("01/" + month + "/" + year);
-                date2 = DateTime.Parse(DateTime.DaysInMonth(year,month ) +"/" + month + "/" + year);
-                break;
+            //case "month":
+                //int month = now.Month;
+                //int year = now.Year;
+                //date1 = DateTime.Parse("01/" + month + "/" + year);
+                //date2 = DateTime.Parse(DateTime.DaysInMonth(year,month ) +"/" + month + "/" + year);
+                //break;
         }
         dataMetrics = serviceDao.GetDataMetricsBehindDatesByType(deviceType, date1, date2);
         foreach(DataMetrics dataMetric in dataMetrics)
@@ -242,7 +243,7 @@ public class Service : IServiceDevice, IServiceCalcul
     {
         DataMetricsJson dataMetricsJson = new DataMetricsJson();
         dataMetricsJson.deviceType = sensorType;
-        dataMetricsJson.value = Double.Parse(value);
+        dataMetricsJson.value = Double.Parse(value, CultureInfo.InvariantCulture);
         dataMetricsJson.dateType = dateType.ToUpper();
         var json = new JavaScriptSerializer().Serialize(dataMetricsJson);
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://10.167.128.145:8080/transaction/data-calculated");
@@ -259,6 +260,7 @@ public class Service : IServiceDevice, IServiceCalcul
         {
             var result = streamReader.ReadToEnd();
         }
+        
         
     }
 }
