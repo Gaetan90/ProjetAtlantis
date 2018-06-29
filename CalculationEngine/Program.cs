@@ -19,33 +19,29 @@ namespace CalculationEngine
         {
             Console.WriteLine("Begin");
             //List<string> listSensor = new List<string> { "presenceSensor", "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "gpsSensor", "co2Sensor", "ledDevice", "beeperDevice" };
-            List<string> listSensor = new List<string> { "temperatureSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "co2Sensor"};
+            List<string> listSensor = new List<string> { "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "co2Sensor"};
             List<string> listDateSend = new List<string> {"day", "week", "month"};
 
-            foreach (var sensorList in listSensor)
+            Parallel.ForEach(listSensor, sensorList =>
+            //foreach (var sensorList in listSensor)
             {
-                foreach (var dateSendList in listDateSend)
+                Parallel.ForEach(listDateSend, dateSendList =>
+                //foreach (var dateSendList in listDateSend)
                 {
                     Console.WriteLine($"Sensor : {sensorList}");
                     Console.WriteLine($"date : {dateSendList}");
                     var jsonUrlDevices = new WebClient().DownloadString($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensorList}/{dateSendList}");
                     var listJsonDevice = JsonConvert.DeserializeObject<List<Metrics>>(jsonUrlDevices);
-                    //Console.WriteLine(jsonUrlDevices);
-                    int i = 0;
                     List<double> listMetricsDouble = new List<double>();
-                    //List<int> listMetricsInt = new List<int>();
-                    //List<bool> listMetricsBoolean = new List<bool>();
                     //List<string> listMetricsString = new List<string>();
-                    foreach (var urlresult in listJsonDevice)
+                    Parallel.ForEach(listJsonDevice, urlresult =>
+                    //foreach (var urlresult in listJsonDevice)
                     {
-                        i++;
-                        //Console.WriteLine($"Device : {i} ");
-                        //Console.WriteLine($"ID : {urlresult.id}");
-                        //Console.WriteLine($"Métric : {urlresult.metric}");
                         //Console.WriteLine($"Valeur : {urlresult.value}");
                         listMetricsDouble.Add(Double.Parse(urlresult.value));
-                    }
-                    double average = listMetricsDouble.Average();
+                    //}
+                    });
+                        double average = listMetricsDouble.Average();
                     //Console.WriteLine($"Moyenne : {average}");
                     var newMetricDouble = new ResultDouble
                     {
@@ -56,14 +52,16 @@ namespace CalculationEngine
                     //Console.WriteLine(countForSend);
                     CalculatedMetricSend(jsonMetric, sensorList, dateSendList);
                     listMetricsDouble = new List<double>();
-                }
-            }
+                //}
+                });
+            //}
+            });
             Console.WriteLine("End");
-            Console.Read();
+            //Console.Read();
         }
         public static void CalculatedMetricSend(string json, string sensor, string date)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://localhost:54435/Service.svc/calculs/{sensor}/{date}");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://10.167.129.218:80/Service.svc/calculs/{sensor}/{date}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensor}/{date}");
@@ -86,17 +84,9 @@ namespace CalculationEngine
             public string metric;
             public string value;
         }
-        public class ResultInt
-        {
-            public int result;
-        }
         public class ResultDouble
         {
             public double result;
-        }
-        public class ResultBoolean
-        {
-            public bool result;
         }
         public class ResultString
         {
