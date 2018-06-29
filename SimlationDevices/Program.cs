@@ -137,6 +137,9 @@ namespace SimlationDevices
                 //Console.WriteLine($"Device : {deviceTypeDevice} Value : {metricValueDevice}");
                 //jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
                 jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
+                //jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
+                //var JsonDevice = JsonConvert.SerializeObject(newMetricSend);
+
                 //Console.WriteLine($"json metric : {jsonMetric}");
                 MetricSend(jsonMetric, idDevice);
                 countForSend = 0;
