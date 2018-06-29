@@ -18,7 +18,6 @@ namespace CalculationEngine
         public static void Main(string[] args)
         {
             Console.WriteLine("Begin");
-
             //List<string> listSensor = new List<string> { "presenceSensor", "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "gpsSensor", "co2Sensor", "ledDevice", "beeperDevice" };
             List<string> listSensor = new List<string> { "temperatureSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "co2Sensor"};
             List<string> listDateSend = new List<string> {"day", "week", "month"};
@@ -40,45 +39,35 @@ namespace CalculationEngine
                     foreach (var urlresult in listJsonDevice)
                     {
                         i++;
-                        Console.WriteLine($"Device : {i} ");
+                        //Console.WriteLine($"Device : {i} ");
                         //Console.WriteLine($"ID : {urlresult.id}");
                         //Console.WriteLine($"Métric : {urlresult.metric}");
-                        Console.WriteLine($"Valeur : {urlresult.value}");
-                        Console.WriteLine("");
+                        //Console.WriteLine($"Valeur : {urlresult.value}");
                         listMetricsDouble.Add(Double.Parse(urlresult.value));
-
                     }
                     double average = listMetricsDouble.Average();
-                    Console.WriteLine($"Moyenne : {average}");
-
-
+                    //Console.WriteLine($"Moyenne : {average}");
                     var newMetricDouble = new ResultDouble
                     {
                         result = average
                     };
-
                     var jsonMetric = new JavaScriptSerializer().Serialize(newMetricDouble);
-                    Console.WriteLine(jsonMetric);
+                    //Console.WriteLine(jsonMetric);
                     //Console.WriteLine(countForSend);
-
-                    //CalculatedMetricSend(jsonMetric);
+                    CalculatedMetricSend(jsonMetric, sensorList, dateSendList);
                     listMetricsDouble = new List<double>();
                 }
             }
-
-            
-
-
-
-
             Console.WriteLine("End");
             Console.Read();
         }
-        public static void CalculatedMetricSend(string json)
+        public static void CalculatedMetricSend(string json, string sensor, string date)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/temperatureSensor/week");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensor}/{date}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
+            Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensor}/{date}");
+            Console.WriteLine(json);
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(json);
