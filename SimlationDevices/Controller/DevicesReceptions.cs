@@ -58,7 +58,7 @@ namespace SimlationDevices.Controller
                 j++;
                 DevicesMetricsSend(deviceList.addressMac, deviceList.typeDevices.name);
             });
-            Console.Read();
+           // Console.Read();
         }
         public static double GetRandomDouble(double minimum, double maximum)
         {

@@ -11,8 +11,6 @@ using System.Text;
 [ServiceContract]
 public interface IServiceCalcul
 {
-    Service Service { get; set; }
-    ServiceDao ServiceDao { get; set; }
 
     [OperationContract]
     ICollection<DataMetricView> GetMetricByDeviceType(string idTypeDevice);

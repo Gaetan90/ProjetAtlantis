@@ -127,4 +127,9 @@ public class ServiceDao : IServiceDao
     {
         return _dbo.Employees.Where(o => (o.email == email) && (o.password == password) && (o.isAdmin == true)).Count();
     }
+
+    public ICollection<Metric> GetMetricsByDevices(string idDevice)
+    {
+        return _dbo.Metrics.Where(o => o.Device.adressMac == idDevice).ToList();
+    }
 }

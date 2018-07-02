@@ -12,11 +12,14 @@ using System.Text;
 [ServiceContract]
 public interface IServiceDevice
 {
-    Service Service { get; set; }
 
     [OperationContract]
     [WebGet(UriTemplate = "devices")]
     ICollection<DeviceView> GetAllDevice();
+
+    [OperationContract]
+    [WebGet(UriTemplate = "devices/metrics/{idDevice}")]
+    ICollection<MetricView> GetMetricsByDevices(string idDevice);
 
     [OperationContract]
     [WebInvoke(Method = "POST", UriTemplate = "device")]

@@ -19,4 +19,5 @@ public interface IServiceDao
     ICollection<Device> GetAllDevicesEnabled();
     void UpdateDevice(Device device);
     int GetEmployeeConnection(string email, string password);
+    ICollection<Metric> GetMetricsByDevices(string idDevice);
 }

@@ -114,6 +114,25 @@ public class Service : IServiceDevice, IServiceCalcul
         serviceDao.SaveNewDevice(device);
     }
 
+    public ICollection<MetricView> GetMetricsByDevices(string idDevice)
+    {
+        ICollection<Metric> metrics = serviceDao.GetMetricsByDevices(idDevice);
+        ICollection<MetricView> metricViews = new Collection<MetricView>();
+        foreach (Metric metric in metrics)
+        {
+            MetricView metricView = new MetricView();
+            metricView.nameTypeDivice = metric.Device.TypeDevice.name;
+            metricView.date = metric.date.Value.Date;
+            metricView.values = new Collection<Object>();
+            foreach (DataMetric dataMetric in metric.DataMetrics)
+            {
+                metricView.values.Add(dataMetric.value);
+            }
+            metricViews.Add(metricView);
+        }
+        return metricViews;
+    }
+
     //*******************************//
     //*********CALULINTERFACE********//
     //*******************************//
@@ -278,4 +297,5 @@ public class Service : IServiceDevice, IServiceCalcul
         // return result["isAdmin"];
         return isAdmin;
     }
+
 }
