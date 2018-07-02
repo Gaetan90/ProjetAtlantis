@@ -26,12 +26,12 @@ public class MetricView
     [DataMember]
     public DeviceView device { get; set; }
 
-    public MetricView getMetricsToMetricsView(Metrics metric)
+    public MetricView getMetricsToMetricsView(Metric metric)
     {
         MetricView metricView = new MetricView();
         metricView.id = metric.id;
         metricView.nbrValues = metric.nbrValues.Value;
-        metricView.nameTypeDivice = metric.Devices.TypeDevices.name;
+        metricView.nameTypeDivice = metric.Device.TypeDevice.name;
         return metricView;
     }
 }

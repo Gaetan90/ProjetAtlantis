@@ -51,6 +51,10 @@ public interface IServiceCalcul
     [WebInvoke(Method = "POST", UriTemplate = "{sensorType}/{dateType}")]
     void ReceptCalculatedMetrics(string sensorType, string dateType, string result);
 
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "/employee/connect")]
+    Object ConnectionWebService(string email, string password);
+
 
 
 
