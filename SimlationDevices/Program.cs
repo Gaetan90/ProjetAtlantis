@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using SimulationDevices.Model;
-using SimlationDevices.Controller;
+using SimulationDevices.Controller;
 
 namespace SimulationDevices
 {
