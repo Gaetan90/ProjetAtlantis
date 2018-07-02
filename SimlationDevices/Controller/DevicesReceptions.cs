@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace SimlationDevices.Controller
+namespace SimulationDevices.Controller
 {
     public class DevicesReceptions
     {
