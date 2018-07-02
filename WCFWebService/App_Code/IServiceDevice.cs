@@ -12,6 +12,7 @@ using System.Text;
 [ServiceContract]
 public interface IServiceDevice
 {
+    Service Service { get; set; }
 
     [OperationContract]
     [WebGet(UriTemplate = "devices")]

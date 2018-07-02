@@ -16,6 +16,18 @@ public class ServiceDao : IServiceDao
         _dbo = new AtlantisWindowsEntities();
     }
 
+    public AtlantisWindowsEntities AtlantisWindowsEntities
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
+
     public int SaveMetricsDao(Metric metrics)
     {
         _dbo.Metrics.Add(metrics);

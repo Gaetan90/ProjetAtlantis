@@ -10,4 +10,16 @@ public class TypeDeviceView
 {
     public int id { get; set; }
     public string name { get; set; }
+
+    public DeviceView DeviceView
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
 }

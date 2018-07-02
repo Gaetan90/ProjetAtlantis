@@ -28,6 +28,30 @@ public class DeviceView
     [DataMember]
     public bool disabled { get; set; }
 
+    public IServiceDevice IServiceDevice
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
+
+    public IServiceDao IServiceDao
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
+
     public void EmployeeToEmployeeView(ICollection<AdoModel.DeviceEmployee> deviceEmployees)
     {
         ICollection<EmployeeView> employees = new Collection<EmployeeView>();

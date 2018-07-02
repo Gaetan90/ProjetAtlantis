@@ -17,4 +17,40 @@ public class DataMetricView
     public string value { get; set; }
     [DataMember]
     public MetricView metric { get; set; }
+
+    public IServiceDao IServiceDao
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
+
+    public IServiceCalcul IServiceCalcul
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
+
+    public IServiceDevice IServiceDevice
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+
+        set
+        {
+        }
+    }
 }

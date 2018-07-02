@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Connected Services\ServiceReferenceDevice\Service.wsdl" />
     <None Include="Connected Services\ServiceReferenceDevice\Service.xsd">
       <SubType>Designer</SubType>
