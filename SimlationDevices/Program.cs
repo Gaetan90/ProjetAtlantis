@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using SimulationDevices.Model;
-using SimulationDevices.Controller;
+using SimlationDevices.Controller;
 
 namespace SimulationDevices
 {
@@ -19,7 +19,7 @@ namespace SimulationDevices
     {
         public static void Main(string[] args)
         {
-            GetDevices.GetListOfDevices();
+            DevicesReceptions.GetListOfDevices();
         }
     }
 }
