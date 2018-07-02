@@ -6,15 +6,17 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimulationDevices.Controller
+namespace CalculationEngine.Controller
 {
-    public class SendMetrics
+    public class SendCalculatedMetric
     {
-        public static void MetricSend(string json, string idDevice)
+        public static void CalculatedMetricSend(string json, string sensor, string date)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/devices/device/{idDevice}/telemetry");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensor}/{date}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
+            Console.WriteLine($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensor}/{date}");
+            Console.WriteLine(json);
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(json);
