@@ -10,10 +10,10 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
-using SimlationDevices.Model;
-using SimlationDevices.Controller;
+using SimulationDevices.Model;
+using SimulationDevices.Controller;
 
-namespace SimlationDevices
+namespace SimulationDevices
 {
     class Program
     {

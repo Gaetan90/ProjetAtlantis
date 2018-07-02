@@ -1,4 +1,4 @@
-﻿using SimlationDevices.Model;
+﻿using SimulationDevices.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace SimlationDevices.Controller
+namespace SimulationDevices.Controller
 {
     class SendDevicesMetrics
     {
