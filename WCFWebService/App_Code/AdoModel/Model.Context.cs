@@ -25,12 +25,12 @@ namespace AdoModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DataMetrics> DataMetrics { get; set; }
-        public virtual DbSet<DeviceEmployees> DeviceEmployees { get; set; }
-        public virtual DbSet<Devices> Devices { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Metrics> Metrics { get; set; }
-        public virtual DbSet<TypeDevices> TypeDevices { get; set; }
-        public virtual DbSet<HistoriqueCommandes> HistoriqueCommandes { get; set; }
+        public virtual DbSet<DataMetric> DataMetrics { get; set; }
+        public virtual DbSet<DeviceEmployee> DeviceEmployees { get; set; }
+        public virtual DbSet<Device> Devices { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<HistoriqueCommande> HistoriqueCommandes { get; set; }
+        public virtual DbSet<Metric> Metrics { get; set; }
+        public virtual DbSet<TypeDevice> TypeDevices { get; set; }
     }
 }

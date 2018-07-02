@@ -16,59 +16,59 @@ public class ServiceDao : IServiceDao
         _dbo = new AtlantisWindowsEntities();
     }
 
-    public int SaveMetricsDao(Metrics metrics)
+    public int SaveMetricsDao(Metric metrics)
     {
         _dbo.Metrics.Add(metrics);
         int result = _dbo.SaveChanges();
         return result;
     }
-    public ICollection<Devices> GetAllDevicesDao()
+    public ICollection<Device> GetAllDevicesDao()
     {
         return _dbo.Devices.ToList();
     }
 
-    public ICollection<Devices> GetAllDevicesEnabled()
+    public ICollection<Device> GetAllDevicesEnabled()
     {
         return _dbo.Devices.Where(o => o.disabled == false).ToList();
     }
 
-    public ICollection<DataMetrics> GetMetricByDeviceTypeDao(int value)
+    public ICollection<DataMetric> GetMetricByDeviceTypeDao(int value)
     {
-        return _dbo.DataMetrics.Where(o => o.Metrics.Devices.idTypeDevice == value).ToList(); 
+        return _dbo.DataMetrics.Where(o => o.Metric.Device.idTypeDevice == value).ToList(); 
     }
 
-    public Devices GetDeviceByAdressMac(string adressMac)
+    public Device GetDeviceByAdressMac(string adressMac)
     {
         return _dbo.Devices.Where(o => o.adressMac == adressMac && o.disabled == false).First();
     }
 
-    public HistoriqueCommandes GetCommandeByName(string commande)
+    public HistoriqueCommande GetCommandeByName(string commande)
     {
         return _dbo.HistoriqueCommandes.Where(o => o.commandeName == commande).First();
     }
 
-    public Devices GetDeviceById(int id)
+    public Device GetDeviceById(int id)
     {
         return _dbo.Devices.Find(id);
     }
 
-    public void SaveCommandeDevice(HistoriqueCommandes commandeDevice)
+    public void SaveCommandeDevice(HistoriqueCommande commandeDevice)
     {
         _dbo.HistoriqueCommandes.Add(commandeDevice);
         _dbo.SaveChanges();
     }
 
-    public ICollection<Employees> GetListEmployees()
+    public ICollection<Employee> GetListEmployees()
     {
         return _dbo.Employees.ToList();
     }
 
-    public TypeDevices GetTypeDeviceByName(string deviceType)
+    public TypeDevice GetTypeDeviceByName(string deviceType)
     {
         return _dbo.TypeDevices.Where(o => o.name == deviceType).First();
     }
 
-    public void SaveNewDevice(Devices device)
+    public void SaveNewDevice(Device device)
     {
         _dbo.Devices.Add(device);
         _dbo.SaveChanges();
@@ -76,19 +76,19 @@ public class ServiceDao : IServiceDao
 
     public void updateEmployee(EmployeeView employee)
     {
-        Employees entity = _dbo.Employees.Find(employee.id);
-        ICollection<DeviceEmployees> deviceEmployees = _dbo.DeviceEmployees.Where(o => o.idEmployee.Value == employee.id).ToList();
-        foreach(DeviceEmployees deviceEmployee in deviceEmployees)
+        Employee entity = _dbo.Employees.Find(employee.id);
+        ICollection<DeviceEmployee> deviceEmployees = _dbo.DeviceEmployees.Where(o => o.idEmployee.Value == employee.id).ToList();
+        foreach(DeviceEmployee deviceEmployee in deviceEmployees)
         {
             _dbo.DeviceEmployees.Remove(deviceEmployee);
         }
-        Employees newEmployee = _dbo.Employees.Find(employee.id);
+        Employee newEmployee = _dbo.Employees.Find(employee.id);
         newEmployee.name = employee.name;
         newEmployee.lastname = employee.lastName;
-        deviceEmployees = new Collection<DeviceEmployees>();
+        deviceEmployees = new Collection<DeviceEmployee>();
         foreach (DeviceView deviceView in employee.devices)
         {
-            DeviceEmployees deviceEmployee = new DeviceEmployees();
+            DeviceEmployee deviceEmployee = new DeviceEmployee();
             deviceEmployee.idDevice = deviceView.id;
             deviceEmployee.idEmployee = entity.id;
             deviceEmployees.Add(deviceEmployee);
@@ -99,15 +99,20 @@ public class ServiceDao : IServiceDao
         
     }
 
-    public ICollection<DataMetrics> GetDataMetricsBehindDatesByType(TypeDevices deviceType, DateTime date1, DateTime date2)
+    public ICollection<DataMetric> GetDataMetricsBehindDatesByType(TypeDevice deviceType, DateTime date1, DateTime date2)
     {
-        return _dbo.DataMetrics.Where(o => o.Metrics.date >= date1 && o.Metrics.date < date2 && o.Metrics.Devices.idTypeDevice == deviceType.id).ToList();
+        return _dbo.DataMetrics.Where(o => o.Metric.date >= date1 && o.Metric.date < date2 && o.Metric.Device.idTypeDevice == deviceType.id).ToList();
     }
 
-    public void UpdateDevice(Devices device)
+    public void UpdateDevice(Device device)
     {
-        Devices entity = this.GetDeviceById(device.id);
+        Device entity = this.GetDeviceById(device.id);
         _dbo.Entry(entity).CurrentValues.SetValues(device);
         _dbo.SaveChanges();
+    }
+
+    public int GetEmployeeConnection(string email, string password)
+    {
+        return _dbo.Employees.Where(o => (o.email == email) && (o.password == password) && (o.isAdmin == true)).Count();
     }
 }

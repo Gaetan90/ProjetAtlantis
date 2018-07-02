@@ -4,18 +4,19 @@ using AdoModel;
 
 public interface IServiceDao
 {
-    ICollection<Devices> GetAllDevicesDao();
-    int SaveMetricsDao(Metrics metrics);
-    Devices GetDeviceByAdressMac(string adressMac);
-    Devices GetDeviceById(int id);
-    ICollection<DataMetrics> GetMetricByDeviceTypeDao(int value);
-    HistoriqueCommandes GetCommandeByName(string commande);
-    void SaveCommandeDevice(HistoriqueCommandes commandeDevice);
-    ICollection<Employees> GetListEmployees();
-    TypeDevices GetTypeDeviceByName(string deviceType);
-    void SaveNewDevice(Devices device);
+    ICollection<Device> GetAllDevicesDao();
+    int SaveMetricsDao(Metric metrics);
+    Device GetDeviceByAdressMac(string adressMac);
+    Device GetDeviceById(int id);
+    ICollection<DataMetric> GetMetricByDeviceTypeDao(int value);
+    HistoriqueCommande GetCommandeByName(string commande);
+    void SaveCommandeDevice(HistoriqueCommande commandeDevice);
+    ICollection<Employee> GetListEmployees();
+    TypeDevice GetTypeDeviceByName(string deviceType);
+    void SaveNewDevice(Device device);
     void updateEmployee(EmployeeView employee);
-    ICollection<DataMetrics> GetDataMetricsBehindDatesByType(TypeDevices deviceType, DateTime monday, DateTime sunday);
-    ICollection<Devices> GetAllDevicesEnabled();
-    void UpdateDevice(Devices device);
+    ICollection<DataMetric> GetDataMetricsBehindDatesByType(TypeDevice deviceType, DateTime date1, DateTime date2);
+    ICollection<Device> GetAllDevicesEnabled();
+    void UpdateDevice(Device device);
+    int GetEmployeeConnection(string email, string password);
 }
