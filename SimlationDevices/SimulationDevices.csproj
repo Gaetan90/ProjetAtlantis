@@ -71,15 +71,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Controller\GetDevices.cs" />
-    <Compile Include="Controller\SendDevicesMetrics.cs" />
-    <Compile Include="Controller\SendMetrics.cs" />
+    <Compile Include="Controller\DevicesReceptions.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\Employee.cs" />
-    <Compile Include="Controller\GetBoolean.cs" />
-    <Compile Include="Controller\GetDouble.cs" />
-    <Compile Include="Controller\GetGPS.cs" />
-    <Compile Include="Controller\GetInt.cs" />
     <Compile Include="Model\ListOfDevices.cs" />
     <Compile Include="Model\Metrics.cs" />
     <Compile Include="Model\TypeDevices.cs" />

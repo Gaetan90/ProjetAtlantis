@@ -54,6 +54,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controller\GetCalculatedMetrics.cs" />
+    <Compile Include="Controller\SendCalculatedMetric.cs" />
+    <Compile Include="Model\Metrics.cs" />
+    <Compile Include="Model\ResultDouble.cs" />
+    <Compile Include="Model\ResultString.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
