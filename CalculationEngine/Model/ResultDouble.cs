@@ -8,6 +8,6 @@ namespace CalculationEngine.Model
 {
     public class ResultDouble
     {
-        public double result;
+        public double result { get; set; }
     }
 }

@@ -8,8 +8,8 @@ namespace SimulationDevices.Model
 {
     public class Metrics
     {
-        public string metricDate;
-        public string deviceType;
-        public string metricValue;
+        public string metricDate { get; set; }
+        public string deviceType { get; set; }
+        public string metricValue { get; set; }
     }
 }

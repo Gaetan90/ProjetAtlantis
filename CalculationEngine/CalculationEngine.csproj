@@ -65,6 +65,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Connected Services\ServiceReferenceCalcul\CalculationEngine.ServiceReferenceCalcul.DataMetricView.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

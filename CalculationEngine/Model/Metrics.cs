@@ -8,8 +8,8 @@ namespace CalculationEngine.Model
 {
     public class Metrics
     {
-        public string id;
-        public string metric;
-        public string value;
+        public string id { get; set; }
+        public string metric { get; set; }
+        public string value { get; set; }
     }
 }
