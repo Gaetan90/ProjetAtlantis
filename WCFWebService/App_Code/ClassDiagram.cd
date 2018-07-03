@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AdoModel.AtlantisWindowsEntities">
+    <Position X="0.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAgAWAAABAAAAAECAAAAAAA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdoModel.DataMetric">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAABAAAAAAAAAAAAAAACACAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DataMetricView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AdoModel.Device">
+    <Position X="11.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAKAAIAAgAAgAAAAkBAAAEAEAAAAAAgA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeviceView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AdoModel.DeviceEmployee">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAgCAAgAAAQAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeviceView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AdoModel.Employee">
+    <Position X="8.75" Y="0.5" Width="1.75" />
+    <AssociationLine Name="DeviceEmployee" Type="AdoModel.DeviceEmployee" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="1.875" />
+        <Point X="10.875" Y="1.875" />
+        <Point X="10.875" Y="5.125" />
+        <Point X="11.25" Y="5.125" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAgAAAAAAAAAAAEAAgAAAEAAggAAgA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeviceEmployee" />
+      <Property Name="EmployeeView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AdoModel.HistoriqueCommande">
+    <Position X="14.25" Y="0.75" Width="1.5" />
+    <AssociationLine Name="Device1" Type="AdoModel.Device" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.25" Y="1.625" />
+        <Point X="13.875" Y="1.625" />
+        <Point X="13.875" Y="0.937" />
+        <Point X="13.5" Y="0.937" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgABAAAAAAAABCAAAAAQAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Device1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AdoModel.Metric">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAgAAAAAAAAAAAAgAAAAQAAAAAQAAggA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MetricView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AdoModel.TypeDevice">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAABgA=</HashCode>
+      <FileName>App_Code\AdoModel\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TypeDeviceView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ServiceDao" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="11.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAQBIQAADAAAAIAACABEABAABEAAABAIAAAAAAAAA=</HashCode>
+      <FileName>App_Code\DAO\ServiceDao.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AtlantisWindowsEntities" />
+    </ShowAsAssociation>
+    <Lollipop Position="1.179" Collapsed="true" />
+  </Class>
+  <Class Name="DataMetricView">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <AssociationLine Name="IServiceDao" Type="IServiceDao" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="4.244" />
+        <Point X="5.75" Y="4.244" />
+        <Point X="5.75" Y="7.707" />
+        <Point X="6.917" Y="7.707" Type="JumpStart" />
+        <Point X="7.083" Y="7.707" Type="JumpEnd" />
+        <Point X="8.167" Y="7.707" Type="JumpStart" />
+        <Point X="8.333" Y="7.707" Type="JumpEnd" />
+        <Point X="9.198" Y="7.707" Type="JumpStart" />
+        <Point X="9.365" Y="7.707" Type="JumpEnd" />
+        <Point X="10.042" Y="7.707" Type="JumpStart" />
+        <Point X="10.208" Y="7.707" Type="JumpEnd" />
+        <Point X="12.956" Y="7.707" Type="JumpStart" />
+        <Point X="13.122" Y="7.707" Type="JumpEnd" />
+        <Point X="13.182" Y="7.707" Type="JumpStart" />
+        <Point X="13.349" Y="7.707" Type="JumpEnd" />
+        <Point X="13.75" Y="7.707" />
+        <Point X="13.75" Y="12.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="IServiceDevice" Type="IServiceDevice" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.625" Y="4.988" />
+        <Point X="4.625" Y="7.707" />
+        <Point X="6.917" Y="7.707" Type="JumpStart" />
+        <Point X="7.083" Y="7.707" Type="JumpEnd" />
+        <Point X="8.167" Y="7.707" Type="JumpStart" />
+        <Point X="8.333" Y="7.707" Type="JumpEnd" />
+        <Point X="9.198" Y="7.707" Type="JumpStart" />
+        <Point X="9.365" Y="7.707" Type="JumpEnd" />
+        <Point X="10.042" Y="7.707" Type="JumpStart" />
+        <Point X="10.208" Y="7.707" Type="JumpEnd" />
+        <Point X="12.25" Y="7.707" />
+        <Point X="12.25" Y="8.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAgAIAACAAAEAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Model\DataMetricView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IServiceDao" />
+      <Property Name="IServiceCalcul" />
+      <Property Name="IServiceDevice" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DeviceView">
+    <Position X="16.5" Y="5.75" Width="2.25" />
+    <AssociationLine Name="IServiceDao" Type="IServiceDao" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.562" Y="8.459" />
+        <Point X="17.562" Y="13.688" />
+        <Point X="14.75" Y="13.688" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAgAIIAAAAIAAAAgAAEAAAAAEAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Model\DeviceView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IServiceDevice" />
+      <Property Name="IServiceDao" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EmployeeView">
+    <Position X="8.5" Y="4.5" Width="1.75" />
+    <AssociationLine Name="IServiceDao" Type="IServiceDao" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.125" Y="7.209" />
+        <Point X="10.125" Y="15.056" />
+        <Point X="12" Y="15.056" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAgBAAAAAAAAAAkAEgAAEAACgAAAgA=</HashCode>
+      <FileName>App_Code\Model\EmployeeView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeviceView" />
+      <Property Name="IServiceCalcul" />
+      <Property Name="IServiceDao" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MetricView">
+    <Position X="6" Y="3.5" Width="2" />
+    <AssociationLine Name="IServiceCalcul" Type="IServiceCalcul" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="7" Y="6.017" />
+        <Point X="7" Y="6.142" />
+        <Point X="7" Y="6.142" />
+        <Point X="7" Y="8.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="IServiceDevice" Type="IServiceDevice" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.375" Y="6.017" />
+        <Point X="6.375" Y="6.874" />
+        <Point X="6.917" Y="6.874" Type="JumpStart" />
+        <Point X="7.083" Y="6.874" Type="JumpEnd" />
+        <Point X="8.25" Y="6.874" />
+        <Point X="8.25" Y="9.029" />
+        <Point X="9.198" Y="9.029" Type="JumpStart" />
+        <Point X="9.365" Y="9.029" Type="JumpEnd" />
+        <Point X="10.042" Y="9.029" Type="JumpStart" />
+        <Point X="10.208" Y="9.029" Type="JumpEnd" />
+        <Point X="11.75" Y="9.029" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAABCAAAAAAAABAAAAAAAgAAAACEAAAAAAQAAggA=</HashCode>
+      <FileName>App_Code\Model\MetricView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IServiceCalcul" />
+      <Property Name="IServiceDevice" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TypeDeviceView">
+    <Position X="16.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Model\TypeDeviceView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeviceView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Service" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QUAkABAAAECAAAAQABQAAABBAACAAAAQCQAQAAAAAAA=</HashCode>
+      <FileName>App_Code\Service.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="IServiceDao">
+    <Position X="12" Y="12.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAQBIQAADAAAAIAACAAEABAABEAAABAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\DAO\IServiceDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IServiceCalcul">
+    <Position X="5.75" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QEAEABAAAACAAAAAABQAAABAAAAAAAAQCQAAAAAAAAA=</HashCode>
+      <FileName>App_Code\IServiceCalcul.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IServiceDevice">
+    <Position X="11.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAEAAAAAQAAAAAAABAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>App_Code\IServiceDevice.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

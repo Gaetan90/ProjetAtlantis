@@ -17,4 +17,5 @@ public class DataMetricView
     public string value { get; set; }
     [DataMember]
     public MetricView metric { get; set; }
+
 }

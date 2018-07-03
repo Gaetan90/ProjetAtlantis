@@ -18,6 +18,10 @@ public interface IServiceDevice
     ICollection<DeviceView> GetAllDevice();
 
     [OperationContract]
+    [WebGet(UriTemplate = "devices/metrics/{idDevice}")]
+    ICollection<MetricView> GetMetricsByDevices(string idDevice);
+
+    [OperationContract]
     [WebInvoke(Method = "POST", UriTemplate = "device")]
     void CreateNewDevice(string id, string name,string deviceType);
 

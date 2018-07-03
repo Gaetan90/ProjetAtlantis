@@ -12,13 +12,13 @@ namespace AdoModel
     using System;
     using System.Collections.Generic;
     
-    public partial class DataMetrics
+    public partial class DataMetric
     {
         public int id { get; set; }
         public string value { get; set; }
         public int idMetric { get; set; }
     
-        public virtual Metrics Metrics { get; set; }
+        public virtual Metric Metric { get; set; }
     }
 }
 namespace AdoModel
@@ -26,29 +26,14 @@ namespace AdoModel
     using System;
     using System.Collections.Generic;
     
-    public partial class DeviceEmployees
-    {
-        public int id { get; set; }
-        public Nullable<int> idDevice { get; set; }
-        public Nullable<int> idEmployee { get; set; }
-    
-        public virtual Devices Devices { get; set; }
-        public virtual Employees Employees { get; set; }
-    }
-}
-namespace AdoModel
-{
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Devices
+    public partial class Device
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Devices()
+        public Device()
         {
-            this.DeviceEmployees = new HashSet<DeviceEmployees>();
-            this.Metrics = new HashSet<Metrics>();
-            this.HistoriqueCommandes = new HashSet<HistoriqueCommandes>();
+            this.DeviceEmployees = new HashSet<DeviceEmployee>();
+            this.HistoriqueCommandes = new HashSet<HistoriqueCommande>();
+            this.Metrics = new HashSet<Metric>();
         }
     
         public int id { get; set; }
@@ -56,14 +41,15 @@ namespace AdoModel
         public string adressMac { get; set; }
         public Nullable<int> idTypeDevice { get; set; }
         public string description { get; set; }
+        public Nullable<bool> disabled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeviceEmployees> DeviceEmployees { get; set; }
-        public virtual TypeDevices TypeDevices { get; set; }
+        public virtual ICollection<DeviceEmployee> DeviceEmployees { get; set; }
+        public virtual TypeDevice TypeDevice { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Metrics> Metrics { get; set; }
+        public virtual ICollection<HistoriqueCommande> HistoriqueCommandes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistoriqueCommandes> HistoriqueCommandes { get; set; }
+        public virtual ICollection<Metric> Metrics { get; set; }
     }
 }
 namespace AdoModel
@@ -71,20 +57,38 @@ namespace AdoModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Employees
+    public partial class DeviceEmployee
+    {
+        public int id { get; set; }
+        public Nullable<int> idDevice { get; set; }
+        public Nullable<int> idEmployee { get; set; }
+    
+        public virtual Device Device { get; set; }
+        public virtual Employee Employee { get; set; }
+    }
+}
+namespace AdoModel
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employees()
+        public Employee()
         {
-            this.DeviceEmployees = new HashSet<DeviceEmployees>();
+            this.DeviceEmployees = new HashSet<DeviceEmployee>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public Nullable<bool> isAdmin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeviceEmployees> DeviceEmployees { get; set; }
+        public virtual ICollection<DeviceEmployee> DeviceEmployees { get; set; }
     }
 }
 namespace AdoModel
@@ -92,14 +96,14 @@ namespace AdoModel
     using System;
     using System.Collections.Generic;
     
-    public partial class HistoriqueCommandes
+    public partial class HistoriqueCommande
     {
         public int id { get; set; }
         public string commandeName { get; set; }
         public Nullable<int> idDevice { get; set; }
         public Nullable<System.DateTime> dateTime { get; set; }
     
-        public virtual Devices Devices { get; set; }
+        public virtual Device Device { get; set; }
     }
 }
 namespace AdoModel
@@ -107,12 +111,12 @@ namespace AdoModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Metrics
+    public partial class Metric
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Metrics()
+        public Metric()
         {
-            this.DataMetrics = new HashSet<DataMetrics>();
+            this.DataMetrics = new HashSet<DataMetric>();
         }
     
         public int id { get; set; }
@@ -121,8 +125,8 @@ namespace AdoModel
         public Nullable<int> idDevice { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DataMetrics> DataMetrics { get; set; }
-        public virtual Devices Devices { get; set; }
+        public virtual ICollection<DataMetric> DataMetrics { get; set; }
+        public virtual Device Device { get; set; }
     }
 }
 namespace AdoModel
@@ -130,18 +134,18 @@ namespace AdoModel
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeDevices
+    public partial class TypeDevice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeDevices()
+        public TypeDevice()
         {
-            this.Devices = new HashSet<Devices>();
+            this.Devices = new HashSet<Device>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Devices> Devices { get; set; }
+        public virtual ICollection<Device> Devices { get; set; }
     }
 }

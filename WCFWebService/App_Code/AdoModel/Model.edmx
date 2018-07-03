@@ -30,6 +30,7 @@
           <Property Name="adressMac" Type="varchar" MaxLength="50" />
           <Property Name="idTypeDevice" Type="int" />
           <Property Name="description" Type="text" />
+          <Property Name="disabled" Type="bit" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -38,6 +39,9 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="isAdmin" Type="bit" />
         </EntityType>
         <EntityType Name="HistoriqueCommandes">
           <Key>
@@ -174,58 +178,58 @@
     <edmx:ConceptualModels>
       <Schema Namespace="AtlantisWindowsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AtlantisWindowsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DataMetrics" EntityType="AtlantisWindowsModel.DataMetrics" />
-          <EntitySet Name="DeviceEmployees" EntityType="AtlantisWindowsModel.DeviceEmployees" />
-          <EntitySet Name="Devices" EntityType="AtlantisWindowsModel.Devices" />
-          <EntitySet Name="Employees" EntityType="AtlantisWindowsModel.Employees" />
-          <EntitySet Name="Metrics" EntityType="AtlantisWindowsModel.Metrics" />
-          <EntitySet Name="TypeDevices" EntityType="AtlantisWindowsModel.TypeDevices" />
+          <EntitySet Name="DataMetrics" EntityType="AtlantisWindowsModel.DataMetric" />
+          <EntitySet Name="DeviceEmployees" EntityType="AtlantisWindowsModel.DeviceEmployee" />
+          <EntitySet Name="Devices" EntityType="AtlantisWindowsModel.Device" />
+          <EntitySet Name="Employees" EntityType="AtlantisWindowsModel.Employee" />
+          <EntitySet Name="HistoriqueCommandes" EntityType="AtlantisWindowsModel.HistoriqueCommande" />
+          <EntitySet Name="Metrics" EntityType="AtlantisWindowsModel.Metric" />
+          <EntitySet Name="TypeDevices" EntityType="AtlantisWindowsModel.TypeDevice" />
           <AssociationSet Name="FK_DataMetrics_Metric" Association="AtlantisWindowsModel.FK_DataMetrics_Metric">
-            <End Role="Metrics" EntitySet="Metrics" />
-            <End Role="DataMetrics" EntitySet="DataMetrics" />
+            <End Role="Metric" EntitySet="Metrics" />
+            <End Role="DataMetric" EntitySet="DataMetrics" />
           </AssociationSet>
           <AssociationSet Name="FK_DeviceEmployees_Devices" Association="AtlantisWindowsModel.FK_DeviceEmployees_Devices">
-            <End Role="Devices" EntitySet="Devices" />
-            <End Role="DeviceEmployees" EntitySet="DeviceEmployees" />
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="DeviceEmployee" EntitySet="DeviceEmployees" />
           </AssociationSet>
           <AssociationSet Name="FK_DeviceEmployees_Employees" Association="AtlantisWindowsModel.FK_DeviceEmployees_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="DeviceEmployees" EntitySet="DeviceEmployees" />
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="DeviceEmployee" EntitySet="DeviceEmployees" />
           </AssociationSet>
           <AssociationSet Name="FK_Devices_TypeDevices" Association="AtlantisWindowsModel.FK_Devices_TypeDevices">
-            <End Role="TypeDevices" EntitySet="TypeDevices" />
-            <End Role="Devices" EntitySet="Devices" />
+            <End Role="TypeDevice" EntitySet="TypeDevices" />
+            <End Role="Device" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriqueCommandes_Devices" Association="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="HistoriqueCommande" EntitySet="HistoriqueCommandes" />
           </AssociationSet>
           <AssociationSet Name="FK_Metrics_Devices" Association="AtlantisWindowsModel.FK_Metrics_Devices">
-            <End Role="Devices" EntitySet="Devices" />
-            <End Role="Metrics" EntitySet="Metrics" />
-          </AssociationSet>
-          <EntitySet Name="HistoriqueCommandes" EntityType="AtlantisWindowsModel.HistoriqueCommandes" />
-          <AssociationSet Name="FK_HistoriqueCommandes_Devices" Association="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices">
-            <End Role="Devices" EntitySet="Devices" />
-            <End Role="HistoriqueCommandes" EntitySet="HistoriqueCommandes" />
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Metric" EntitySet="Metrics" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="DataMetrics">
+        <EntityType Name="DataMetric">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idMetric" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Metrics" Relationship="AtlantisWindowsModel.FK_DataMetrics_Metric" FromRole="DataMetrics" ToRole="Metrics" />
+          <NavigationProperty Name="Metric" Relationship="AtlantisWindowsModel.FK_DataMetrics_Metric" FromRole="DataMetric" ToRole="Metric" />
         </EntityType>
-        <EntityType Name="DeviceEmployees">
+        <EntityType Name="DeviceEmployee">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idDevice" Type="Int32" />
           <Property Name="idEmployee" Type="Int32" />
-          <NavigationProperty Name="Devices" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Devices" FromRole="DeviceEmployees" ToRole="Devices" />
-          <NavigationProperty Name="Employees" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Employees" FromRole="DeviceEmployees" ToRole="Employees" />
+          <NavigationProperty Name="Device" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Devices" FromRole="DeviceEmployee" ToRole="Device" />
+          <NavigationProperty Name="Employee" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Employees" FromRole="DeviceEmployee" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="Devices">
+        <EntityType Name="Device">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -233,101 +237,26 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="adressMac" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idTypeDevice" Type="Int32" />
-          <NavigationProperty Name="DeviceEmployees" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Devices" FromRole="Devices" ToRole="DeviceEmployees" />
-          <NavigationProperty Name="TypeDevices" Relationship="AtlantisWindowsModel.FK_Devices_TypeDevices" FromRole="Devices" ToRole="TypeDevices" />
-          <NavigationProperty Name="Metrics" Relationship="AtlantisWindowsModel.FK_Metrics_Devices" FromRole="Devices" ToRole="Metrics" />
-          <NavigationProperty Name="HistoriqueCommandes" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="Devices" ToRole="HistoriqueCommandes" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="disabled" Type="Boolean" />
+          <NavigationProperty Name="DeviceEmployees" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Devices" FromRole="Device" ToRole="DeviceEmployee" />
+          <NavigationProperty Name="TypeDevice" Relationship="AtlantisWindowsModel.FK_Devices_TypeDevices" FromRole="Device" ToRole="TypeDevice" />
+          <NavigationProperty Name="HistoriqueCommandes" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="Device" ToRole="HistoriqueCommande" />
+          <NavigationProperty Name="Metrics" Relationship="AtlantisWindowsModel.FK_Metrics_Devices" FromRole="Device" ToRole="Metric" />
         </EntityType>
-        <EntityType Name="Employees">
+        <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DeviceEmployees" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Employees" FromRole="Employees" ToRole="DeviceEmployees" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <NavigationProperty Name="DeviceEmployees" Relationship="AtlantisWindowsModel.FK_DeviceEmployees_Employees" FromRole="Employee" ToRole="DeviceEmployee" />
         </EntityType>
-        <EntityType Name="Metrics">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="nbrValues" Type="Int32" />
-          <Property Name="idDevice" Type="Int32" />
-          <NavigationProperty Name="DataMetrics" Relationship="AtlantisWindowsModel.FK_DataMetrics_Metric" FromRole="Metrics" ToRole="DataMetrics" />
-          <NavigationProperty Name="Devices" Relationship="AtlantisWindowsModel.FK_Metrics_Devices" FromRole="Metrics" ToRole="Devices" />
-        </EntityType>
-        <EntityType Name="TypeDevices">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Devices" Relationship="AtlantisWindowsModel.FK_Devices_TypeDevices" FromRole="TypeDevices" ToRole="Devices" />
-        </EntityType>
-        <Association Name="FK_DataMetrics_Metric">
-          <End Type="AtlantisWindowsModel.Metrics" Role="Metrics" Multiplicity="1" />
-          <End Type="AtlantisWindowsModel.DataMetrics" Role="DataMetrics" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Metrics">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DataMetrics">
-              <PropertyRef Name="idMetric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DeviceEmployees_Devices">
-          <End Type="AtlantisWindowsModel.Devices" Role="Devices" Multiplicity="0..1" />
-          <End Type="AtlantisWindowsModel.DeviceEmployees" Role="DeviceEmployees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Devices">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DeviceEmployees">
-              <PropertyRef Name="idDevice" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DeviceEmployees_Employees">
-          <End Type="AtlantisWindowsModel.Employees" Role="Employees" Multiplicity="0..1" />
-          <End Type="AtlantisWindowsModel.DeviceEmployees" Role="DeviceEmployees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DeviceEmployees">
-              <PropertyRef Name="idEmployee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Devices_TypeDevices">
-          <End Type="AtlantisWindowsModel.TypeDevices" Role="TypeDevices" Multiplicity="0..1" />
-          <End Type="AtlantisWindowsModel.Devices" Role="Devices" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeDevices">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Devices">
-              <PropertyRef Name="idTypeDevice" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Metrics_Devices">
-          <End Type="AtlantisWindowsModel.Devices" Role="Devices" Multiplicity="0..1" />
-          <End Type="AtlantisWindowsModel.Metrics" Role="Metrics" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Devices">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Metrics">
-              <PropertyRef Name="idDevice" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="HistoriqueCommandes">
+        <EntityType Name="HistoriqueCommande">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -335,16 +264,95 @@
           <Property Name="commandeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idDevice" Type="Int32" />
           <Property Name="dateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Devices" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="HistoriqueCommandes" ToRole="Devices" />
+          <NavigationProperty Name="Device" Relationship="AtlantisWindowsModel.FK_HistoriqueCommandes_Devices" FromRole="HistoriqueCommande" ToRole="Device" />
         </EntityType>
-        <Association Name="FK_HistoriqueCommandes_Devices">
-          <End Type="AtlantisWindowsModel.Devices" Role="Devices" Multiplicity="0..1" />
-          <End Type="AtlantisWindowsModel.HistoriqueCommandes" Role="HistoriqueCommandes" Multiplicity="*" />
+        <EntityType Name="Metric">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="nbrValues" Type="Int32" />
+          <Property Name="idDevice" Type="Int32" />
+          <NavigationProperty Name="DataMetrics" Relationship="AtlantisWindowsModel.FK_DataMetrics_Metric" FromRole="Metric" ToRole="DataMetric" />
+          <NavigationProperty Name="Device" Relationship="AtlantisWindowsModel.FK_Metrics_Devices" FromRole="Metric" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="TypeDevice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Devices" Relationship="AtlantisWindowsModel.FK_Devices_TypeDevices" FromRole="TypeDevice" ToRole="Device" />
+        </EntityType>
+        <Association Name="FK_DataMetrics_Metric">
+          <End Type="AtlantisWindowsModel.Metric" Role="Metric" Multiplicity="1" />
+          <End Type="AtlantisWindowsModel.DataMetric" Role="DataMetric" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Devices">
+            <Principal Role="Metric">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="HistoriqueCommandes">
+            <Dependent Role="DataMetric">
+              <PropertyRef Name="idMetric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceEmployees_Devices">
+          <End Type="AtlantisWindowsModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="AtlantisWindowsModel.DeviceEmployee" Role="DeviceEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DeviceEmployee">
+              <PropertyRef Name="idDevice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceEmployees_Employees">
+          <End Type="AtlantisWindowsModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="AtlantisWindowsModel.DeviceEmployee" Role="DeviceEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DeviceEmployee">
+              <PropertyRef Name="idEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devices_TypeDevices">
+          <End Type="AtlantisWindowsModel.TypeDevice" Role="TypeDevice" Multiplicity="0..1" />
+          <End Type="AtlantisWindowsModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDevice">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="idTypeDevice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoriqueCommandes_Devices">
+          <End Type="AtlantisWindowsModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="AtlantisWindowsModel.HistoriqueCommande" Role="HistoriqueCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoriqueCommande">
+              <PropertyRef Name="idDevice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Metrics_Devices">
+          <End Type="AtlantisWindowsModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="AtlantisWindowsModel.Metric" Role="Metric" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Metric">
               <PropertyRef Name="idDevice" />
             </Dependent>
           </ReferentialConstraint>
@@ -356,7 +364,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AtlantisWindowsModelStoreContainer" CdmEntityContainer="AtlantisWindowsEntities">
           <EntitySetMapping Name="DataMetrics">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.DataMetrics">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.DataMetric">
               <MappingFragment StoreEntitySet="DataMetrics">
                 <ScalarProperty Name="idMetric" ColumnName="idMetric" />
                 <ScalarProperty Name="value" ColumnName="value" />
@@ -365,7 +373,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeviceEmployees">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.DeviceEmployees">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.DeviceEmployee">
               <MappingFragment StoreEntitySet="DeviceEmployees">
                 <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
                 <ScalarProperty Name="idDevice" ColumnName="idDevice" />
@@ -374,8 +382,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Devices">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.Devices">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.Device">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="disabled" ColumnName="disabled" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="idTypeDevice" ColumnName="idTypeDevice" />
                 <ScalarProperty Name="adressMac" ColumnName="adressMac" />
@@ -385,16 +394,29 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.Employees">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="HistoriqueCommandes">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.HistoriqueCommande">
+              <MappingFragment StoreEntitySet="HistoriqueCommandes">
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
+                <ScalarProperty Name="commandeName" ColumnName="commandeName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Metrics">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.Metrics">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.Metric">
               <MappingFragment StoreEntitySet="Metrics">
                 <ScalarProperty Name="idDevice" ColumnName="idDevice" />
                 <ScalarProperty Name="nbrValues" ColumnName="nbrValues" />
@@ -404,19 +426,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeDevices">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.TypeDevices">
+            <EntityTypeMapping TypeName="AtlantisWindowsModel.TypeDevice">
               <MappingFragment StoreEntitySet="TypeDevices">
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HistoriqueCommandes">
-            <EntityTypeMapping TypeName="AtlantisWindowsModel.HistoriqueCommandes">
-              <MappingFragment StoreEntitySet="HistoriqueCommandes">
-                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
-                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
-                <ScalarProperty Name="commandeName" ColumnName="commandeName" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -435,7 +447,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SimulationDevices.Controller.DevicesReceptions">
+    <Position X="17.25" Y="10.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAgABAAAAoAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Controller\DevicesReceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationDevices.Model.Device">
+    <Position X="17.75" Y="13" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Model\Device.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationDevices.Model.Employee">
+    <Position X="19.5" Y="13" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAIAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Model\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationDevices.Model.ListOfDevices">
+    <Position X="14.25" Y="13" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Model\ListOfDevices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationDevices.Model.Metrics">
+    <Position X="21.25" Y="13" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAgAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Model\Metrics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationDevices.Model.TypeDevices">
+    <Position X="16" Y="13" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Model\TypeDevices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationDevices.Program">
+    <Position X="17.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

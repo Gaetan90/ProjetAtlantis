@@ -71,11 +71,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controller\DevicesReceptions.cs" />
+    <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\ListOfDevices.cs" />
+    <Compile Include="Model\Metrics.cs" />
+    <Compile Include="Model\TypeDevices.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Connected Services\ServiceReferenceDevice\Service.wsdl" />
     <None Include="Connected Services\ServiceReferenceDevice\Service.xsd">
       <SubType>Designer</SubType>
@@ -133,5 +141,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

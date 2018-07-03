@@ -25,16 +25,22 @@ public class DeviceView
     public string nameDeviceType { get; set; }
     [DataMember]
     public TypeDeviceView typeDevices { get; set; }
+    [DataMember]
+    public bool disabled { get; set; }
 
-    public void EmployeeToEmployeeView(ICollection<AdoModel.DeviceEmployees> deviceEmployees)
+
+    public void EmployeeToEmployeeView(ICollection<AdoModel.DeviceEmployee> deviceEmployees)
     {
         ICollection<EmployeeView> employees = new Collection<EmployeeView>();
-        foreach (DeviceEmployees employee in deviceEmployees)
+        foreach (DeviceEmployee employee in deviceEmployees)
         {
             EmployeeView employeeView = new EmployeeView();
-            employeeView.id = employee.Employees.id;
-            employeeView.name = employee.Employees.name;
-            employeeView.lastName = employee.Employees.lastname;
+            employeeView.id = employee.Employee.id;
+            employeeView.name = employee.Employee.name;
+            employeeView.lastName = employee.Employee.lastname;
+            employeeView.email = employee.Employee.email;
+            employeeView.password = employee.Employee.password;
+            employeeView.isAdmin = employee.Employee.isAdmin.Value;
             employees.Add(employeeView);
         }
         this.employees = employees;

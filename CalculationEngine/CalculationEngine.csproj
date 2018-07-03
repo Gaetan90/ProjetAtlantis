@@ -40,6 +40,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,11 +54,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controller\GetCalculatedMetrics.cs" />
+    <Compile Include="Controller\SendCalculatedMetric.cs" />
+    <Compile Include="Model\Metrics.cs" />
+    <Compile Include="Model\ResultDouble.cs" />
+    <Compile Include="Model\ResultString.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Connected Services\ServiceReferenceCalcul\CalculationEngine.ServiceReferenceCalcul.DataMetricView.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

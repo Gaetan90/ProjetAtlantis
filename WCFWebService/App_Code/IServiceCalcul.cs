@@ -12,12 +12,16 @@ using System.Text;
 public interface IServiceCalcul
 {
 
-	[OperationContract]
+    [OperationContract]
     ICollection<DataMetricView> GetMetricByDeviceType(string idTypeDevice);
 
     [OperationContract]
     [WebGet(UriTemplate = "devices"  )]
     ICollection<DeviceView> GetListDevicesByEmployee();
+
+    [OperationContract]
+    [WebGet(UriTemplate = "devices/device/{id}")]
+    DeviceView GetDeviceById(string id);
 
     [OperationContract]
     [WebGet(UriTemplate = "metrics"  )]
@@ -38,6 +42,18 @@ public interface IServiceCalcul
     [OperationContract]
     [WebInvoke(Method = "POST", UriTemplate = "device/command")]
     void SetCommandeDevice(string id, string action);
+
+    [OperationContract]
+    [WebGet(UriTemplate = "/{sensorType}/{dateType}")]
+    ICollection<DataMetricView> GetListMetrics(string sensorType, string dateType);
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "{sensorType}/{dateType}")]
+    void ReceptCalculatedMetrics(string sensorType, string dateType, string result);
+
+    [OperationContract]
+    [WebInvoke(Method = "POST", UriTemplate = "/employee/connect")]
+    Object ConnectionWebService(string email, string password);
 
 
 
