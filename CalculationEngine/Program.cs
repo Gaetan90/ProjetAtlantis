@@ -17,6 +17,22 @@ namespace CalculationEngine
 {
     class Program
     {
+        public SendCalculatedMetric SendCalculatedMetric
+        {
+            get => default(SendCalculatedMetric);
+            set
+            {
+            }
+        }
+
+        public GetCalculatedMetrics GetCalculatedMetrics
+        {
+            get => default(GetCalculatedMetrics);
+            set
+            {
+            }
+        }
+
         public static void Main(string[] args)
         {
             GetCalculatedMetrics.GetMetricsCalculated();

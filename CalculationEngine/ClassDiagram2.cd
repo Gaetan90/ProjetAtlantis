@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CalculationEngine.Controller.GetCalculatedMetrics">
+    <Position X="1.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\GetCalculatedMetrics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CalculationEngine.Controller.SendCalculatedMetric">
+    <Position X="5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\SendCalculatedMetric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CalculationEngine.Model.Metrics">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAgA=</HashCode>
+      <FileName>Model\Metrics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CalculationEngine.Model.ResultDouble">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ResultDouble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CalculationEngine.Model.ResultString">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ResultString.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CalculationEngine.Program">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <AssociationLine Name="SendCalculatedMetric" Type="CalculationEngine.Controller.SendCalculatedMetric" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="2.312" />
+        <Point X="5.938" Y="2.312" />
+        <Point X="5.938" Y="3.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.588" Y="0.466" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="GetCalculatedMetrics" Type="CalculationEngine.Controller.GetCalculatedMetrics" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="2.312" />
+        <Point X="2.625" Y="2.312" />
+        <Point X="2.625" Y="3.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.068" Y="0.477" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SendCalculatedMetric" />
+      <Property Name="GetCalculatedMetrics" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

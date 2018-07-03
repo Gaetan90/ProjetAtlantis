@@ -8,6 +8,6 @@ namespace CalculationEngine.Model
 {
     public class ResultString
     {
-        public string result;
+        public string result { get; set; }
     }
 }
