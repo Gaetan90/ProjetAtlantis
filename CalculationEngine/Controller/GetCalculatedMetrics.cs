@@ -17,7 +17,7 @@ namespace CalculationEngine.Controller
         {
             Console.WriteLine("Begin");
             //List<string> listSensor = new List<string> { "presenceSensor", "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "gpsSensor", "co2Sensor", "ledDevice", "beeperDevice" };
-            List<string> listSensor = new List<string> { "temperatureSensor", "brightnessSensor", "atmosphericPressureSensor", "humiditySensor", "soundLevelSensor", "co2Sensor" };
+            List<string> listSensor = new List<string> { "temperatureSensor", "brightnessSensor", "humiditySensor", "soundLevelSensor", "co2Sensor" };
             List<string> listDateSend = new List<string> { "day", "week", "month" };
 
             Parallel.ForEach(listSensor, sensorList =>

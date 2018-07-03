@@ -19,18 +19,6 @@ namespace AdoModel
         public int idMetric { get; set; }
     
         public virtual Metric Metric { get; set; }
-
-        public DataMetricView DataMetricView
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
 namespace AdoModel
@@ -62,18 +50,6 @@ namespace AdoModel
         public virtual ICollection<HistoriqueCommande> HistoriqueCommandes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Metric> Metrics { get; set; }
-
-        public DeviceView DeviceView
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
 namespace AdoModel
@@ -89,18 +65,6 @@ namespace AdoModel
     
         public virtual Device Device { get; set; }
         public virtual Employee Employee { get; set; }
-
-        public DeviceView DeviceView
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
 namespace AdoModel
@@ -125,30 +89,6 @@ namespace AdoModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeviceEmployee> DeviceEmployees { get; set; }
-
-        public DeviceEmployee DeviceEmployee
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public EmployeeView EmployeeView
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
 namespace AdoModel
@@ -164,18 +104,6 @@ namespace AdoModel
         public Nullable<System.DateTime> dateTime { get; set; }
     
         public virtual Device Device { get; set; }
-
-        public Device Device1
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
 namespace AdoModel
@@ -199,18 +127,6 @@ namespace AdoModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DataMetric> DataMetrics { get; set; }
         public virtual Device Device { get; set; }
-
-        public MetricView MetricView
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
 namespace AdoModel
@@ -231,17 +147,5 @@ namespace AdoModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Device> Devices { get; set; }
-
-        public TypeDeviceView TypeDeviceView
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
     }
 }
