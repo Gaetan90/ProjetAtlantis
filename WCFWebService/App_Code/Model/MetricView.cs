@@ -26,29 +26,6 @@ public class MetricView
     [DataMember]
     public DeviceView device { get; set; }
 
-    public IServiceCalcul IServiceCalcul
-    {
-        get
-        {
-            throw new System.NotImplementedException();
-        }
-
-        set
-        {
-        }
-    }
-
-    public IServiceDevice IServiceDevice
-    {
-        get
-        {
-            throw new System.NotImplementedException();
-        }
-
-        set
-        {
-        }
-    }
 
     public MetricView getMetricsToMetricsView(Metric metric)
     {

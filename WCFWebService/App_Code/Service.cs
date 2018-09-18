@@ -25,9 +25,9 @@ public class Service : IServiceDevice, IServiceCalcul
         this.serviceDao = new ServiceDao();
     }
 
-    //*******************************//
-    //*********DEVICEINTERFACE********//
-    //*******************************//
+    //*********************************//
+    //*********DEVICE INTERFACE********//
+    //*********************************//
     public ICollection<DeviceView> GetAllDevice()
     {
         ICollection<DeviceView> devices = new Collection<DeviceView>();
@@ -48,10 +48,8 @@ public class Service : IServiceDevice, IServiceCalcul
                 typeDeviceView.name = typeDevice.name;
                 deviceView.typeDevices = typeDeviceView;
             }
-            
             devices.Add(deviceView);
         }
-
         return devices;
     }
 
@@ -133,9 +131,9 @@ public class Service : IServiceDevice, IServiceCalcul
         return metricViews;
     }
 
-    //*******************************//
-    //*********CALULINTERFACE********//
-    //*******************************//
+    //********************************//
+    //*********CALUL INTERFACE********//
+    //********************************//
 
     public ICollection<DeviceView> GetListDevicesByEmployee()
     {
@@ -294,7 +292,6 @@ public class Service : IServiceDevice, IServiceCalcul
         Dictionary<string, bool> result = new Dictionary<string, bool>();
         result.Add("isAdmin", employee == 0 ? false : true);
         Object isAdmin = employee == 0 ? false : true;
-        // return result["isAdmin"];
         return isAdmin;
     }
 

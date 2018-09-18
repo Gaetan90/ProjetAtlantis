@@ -28,42 +28,6 @@ public class EmployeeView
     [DataMember]
     public ICollection<DeviceView> devices { get; set; }
 
-    public DeviceView DeviceView
-    {
-        get
-        {
-            throw new System.NotImplementedException();
-        }
-
-        set
-        {
-        }
-    }
-
-    public IServiceCalcul IServiceCalcul
-    {
-        get
-        {
-            throw new System.NotImplementedException();
-        }
-
-        set
-        {
-        }
-    }
-
-    public IServiceDao IServiceDao
-    {
-        get
-        {
-            throw new System.NotImplementedException();
-        }
-
-        set
-        {
-        }
-    }
-
     public void DeviceToDeviceView(ICollection<DeviceEmployee> deviceEmployees)
     {
         ICollection<DeviceView> listdeviceView = new Collection<DeviceView>();
