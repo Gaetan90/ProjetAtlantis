@@ -10,6 +10,7 @@ namespace CalculationEngine.Controller
 {
     public class SendCalculatedMetric
     {
+
         public static void CalculatedMetricSend(string json, string sensor, string date)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://wcfwebservice.azurewebsites.net/Service.svc/calculs/{sensor}/{date}");

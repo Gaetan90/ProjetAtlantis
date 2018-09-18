@@ -13,6 +13,7 @@ namespace CalculationEngine.Controller
 {
     public class GetCalculatedMetrics
     {
+
         public static void GetMetricsCalculated()
         {
             Console.WriteLine("Begin");

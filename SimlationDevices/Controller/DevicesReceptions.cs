@@ -105,7 +105,7 @@ namespace SimulationDevices.Controller
         {
             Console.WriteLine($"BEGIN SEND METRICS : {idDevice} - {deviceType} Time : {DateTime.UtcNow.ToString("o")}");
             int countForSend = 0;
-            List<Metrics> listOfMetrics = new List<Metrics>();
+            //List<Metrics> listOfMetrics = new List<Metrics>();
             var jsonMetric = "";
             // Parallel.For(0, 10000, index =>
             for (int i = 0; i < 10000; i++)
@@ -176,12 +176,12 @@ namespace SimulationDevices.Controller
                     deviceType = deviceTypeDevice,
                     metricValue = metricValueDevice
                 };
-                listOfMetrics.Add(newMetricSend);
+                //listOfMetrics.Add(newMetricSend);
                 jsonMetric += new JavaScriptSerializer().Serialize(newMetricSend);
                 MetricSend(jsonMetric, idDevice);
                 countForSend = 0;
                 jsonMetric = "";
-                listOfMetrics = new List<Metrics>();
+                //listOfMetrics = new List<Metrics>();
                 Thread.Sleep(1000);
             }
             //);
